@@ -40,6 +40,8 @@ use App\Http\Livewire\Users;
 |
 */
 
+
+
 Route::redirect('/', '/login');
 
 Route::get('/register', Register::class)->name('register');
@@ -62,7 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile-example', ProfileExample::class)->name('profile-example');
     //Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
     
-    Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
+    //Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
 
     //Route::get('/edit-user', EditUser::class)->name('edit-user');
     Route::get('/new-user', NewUser::class)->name('new-user');

@@ -181,7 +181,8 @@
                                 {{-- {{ route('edit-user', ['id' => $user->id])}} --}}
                                 {{-- $set('edit', {{ $factura->id }})  --}}
                                
-                                <a class="dropdown-item d-flex align-items-center"  href="{{route('edit-user', ['id'=>$user]) }}" >
+                               {{-- {{route('edit-user', ['id'=>$user]) }} --}}
+                                <a class="dropdown-item d-flex align-items-center"  href="" >
                                     <span class="fas fa-user-shield me-2"></span>
                                     View Details
                                    
