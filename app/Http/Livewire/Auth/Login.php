@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Auth;
 
 use App\Models\User;
+use App\Models\Account;
 use Livewire\Component;
 
 class Login extends Component
@@ -33,7 +34,7 @@ class Login extends Component
     {
         $credentials = $this->validate();
         if (auth()->attempt(['email' => $this->email, 'password' => $this->password], $this->remember_me)) {
-            $user = User::where(['email' => $this->email])->first();
+            $user = Account::where(['email' => $this->email])->first();
             auth()->login($user, $this->remember_me);
             return redirect()->intended('/dashboard');
         } else {

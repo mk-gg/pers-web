@@ -25,21 +25,22 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::get('/test-api', function ()
-{
-    $user = User::create([
-        'email' => 'test1@pers.com',
-        'password' => Hash::make('1234'),
-        'remember_token' => Str::random(10),
-    ]);
-});
+// Route::get('/test-api', function ()
+// {
+//     $user = User::create([
+//         'email' => 'test1@pers.com',
+//         'password' => Hash::make('1234'),
+//         'remember_token' => Str::random(10),
+//     ]);
+// });
 
 
 
 
-Route::get('/test', function(Request $request){
-    return 'Authenticated';
-});
+// Route::get('/test', function(Request $request){
+//     return 'Authenticated';
+// });
 
+Route::resource('account', AccountController::class);
 
 Route::resource('users', UserController::class);

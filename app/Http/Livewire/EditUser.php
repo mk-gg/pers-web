@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
+use App\Models\Account;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class EditUser extends Component{
 
-    public User $user;
+    public Account $user;
 
     public $showSavedAlert = false;
     public $urlId = '';
@@ -21,18 +21,24 @@ class EditUser extends Component{
     public $role = '';
     public $password = '';
     public $passwordConfirmation = '';
-    
+
     public function rules() {
-        
+
         return [
-         
             'user.first_name' => 'max:15',
             'user.last_name' => 'max:20',
             'user.email' => 'email',
-            'user.phone' => 'numeric',
-            
+            //'user.gender' => ['required', Rule::in(['Male', 'Female', 'Other'])],
+            //'user.dob' => 'required|date|before:-13 years',
+            'user.role' => ['required', Rule::in(['reporter', 'responder', 'dispatcher', 'administrator'])],
+            'user.address' => 'max:40',
+            'user.number' => 'numeric',
+            'user.city' => 'max:20',
+            'user.ZIP' => 'numeric',
         ];
-    }
+        }
+    
+
 
    // public function __construct(User $id)
    // {
@@ -44,16 +50,16 @@ class EditUser extends Component{
     {
         dd('boo');
     }
-    public function mount(User $id) 
+    public function mount(Account $id) 
     {
       
-        $existingUser = User::find($id)->first();
+        $existingUser = Account::find($id)->first();
         $this->urlId = intval($existingUser->id);
         $this->user = $existingUser; 
-        $existingUser = User::where('email', $this->email)->first();
+        $existingUser = Account::where('email', $this->email)->first();
         if($existingUser && $existingUser->id == $this->urlId) {
             
-            dd(1);
+           
         }
         else {
             
@@ -66,7 +72,7 @@ class EditUser extends Component{
         $this->validate();
         
         $this->user->save();
-
+        
         $this->showSavedAlert = true;
     }
 

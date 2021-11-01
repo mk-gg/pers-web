@@ -144,6 +144,10 @@
             <tbody>
                     
                 @foreach ($users as $user)
+                
+               
+              
+                
                 <tr>
                     <td>
                         <div class="form-check dashboard-check">
@@ -162,10 +166,13 @@
                             </div>
                         </a>
                     </td>
-                    <td><span class="fw-normal">Administrator</span></td>
-                    <td><span class="fw-normal d-flex align-items-center">15 Jun 2021</span></td>
+                    <td><span class="fw-normal">{{ ucfirst($user->role) }}</span></td>
+                    <td><span class="fw-normal d-flex align-items-center">{{ $user->created_at }}</span></td>
                     <td><span class="fw-normal text-success">Active</span></td>
                     <td>
+                        @if (auth()->user()->id == $user->id || $user->role == "administrator")
+                        
+                        @else
                         <div class="btn-group">
                             <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0"
                                 data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -182,19 +189,27 @@
                                 {{-- $set('edit', {{ $factura->id }})  --}}
                                
                                {{-- {{route('edit-user', ['id'=>$user]) }} --}}
-                                <a class="dropdown-item d-flex align-items-center"  href="" >
+                                <a class="dropdown-item d-flex align-items-center"  href="{{route('edit-user', ['id'=>$user]) }}" >
                                     <span class="fas fa-user-shield me-2"></span>
-                                    View Details
-                                   
+                                    Edit User
                                 </a>
             
-                                <a class="dropdown-item text-danger d-flex align-items-center" href="#">
+                                <a class="dropdown-item text-danger d-flex align-items-center" href="#" data-bs-toggle="modal" data-bs-target="#modal-default" wire:click="delete({{ $user }})">
                                     <span class="fas fa-user-times me-2"></span>
                                     Delete user
+                                    
                                 </a>
+                                
+                                
+                                
                             </div>
                         </div>
+                        @endif
+                        
+                        
                     </td>
+                    
+                    
                 </tr>
                 
                 @endforeach

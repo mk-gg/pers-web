@@ -5,10 +5,10 @@ namespace App\Http\Controllers\API;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Validator;
-use App\Models\User;
-use App\Http\Resources\User as UserResource;
+use App\Models\Account;
+use App\Http\Resources\Account as AccountResource;
    
-class UserController extends BaseController
+class AccountController extends BaseController
 {
 
     /**
@@ -16,8 +16,8 @@ class UserController extends BaseController
      */
     public function index()
     {
-        $users = User::all();
-        return $this->sendResponse(UserResource::collection($users), 'Posts fetched.');
+        $accounts = Account::all();
+        return $this->sendResponse(AccountResource::collection($accounts), 'Posts fetched.');
     }
 
     /**
@@ -36,8 +36,8 @@ class UserController extends BaseController
         if($validator->fails()){
             return $this->sendError($validator->errors());       
         }
-        $user = User::create($input);
-        return $this->sendResponse(new UserResource($user), 'Post created.');
+        $account = Account::create($input);
+        return $this->sendResponse(new AccountResource($account), 'Post created.');
     }
 
    /**
@@ -46,15 +46,15 @@ class UserController extends BaseController
     */
     public function show($id)
     {
-        $user = User::find($id);
-        if (is_null($user)) {
+        $account = Account::find($id);
+        if (is_null($account)) {
             return $this->sendError('Post does not exist.');
         }
-        return $this->sendResponse(new UserResource($user), 'Post fetched.');
+        return $this->sendResponse(new AccountResource($account), 'Post fetched.');
     }
     
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, Account $account)
     {
         $input = $request->all();
 
@@ -69,18 +69,18 @@ class UserController extends BaseController
             return $this->sendError($validator->errors());       
         }
 
-        $user->first_name = $input['first_name'];
-        $user->last_name = $input['last_name'];
-        $user->email = $input['email'];
-        $user->password = $input['password'];
-        $user->save();
+        $account->first_name = $input['first_name'];
+        $account->last_name = $input['last_name'];
+        $account->email = $input['email'];
+        $account->password = $input['password'];
+        $account->save();
         
-        return $this->sendResponse(new UserResource($user), 'Post updated.');
+        return $this->sendResponse(new AccountResource($account), 'Post updated.');
     }
    
-    public function destroy(User $user)
+    public function destroy(Account $account)
     {
-        $user->delete();
+        $account->delete();
         return $this->sendResponse([], 'Post deleted.');
     }
 }

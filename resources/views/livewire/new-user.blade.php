@@ -48,6 +48,11 @@
     </div>
     <div class="row">
         <div class="col-12 col-xl-8">
+            @if($showAddAlert)
+            <div class="alert alert-success" role="alert">
+                Added!
+            </div>
+            @endif
             <div class="card card-body border-0 shadow mb-4">
                 <h2 class="h5 mb-4">General information</h2>
                 <!-- Form -->
@@ -84,16 +89,20 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="role">Rolee</label>
-                            <select class="form-select mb-0" id="gender"
-                                aria-label="Gender select example">
-                                <option selected>Role</option>
-                                <option value="Responder">Responder</option>
-                                <option value="Reporter">Reporter</option>
-                                <option value="Dispatcher">Dispatcher</option>
-                                <option value="Administrator">Administrator</option>
+                            <label for="role">Role</label>
+                            <select wire:model="role" class="form-select mb-0"  id="role" 
+                                aria-label="Role select example">
+                                <option >Choose...</option>
+                                <option value="responder">Responder</option>
+                                <option value="reporter">Reporter</option>
+                                <option value="dispatcher">Dispatcher</option>
+                                <option value="administrator">Administrator</option>
+                              
                             </select>
+                         
+                            @error('role') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
+                        
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -118,7 +127,7 @@
                                 <label for="password">Your Password</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon4"><svg class="icon icon-xs text-gray-600" fill="#6b7280" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg></span>
-                                <input wire:model.lazy="password" type="passowrd" placeholder="Password" class="form-control" id="password" required>
+                                <input wire:model.lazy="password" type="password" placeholder="Password" class="form-control" id="password" required>
                             </div>
                             @error('password') <div class="invalid-feedback"> {{ $message }}</div> @enderror
                         </div>

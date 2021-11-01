@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Auth;
 
 use Livewire\Component;
+use App\Models\Account;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -33,7 +34,7 @@ class Register extends Component
             'password' => 'required|same:passwordConfirmation|min:6',
         ]);
 
-        $user = User::create([
+        $user = Account::create([
             'email' =>$this->email,
             'password' => Hash::make($this->password),
             'remember_token' => Str::random(10),

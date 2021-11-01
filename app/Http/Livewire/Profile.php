@@ -25,7 +25,7 @@ class Profile extends Component
         'user.city' => 'max:20',
         'user.ZIP' => 'numeric',
     ];
-}
+    }
 
     public function mount() { $this->user = auth()->user(); }
 
