@@ -7,14 +7,14 @@ use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
-class AccountFactory extends Factory
+class IncidentFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Account::class;
+    protected $model = Incident::class;
 
     /**
      * Define the model's default state.
@@ -24,21 +24,18 @@ class AccountFactory extends Factory
     public function definition()
     {
         return [
+            'incident_type' => $this->faker->incident_type,
             'first_name' => $this->faker->firstName(),
             'last_name' => $this->faker->lastName(),
             'gender' => Arr::random(['male', 'female', 'other']),
+            'age' => $this->faker->age,
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'role' => Arr::random(['administrator', 'responder', 'reporter', 'dispatcher']),
-            'birthdate' => $this->faker->date('2021-01-01'),
-            'address' => $this->faker->address,
-            'phone' => $this->faker->phoneNumber,
-            'unit_name' => $this->faker->unit_name,
-            'city' => $this->faker->city,
-            'province' => $this->faker->province,
-            'ZIP' => $this->faker->randomNumber(6),
-            
+            'description' => $this->faker->description,
+            'location' => $this->faker->location,
+            'date_time_reported' => now(),
+            'location_id' => $this->faker->location_id,
+            'account_id' => $this->faker->account_id,
+           
             'remember_token' => Str::random(10),
             
        
@@ -51,12 +48,12 @@ class AccountFactory extends Factory
      *
      * @return \Illuminate\Database\Eloquent\Factories\Factory
      */
-    public function unverified()
-    {
-        return $this->state(function (array $attributes) {
-            return [
-                'email_verified_at' => null,
-            ];
-        });
-    }
+    // public function unverified()
+    // {
+    //     return $this->state(function (array $attributes) {
+    //         return [
+    //             'email_verified_at' => null,
+    //         ];
+    //     });
+    // }
 }

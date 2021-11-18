@@ -8,6 +8,8 @@ use App\Models\User;
 
 
 use App\Http\Controllers\API\UserController;
+use App\Http\Controllers\API\AccountController;
+use App\Http\Controllers\API\IncidentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +43,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return 'Authenticated';
 // });
 
-Route::resource('account', AccountController::class);
+Route::resource('accounts', AccountController::class);
+
+Route::resource('incidents', IncidentController::class);
 
 Route::resource('users', UserController::class);

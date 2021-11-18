@@ -29,9 +29,17 @@ class AccountController extends BaseController
         $validator = Validator::make($input, [
             'first_name' => 'required',
             'last_name' => 'required',
+            'birthdate' => 'required',
+            'gender' => 'required',
+            'phone' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'role' => 'required'
+            'role' => 'required',
+            'unit_name' => 'nullable',
+            'city' => 'nullable',
+            'zip_code' => 'nullable',
+            'province' => 'nullable',
+        
         ]);
         if($validator->fails()){
             return $this->sendError($validator->errors());       
@@ -61,8 +69,16 @@ class AccountController extends BaseController
         $validator = Validator::make($input, [
             'first_name' => 'required',
             'last_name' => 'required',
+            'birthdate' => 'required',
+            'gender' => 'required',
+            'phone' => 'required',
             'email' => 'required',
-            'password' => 'required'
+            'password' => 'required',
+            'role' => 'required',
+            'unit_name' => 'nullable',
+            'city' => 'nullable',
+            'zip_code' => 'nullable',
+            'province' => 'nullable',
         ]);
 
         if($validator->fails()){
@@ -73,6 +89,13 @@ class AccountController extends BaseController
         $account->last_name = $input['last_name'];
         $account->email = $input['email'];
         $account->password = $input['password'];
+        $account->birthdate = $input['birthdate'];
+        $account->phone = $input['phone'];
+        $account->role = $input['role'];
+        $account->unit_name = $input['unit_name'];
+        $account->city = $input['city'];
+        $account->zip_code = $input['zip_code'];
+        $account->province = $input['province'];
         $account->save();
         
         return $this->sendResponse(new AccountResource($account), 'Post updated.');

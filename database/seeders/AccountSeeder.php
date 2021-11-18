@@ -21,6 +21,9 @@ class AccountSeeder extends Seeder
             'email' => 'admin@pers.com',
             'role' => 'administrator',
             'password' => Hash::make('secret'),
+            'address' => 'Pasacao',
+            'phone' => '0912345678',
+            'birthdate' => '2021-01-01'
         ]);
     }
 }

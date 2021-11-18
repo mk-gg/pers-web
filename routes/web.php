@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\ResetPasswordExample;
 use App\Http\Livewire\UpgradeToPro;
 use App\Http\Livewire\Users;
+use App\Http\Livewire\Incidents;
 
 
 /*
@@ -63,7 +64,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/profile-example', ProfileExample::class)->name('profile-example');
     Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
-    
+    Route::get('/incidents', Incidents::class)->name('incidents');
     //Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
 
     //Route::get('/edit-user', EditUser::class)->name('edit-user');

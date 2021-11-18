@@ -21,11 +21,11 @@ class CreateAccountsTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('role');
-            $table->date('birthdate');
+            $table->date('birthdate')->nullable();
             $table->string('address')->nullable();
-            $table->string('number')->nullable();
-            $table->string('city')->nullable();
-            $table->string('ZIP')->nullable();
+            $table->string('phone')->nullable();
+            // $table->string('city')->nullable();
+            // $table->string('ZIP')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken()->unique();
             $table->timestamps();

@@ -2,14 +2,14 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\User;
+use App\Models\Account;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 
 class Profile extends Component
 {
-    public User $user;
+    public Account $user;
     public $showSavedAlert = false;
     public $showDemoNotification = false;
 
