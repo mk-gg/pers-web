@@ -30,13 +30,13 @@ class AccountController extends BaseController
             'first_name' => 'required',
             'last_name' => 'required',
             'birthdate' => 'required',
-            'gender' => 'required',
+            'sex' => 'required',
             'phone' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'role' => 'required',
+            'account_typerole' => 'required',
             'unit_name' => 'nullable',
-            'city' => 'nullable',
+            'city_municipality' => 'nullable',
             'zip_code' => 'nullable',
             'province' => 'nullable',
         
@@ -70,13 +70,13 @@ class AccountController extends BaseController
             'first_name' => 'required',
             'last_name' => 'required',
             'birthdate' => 'required',
-            'gender' => 'required',
+            'sex' => 'required',
             'phone' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'role' => 'required',
+            'account_type' => 'required',
             'unit_name' => 'nullable',
-            'city' => 'nullable',
+            'city_municipality' => 'nullable',
             'zip_code' => 'nullable',
             'province' => 'nullable',
         ]);
@@ -91,9 +91,9 @@ class AccountController extends BaseController
         $account->password = $input['password'];
         $account->birthdate = $input['birthdate'];
         $account->phone = $input['phone'];
-        $account->role = $input['role'];
+        $account->account_type = $input['account_type'];
         $account->unit_name = $input['unit_name'];
-        $account->city = $input['city'];
+        $account->city_municipality = $input['city_municipality'];
         $account->zip_code = $input['zip_code'];
         $account->province = $input['province'];
         $account->save();
