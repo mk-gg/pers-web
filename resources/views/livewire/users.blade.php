@@ -135,7 +135,7 @@
                         </div>
                     </th>
                     <th class="border-bottom">Name</th>
-                    <th class="border-bottom">Role</th>
+                    <th class="border-bottom">Account Type</th>
                     <th class="border-bottom">Date Created</th>
                     <th class="border-bottom">Status</th>
                     <th class="border-bottom">Action</th>
@@ -166,11 +166,11 @@
                             </div>
                         </a>
                     </td>
-                    <td><span class="fw-normal">{{ ucfirst($user->role) }}</span></td>
+                    <td><span class="fw-normal">{{ ucfirst($user->account_type) }}</span></td>
                     <td><span class="fw-normal d-flex align-items-center">{{ $user->created_at }}</span></td>
                     <td><span class="fw-normal text-success">Active</span></td>
                     <td>
-                        @if (auth()->user()->id == $user->id || $user->role == "administrator")
+                        @if (auth()->user()->id == $user->id || $user->account_type == "administrator")
                         
                         @else
                         <div class="btn-group">

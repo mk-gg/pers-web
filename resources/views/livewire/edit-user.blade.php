@@ -90,16 +90,16 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="role">Role</label>
-                            <select wire:model="user.role" class="form-select mb-0" id="role"
-                                aria-label="Gender select example">
+                            <label for="account_type">Role</label>
+                            <select wire:model="user.account_type" class="form-select mb-0" id="account_type"
+                                aria-label="Role select example">
                                 <option selected>Role</option>
                                 <option value="responder">Responder</option>
                                 <option value="reporter">Reporter</option>
                                 <option value="dispatcher">Dispatcher</option>
                                 <option value="administrator">Administrator</option>
                             </select>
-                            @error('user.role')<div class="invalid-feedback">{{ $message }}</div> @enderror
+                            @error('user.account_type')<div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                     </div>
                     <div class="row">
@@ -159,15 +159,15 @@
                     <div class="row">
                         <div class="col-sm-4 mb-3">
                             <div class="form-group">
-                                <label for="city">City</label>
-                                <input class="form-control" id="city" type="text"
+                                <label for="city_municipality">City</label>
+                                <input class="form-control" id="city_municipality" type="text"
                                     placeholder="City">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="zip">ZIP</label>
-                                <input class="form-control" id="zip" type="tel" placeholder="ZIP">
+                                <label for="zip_code">ZIP</label>
+                                <input class="form-control" id="zip_code" type="tel" placeholder="ZIP">
                             </div>
                         </div>
                     </div> --}}

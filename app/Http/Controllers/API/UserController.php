@@ -31,7 +31,7 @@ class UserController extends BaseController
             'last_name' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'role' => 'required'
+            'account_type' => 'required'
         ]);
         if($validator->fails()){
             return $this->sendError($validator->errors());       

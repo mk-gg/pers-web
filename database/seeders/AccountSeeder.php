@@ -19,7 +19,7 @@ class AccountSeeder extends Seeder
             'first_name' => 'Admin',
             'last_name' => 'User',
             'email' => 'admin@pers.com',
-            'role' => 'administrator',
+            'account_type' => 'administrator',
             'password' => Hash::make('secret'),
             'address' => 'Pasacao',
             'phone' => '0912345678',

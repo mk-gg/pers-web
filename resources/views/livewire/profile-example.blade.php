@@ -160,8 +160,8 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="gender">Gender</label>
-                            <select class="form-select mb-0" id="gender"
+                            <label for="sex">Gender</label>
+                            <select class="form-select mb-0" id="sex"
                                 aria-label="Gender select example">
                                 <option selected>Gender</option>
                                 <option value="Female">Female</option>
@@ -213,8 +213,8 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="zip">ZIP</label>
-                                <input class="form-control" id="zip" type="tel" placeholder="ZIP">
+                                <label for="zip_code">ZIP</label>
+                                <input class="form-control" id="zip_code" type="tel" placeholder="ZIP">
                             </div>
                         </div>
                     </div>

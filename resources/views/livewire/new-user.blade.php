@@ -89,8 +89,8 @@
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
-                            <label for="role">Role</label>
-                            <select wire:model="role" class="form-select mb-0"  id="role" 
+                            <label for="account_type">Account Type</label>
+                            <select wire:model="account_type" class="form-select mb-0"  id="account_type" 
                                 aria-label="Role select example">
                                 <option >Choose...</option>
                                 <option value="responder">Responder</option>
@@ -100,7 +100,7 @@
                               
                             </select>
                          
-                            @error('role') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                            @error('account_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                         
                     </div>
@@ -141,7 +141,7 @@
                                 </div>  
                             </div>
                         </div>
-                    {{-- <h2 class="h5 my-4">Location</h2>
+                    <h2 class="h5 my-4">Location</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">
                             <div class="form-group">
@@ -161,18 +161,18 @@
                     <div class="row">
                         <div class="col-sm-4 mb-3">
                             <div class="form-group">
-                                <label for="city">City</label>
-                                <input class="form-control" id="city" type="text"
+                                <label for="city_municipality">City</label>
+                                <input class="form-control" id="city_municipality" type="text"
                                     placeholder="City">
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="zip">ZIP</label>
-                                <input class="form-control" id="zip" type="tel" placeholder="ZIP">
+                                <label for="zip_code">ZIP</label>
+                                <input class="form-control" id="zip_code" type="tel" placeholder="ZIP">
                             </div>
                         </div>
-                    </div> --}}
+                    </div>
                     <div class="mt-3">
                         <button type="submit" class="btn btn-gray-800 mt-2 animate-up-2">Save All</button>
                     </div>

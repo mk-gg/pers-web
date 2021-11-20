@@ -15,12 +15,12 @@ class NewUser extends Component
     public $first_name = '';
     public $last_name = '';
     public $email = '';
-    public $role = '';
+    public $account_type = '';
     public $password = '';
     public $passwordConfirmation = '';
     //public $birthdate = '';
     public $showAddAlert = false;
-    public $roles;
+    public $account_types;
 
     public function rules()
     {
@@ -28,7 +28,7 @@ class NewUser extends Component
             'first_name' => 'max:15',
             'last_name' => 'max:20',
             'email' => 'email',
-            'role' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'administrator'])],
+            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'administrator'])],
             'password' => 'required|same:passwordConfirmation|min:6'
         ];
     }
@@ -48,7 +48,7 @@ class NewUser extends Component
             'last_name' => 'max:20',
             'email' => 'email',
             
-            'role' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'administrator'])],
+            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'administrator'])],
             'email' => 'required',
             'password' => 'required|same:passwordConfirmation|min:6',
            
@@ -59,7 +59,7 @@ class NewUser extends Component
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'role' => strtolower($this->role),
+            'account_type' => strtolower($this->account_type),
             'password' => Hash::make($this->password),
             'remember_token' => Str::random(10),
         ]);
@@ -71,7 +71,7 @@ class NewUser extends Component
 
     public function render()
     {
-        //view('livewire.new-user', ['roless' => ['Responder', 'Reporter', 'Dispatcher']]
+        //view('livewire.new-user', ['account_types' => ['Responder', 'Reporter', 'Dispatcher']]
         return view('livewire.new-user');
         ;
     }

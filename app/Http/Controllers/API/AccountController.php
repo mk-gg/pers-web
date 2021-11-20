@@ -34,7 +34,7 @@ class AccountController extends BaseController
             'phone' => 'required',
             'email' => 'required',
             'password' => 'required',
-            'account_typerole' => 'required',
+            'account_type' => 'required',
             'unit_name' => 'nullable',
             'city_municipality' => 'nullable',
             'zip_code' => 'nullable',
