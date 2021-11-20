@@ -13,14 +13,14 @@ class Account extends JsonResource
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
             'email' => $this->email,
-            'role' => $this->role,
+            'account_type' => $this->account_type,
             'password' => $this->password,
             'phone' => $this->phone,
             'birthdate' => $this->birthdate,
             'gender' => $this->gender,
             'address' => $this->address,
             'unit_name' => $this->unit_name,
-            'city' => $this->city,
+            'city' => $this->city_municipality,
             'zip_code' => $this->zip_code,
             'province' => $this->province
             
