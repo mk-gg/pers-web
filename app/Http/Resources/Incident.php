@@ -15,12 +15,12 @@ class Incident extends JsonResource
             'incident_type' => $this->incident_type,
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'gender' => $this->gender,
+            'sex' => $this->sex,
             'age' => $this->age,
             'description' => $this->description,
             'date_time_reported' => $this->date_time_reported,
             'location_id' => $this->location_id,
-            'reporter_id' => $this->reporter_id
+            'account_id' => $this->account_id
         ];
     }
     

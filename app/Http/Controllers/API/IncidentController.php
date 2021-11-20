@@ -30,12 +30,11 @@ class IncidentController extends BaseController
             'incident_type' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
-            'gender' => 'required',
+            'sex' => 'required',
             'age' => 'required',
             'description' => 'nullable',
-            'date_time_reported' => 'required',
             'location_id' => 'nullable',
-            'reporter_id' => 'required',
+            'account_id' => 'required',
             
         ]);
         if($validator->fails()){
@@ -67,12 +66,11 @@ class IncidentController extends BaseController
             'incident_type' => 'required',
             'first_name' => 'required',
             'last_name' => 'required',
-            'gender' => 'required',
+            'sex' => 'required',
             'age' => 'required',
             'description' => 'nullable',
-            'date_time_reported' => 'required',
             'location_id' => 'nullable',
-            'reporter_id' => 'required',
+            'account_id' => 'required',
         ]);
 
         if($validator->fails()){
@@ -81,13 +79,13 @@ class IncidentController extends BaseController
 
         $incident->first_name = $input['first_name'];
         $incident->last_name = $input['last_name'];
-        $incident->gender = $input['gender'];
+        $incident->sex = $input['sex'];
         $incident->age = $input['age'];
         $incident->incident_type = $input['incident_type'];
         $incident->description = $input['description'];
-        $incident->date_time_reported = $input['date_time_reported'];
+     
         $incident->location_id = $input['location_id'];
-        $incident->reporter_id = $input['reporter_id'];
+        $incident->account_id = $input['account_id'];
         $incident->save();
         
         return $this->sendResponse(new IncidentResource($incident), 'Post updated.');

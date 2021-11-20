@@ -17,7 +17,7 @@ class Account extends JsonResource
             'password' => $this->password,
             'phone' => $this->phone,
             'birthdate' => $this->birthdate,
-            'gender' => $this->gender,
+            'sex' => $this->sex,
             'address' => $this->address,
             'unit_name' => $this->unit_name,
             'city' => $this->city_municipality,

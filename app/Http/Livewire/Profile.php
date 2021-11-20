@@ -19,11 +19,11 @@ class Profile extends Component
         'user.first_name' => 'max:15',
         'user.last_name' => 'max:20',
         'user.email' => 'email',
-        'user.gender' => ['required', Rule::in(['Male', 'Female', 'Other'])],
+        'user.sex' => ['required', Rule::in(['Male', 'Female', 'Other'])],
         'user.address' => 'max:40',
         'user.number' => 'numeric',
-        'user.city' => 'max:20',
-        'user.ZIP' => 'numeric',
+        'user.city_municipality' => 'max:20',
+        'user.zip_code' => 'numeric',
     ];
     }
 

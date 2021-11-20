@@ -20,7 +20,7 @@ class IncidentSeeder extends Seeder
         
             'first_name' => 'Juanito',
             'last_name' => 'Panito',
-            'gender' => 'male',
+            'sex' => 'male',
             'age' => '53',
             'incident_type' => 'Heat Stroke',
             'description' => 'Man got heatstroke',
