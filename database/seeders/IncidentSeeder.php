@@ -25,8 +25,6 @@ class IncidentSeeder extends Seeder
             'incident_type' => 'Heat Stroke',
             'description' => 'Man got heatstroke',
             'location' => 'Pascao'
-
-
             
         ]);
     }
