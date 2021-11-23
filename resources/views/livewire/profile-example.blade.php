@@ -170,7 +170,24 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <input  class="form-control" id="email" type="email"
+                                    placeholder="name@company.com" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="phone">Phone</label>
+                                <input class="form-control" id="phone" type="number"
+                                    placeholder="+12-345 678 910">
+                            </div>
+                        </div>
+                    </div>
+                      <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
                                 <label for="email">Email</label>

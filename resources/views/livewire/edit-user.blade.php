@@ -113,8 +113,8 @@
                         </div>
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
-                            <label for="phone">Phone</label>
-                                <input class="form-control" id="phone" type="number"
+                            <label for="mobile_no">Phone</label>
+                                <input class="form-control" id="mobile_no" type="number"
                                     placeholder="+639 32 456 7853">
                             </div>
                         </div>

@@ -45,7 +45,7 @@ use App\Http\Livewire\Incidents;
 
 Route::redirect('/', '/login');
 
-Route::get('/register', Register::class)->name('register');
+//Route::get('/register', Register::class)->name('register');
 
 Route::get('/login', Login::class)->name('login');
 

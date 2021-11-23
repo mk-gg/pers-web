@@ -44,7 +44,6 @@
                 </a>
             </div>
         </div>
-        
     </div>
     <div class="row">
         <div class="col-12 col-xl-8">
@@ -86,6 +85,7 @@
                                 <input data-datepicker=""
                                     class="form-control datepicker-input" id="birthday" type="text"
                                     placeholder="yyyy/mm/dd">
+                                    @error('birthday') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                             </div>
                         </div>
                         <div class="col-md-6 mb-3">
@@ -97,13 +97,11 @@
                                 <option value="reporter">Reporter</option>
                                 <option value="dispatcher">Dispatcher</option>
                                 <option value="administrator">Administrator</option>
-                              
                             </select>
-                         
                             @error('account_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
-                        
                     </div>
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
@@ -113,12 +111,13 @@
                             </div>
                             @error('email') <div class="invalid-feedback"> {{ $message }} </div> @enderror 
                         </div>
-                    <div class="col-md-6 mb-3">
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                                <input class="form-control" id="phone" type="number"
-                                    placeholder="+639 32 456 7853">
+                        <div class="col-md-6 mb-3">
+                            <div class="form-group">
+                                <label for="mobile_no">Phone</label>
+                                    <input wire:model="mobile_no" class="form-control" id="mobile_no" type="number"
+                                        placeholder="+639 32 456 7853">
                             </div>
+                            @error('mobile_no') <div class="invalid-feedback"> {{ $message }}</div> @enderror
                         </div>
                     </div>
                     <div class="row">
@@ -127,11 +126,11 @@
                                 <label for="password">Your Password</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon4"><svg class="icon icon-xs text-gray-600" fill="#6b7280" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg></span>
-                                <input wire:model.lazy="password" type="password" placeholder="Password" class="form-control" id="password" required>
-                            </div>
+                                    <input wire:model.lazy="password" type="password" placeholder="Password" class="form-control" id="password" required>
+                                </div>
                             @error('password') <div class="invalid-feedback"> {{ $message }}</div> @enderror
+                            </div>
                         </div>
-                    </div>
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
                                 <label for="confirm_password">Confirm Password</label>
@@ -141,6 +140,25 @@
                                 </div>  
                             </div>
                         </div>
+                    </div>
+
+                    <div class="row align-items-center">
+                        <div class="col-md-6 mb-3">
+                            <label for="unit_name">Unit Name</label>
+                                <input wire:model="unit_name" class="form-control" id="unit_name" type="text"
+                                    placeholder="Unit Name">
+                        </div> 
+                        <div class="col-md-6 mb-3">
+                            <label for="sex">Gender</label>
+                            <select class="form-select mb-0" id="sex"
+                                aria-label="Gender select example">
+                                <option selected>Gender</option>
+                                <option value="Female">Female</option>
+                                <option value="Male">Male</option>
+                            </select>
+                            @error('sex') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                        </div>
+                    </div>
                     <h2 class="h5 my-4">Location</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">
@@ -179,7 +197,7 @@
                 </form>
             </div>
         </div>
-    </div>
+    
         <div class="col-12 col-xl-4">
             <div class="row">
                 <div class="col-12 mb-4">

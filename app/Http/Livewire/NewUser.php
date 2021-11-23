@@ -18,9 +18,12 @@ class NewUser extends Component
     public $account_type = '';
     public $password = '';
     public $passwordConfirmation = '';
-    //public $birthdate = '';
+    public $birthday = '';
     public $showAddAlert = false;
     public $account_types;
+    public $mobile_no;
+    public $sex;
+    public $unit_name = '';
 
     public function rules()
     {
@@ -42,28 +45,37 @@ class NewUser extends Component
     
     public function add()
     {
-        
+        // Validate First the inputs before creating
         $this->validate([
             'first_name' => 'max:15',
             'last_name' => 'max:20',
+            'birthday' => 'required|date|before:-13 years',
+            'sex'  => ['required', Rule::in(['male', 'female'])],
             'email' => 'email',
-            
+            'mobile_no' => 'required|regex:/^(09|\+639)\d{9}$/',
             'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'administrator'])],
-            'email' => 'required',
+            'email' => 'required|email:rfc,dns|unique:accounts',
             'password' => 'required|same:passwordConfirmation|min:6',
+            'unit_name' => 'max:20',
            
         ]);
        
-        
+        // Create a user
         $this->user = Account::create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
+            'birthday' => $this->birthday,
+            'sex' => strtolower($this->sex),
+            'mobile_no' => $this->mobile_no,
             'email' => $this->email,
             'account_type' => strtolower($this->account_type),
             'password' => Hash::make($this->password),
             'remember_token' => Str::random(10),
+            'unit_name' => $this->unit_name,
+
         ]);
 
+        // Pop up a alert message.
         $this->showAddAlert = true;   
         return redirect('/users');
     }

@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\AccountController;
 use App\Http\Controllers\API\IncidentController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,26 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+//Public Routes
+//Route::resource('accounts', AccountController::class);
+
+//Route::resource('incidents', IncidentController::class);
+// Route::get('/accounts', [AccountController::class, 'index']);
+Route::resource('users', UserController::class);
+Route::post('/register', [AuthController::class, 'register']);
+Route::post('/login', [AuthController::class, 'login']);
+
+//Protected Routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::post('/logout', [AuthController::class, 'logout']);
+
+
+    Route::resource('accounts', AccountController::class);
+   
+    Route::resource('incidents', IncidentController::class);
+});
+
+
 // Route::get('/test-api', function ()
 // {
 //     $user = User::create([
@@ -36,15 +57,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     ]);
 // });
 
-
-
-
 // Route::get('/test', function(Request $request){
 //     return 'Authenticated';
 // });
-
-Route::resource('accounts', AccountController::class);
-
-Route::resource('incidents', IncidentController::class);
-
-Route::resource('users', UserController::class);

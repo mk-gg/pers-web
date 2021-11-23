@@ -31,7 +31,7 @@ class UserFactory extends Factory
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
             'account_type' => Arr::random(['administrator', 'responder', 'reporter', 'dispatcher']),
-            'birthdate' => $this->faker->date('2021-01-01'),
+            'birthday' => $this->faker->date('2021-01-01'),
             'address' => $this->faker->address,
             'city_municipality' => $this->faker->city_municipality,
             'zip_code' => $this->faker->randomNumber(6),

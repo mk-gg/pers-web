@@ -7,6 +7,7 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use Validator;
 use App\Models\Account;
 use App\Http\Resources\Account as AccountResource;
+use Laravel\Sanctum\HasApiTokens;
    
 class AccountController extends BaseController
 {
@@ -29,9 +30,9 @@ class AccountController extends BaseController
         $validator = Validator::make($input, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'birthdate' => 'required',
+            'birthday' => 'required',
             'sex' => 'required',
-            'phone' => 'required',
+            'mobile_no' => 'required',
             'email' => 'required',
             'password' => 'required',
             'account_type' => 'required',
@@ -69,9 +70,9 @@ class AccountController extends BaseController
         $validator = Validator::make($input, [
             'first_name' => 'required',
             'last_name' => 'required',
-            'birthdate' => 'required',
+            'birthday' => 'required',
             'sex' => 'required',
-            'phone' => 'required',
+            'mobile_no' => 'required',
             'email' => 'required',
             'password' => 'required',
             'account_type' => 'required',
@@ -89,8 +90,8 @@ class AccountController extends BaseController
         $account->last_name = $input['last_name'];
         $account->email = $input['email'];
         $account->password = $input['password'];
-        $account->birthdate = $input['birthdate'];
-        $account->phone = $input['phone'];
+        $account->birthday = $input['birthday'];
+        $account->mobile_no = $input['mobile_no'];
         $account->account_type = $input['account_type'];
         $account->unit_name = $input['unit_name'];
         $account->city_municipality = $input['city_municipality'];

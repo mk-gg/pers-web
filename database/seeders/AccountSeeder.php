@@ -22,8 +22,9 @@ class AccountSeeder extends Seeder
             'account_type' => 'administrator',
             'password' => Hash::make('secret'),
             'address' => 'Pasacao',
-            'phone' => '0912345678',
-            'birthdate' => '2021-01-01'
+            'mobile_no' => '0912345678',
+            'birthday' => '2021-01-01'
         ]);
     }
 }
+
