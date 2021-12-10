@@ -18,9 +18,9 @@ class CreateIncidentsTable extends Migration
             $table->string('incident_type');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
-            $table->string('sex');
+            $table->string('sex')->nullable();
             $table->string('age')->nullable();
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->string('location');
             $table->timestamp('date_time_reported');
             $table->string('location_id')->nullable();

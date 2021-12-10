@@ -21,6 +21,7 @@
             <p class="mb-0">Insert desc</p>
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
+            @can('create_acc', \App\Models\Account::class)
             <a href="{{ route('new-user') }}" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
                 <svg class="icon icon-xs me-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                     xmlns="http://www.w3.org/2000/svg">
@@ -29,6 +30,7 @@
                 </svg>
                 New User
             </a>
+            @endcan
             <div class="btn-group ms-2 ms-lg-3">
                 <button type="button" class="btn btn-sm btn-outline-gray-600">Share</button>
                 <button type="button" class="btn btn-sm btn-outline-gray-600">Export</button>
@@ -213,7 +215,17 @@
                 </tr>
                 
                 @endforeach
+
+                
+
             </tbody>
+            
         </table>
+        
+        
+        {{ $users->links('pagination-links') }}
+            
+        
+        
     </div>
 </div>

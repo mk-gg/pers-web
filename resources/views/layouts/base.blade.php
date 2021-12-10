@@ -42,6 +42,8 @@
     <!-- Volt CSS -->
     <link type="text/css" href="/css/volt.css" rel="stylesheet">
 
+    <!-- Pikaday CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
     @livewireStyles
 
     @livewireScripts
@@ -72,8 +74,11 @@
     <!-- Sweet Alerts 2 -->
     <script src="/assets/js/sweetalert2.all.min.js"></script>
 
-    <!-- Moment JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"></script>
+     <!-- Moment JS -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+     <!-- Pikaday -->
+     <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script> 
 
     <!-- Notyf -->
     <script src="/vendor/notyf/notyf.min.js"></script>
@@ -120,6 +125,10 @@
     @endif
 
     {{ $slot }}
+
+
+
+    
 
 </body>
 

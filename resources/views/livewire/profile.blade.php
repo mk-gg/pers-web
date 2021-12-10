@@ -181,12 +181,24 @@
                         </div>
                         <div class="mb-3 col-sm-3">
                             <div class="form-group">
-                                <label for="number">Number</label>
-                                <input wire:model="user.number" class="form-control" id="number" type="number"
+                                <label for="mobile_no">Number</label>
+                                <input wire:model="user.mobile_no" class="form-control" id="mobile_no" type="number"
                                     placeholder="No.">
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-6 mb-3">
+                            <label for="birthday">Birthday</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><svg class="icon icon-xs" fill="currentColor"
+                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd"
+                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                            clip-rule="evenodd"></path>
+                                    </svg></span>
+                                <input data-datepicker="" wire:model="user.birthday" class="form-control datepicker-input" id="birthday" type="text" placeholder="yyyy/mm/dd">
+                            </div>
+                        </div>
                     <div class="row">
                         <div class="mb-3 col-sm-4">
                             <div class="form-group">

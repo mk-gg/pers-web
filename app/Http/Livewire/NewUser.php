@@ -18,7 +18,7 @@ class NewUser extends Component
     public $account_type = '';
     public $password = '';
     public $passwordConfirmation = '';
-    public $birthday = '';
+    public $birthday;
     public $showAddAlert = false;
     public $account_types;
     public $mobile_no;
@@ -31,6 +31,7 @@ class NewUser extends Component
             'first_name' => 'max:15',
             'last_name' => 'max:20',
             'email' => 'email',
+            'birthday' => 'required',
             'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'administrator'])],
             'password' => 'required|same:passwordConfirmation|min:6'
         ];
@@ -45,14 +46,15 @@ class NewUser extends Component
     
     public function add()
     {
+       
         // Validate First the inputs before creating
         $this->validate([
             'first_name' => 'max:15',
             'last_name' => 'max:20',
-            'birthday' => 'required|date|before:-13 years',
+            'birthday' => 'required',
             'sex'  => ['required', Rule::in(['male', 'female'])],
             'email' => 'email',
-            'mobile_no' => 'required|regex:/^(09|\+639)\d{9}$/',
+            'mobile_no' => 'required',
             'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'administrator'])],
             'email' => 'required|email:rfc,dns|unique:accounts',
             'password' => 'required|same:passwordConfirmation|min:6',
@@ -60,6 +62,7 @@ class NewUser extends Component
            
         ]);
        
+         
         // Create a user
         $this->user = Account::create([
             'first_name' => $this->first_name,

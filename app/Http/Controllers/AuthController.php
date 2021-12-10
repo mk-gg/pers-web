@@ -54,6 +54,7 @@ class AuthController extends Controller
         auth()->user()->tokens()->delete();
 
         return [
+            'status' => true,
             'message' => 'Logged out'
         ];
     }
@@ -67,17 +68,25 @@ class AuthController extends Controller
         
         // Check email
         $user = Account::where('email', $fields['email'])->first();
+        
+        if(!$user){
+            return response([
+                'status' => false,
+                'message' => 'The credential does not exist'
+            ], 401);
+        }
 
         // Check Password
-        if(!$user || !Hash::check($fields['password'], $user->password)) {
+        if(!Hash::check($fields['password'], $user->password)) {
             return response([
-                'message' => 'The password doesnt match'
-            ], 401);
+                'status' => false,
+                'message' => 'The password doesnt match'], 401);
         }
 
         $token = $user->createToken('myapptoken')->plainTextToken;
 
         $response = [
+            'success' => true,
             'user' => $user,
             'token' => $token
         ];

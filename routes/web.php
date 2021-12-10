@@ -28,6 +28,8 @@ use App\Http\Livewire\ResetPasswordExample;
 use App\Http\Livewire\UpgradeToPro;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\Incidents;
+use App\Http\Livewire\NewIncident;
+
 
 
 /*
@@ -63,12 +65,11 @@ Route::get('/upgrade-to-pro', UpgradeToPro::class)->name('upgrade-to-pro');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/profile-example', ProfileExample::class)->name('profile-example');
-    Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
+    
     Route::get('/incidents', Incidents::class)->name('incidents');
-    //Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
-
-    //Route::get('/edit-user', EditUser::class)->name('edit-user');
+    Route::get('/new-incident', NewIncident::class)->name('new-incident');
     Route::get('/new-user', NewUser::class)->name('new-user');
+    Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
     Route::get('/users', Users::class)->name('users');
     Route::get('/login-example', LoginExample::class)->name('login-example');
     Route::get('/register-example', RegisterExample::class)->name('register-example');

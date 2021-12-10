@@ -5,8 +5,13 @@ namespace App\Http\Livewire;
 use Livewire\Component;
 use App\Models\User;
 use App\Models\Account;
+
+use Livewire\WithPagination;
+
 class Users extends Component
 {   
+    use WithPagination;
+    
     public Account $user;
     public Account $existingUser;
     public $email = '';
@@ -40,7 +45,7 @@ class Users extends Component
     {
         return view('livewire.users', [
             //'users' => User::all(),
-            'users' => Account::all(), 
+            'users' => Account::latest()->paginate(10) 
         ]);
     }
 }

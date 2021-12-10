@@ -19,9 +19,10 @@ class Profile extends Component
         'user.first_name' => 'max:15',
         'user.last_name' => 'max:20',
         'user.email' => 'email',
+        'user.birthday' => 'date_format:Y-m-d',
         'user.sex' => ['required', Rule::in(['Male', 'Female', 'Other'])],
         'user.address' => 'max:40',
-        'user.number' => 'numeric',
+        'user.mobile_no' => 'numeric',
         'user.city_municipality' => 'max:20',
         'user.zip_code' => 'numeric',
     ];
