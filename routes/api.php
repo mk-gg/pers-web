@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\AccountController;
 use App\Http\Controllers\API\IncidentController;
+use App\Http\Controllers\API\LocationController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -36,14 +37,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('users', UserController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
+Route::resource('locations', LocationController::class);
 //Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
 
 
     Route::resource('accounts', AccountController::class);
-   
+    
     Route::resource('incidents', IncidentController::class);
 });
 

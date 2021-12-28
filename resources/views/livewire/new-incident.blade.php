@@ -198,7 +198,7 @@
         {{-- End Form --}}
 
         {{-- Right Panel Map --}}
-
+        {{--  
         <div class="col-12 col-xl-4">
             <div class="row">
                 <div class="col-12 mb-4">
@@ -221,10 +221,12 @@
                                 Connect
                             </a>
                             <a class="btn btn-sm btn-secondary" href="#">Send Message</a>
-                            --}}
+                            
                         </div>
                     </div>
                 </div>
+               
+                 
                 <div class="col-12">
                     <div class="card card-body border-0 shadow mb-4">
                         <h2 class="h5 mb-4">Select profile photo</h2>
@@ -284,7 +286,7 @@
                 </div>
             </div>
         </div>
-
+        --}}
         {{-- End Right Panel Map --}}
     </div>
     

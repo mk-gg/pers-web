@@ -20,6 +20,7 @@ class EditUser extends Component{
     public $email = '';
     public $account_type = '';
     public $password = '';
+    public $birthday;
     public $passwordConfirmation = '';
 
     public function rules() {
@@ -29,11 +30,11 @@ class EditUser extends Component{
             'user.last_name' => 'max:20',
             'user.email' => 'email',
             //'user.sex' => ['required', Rule::in(['Male', 'Female', 'Other'])],
-            //'user.dob' => 'required|date|before:-13 years',
+            'user.birthday' => 'required|date|before:-13 years',
             'user.account_type' => ['required', Rule::in(['reporter', 'responder', 'dispatcher', 'administrator'])],
             'user.address' => 'max:40',
-            'user.number' => 'numeric',
-            'user.city' => 'max:20',
+            'user.mobile_no' => 'numeric',
+            'user.city_municipality' => 'max:20',
             'user.zip_code' => 'numeric',
         ];
         }

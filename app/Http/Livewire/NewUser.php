@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use Carbon\Carbon;
 use App\Models\Account;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
@@ -11,11 +12,12 @@ use Illuminate\Support\Str;
 
 class NewUser extends Component
 {
+
     public Account $user;
     public $first_name = '';
     public $last_name = '';
     public $email = '';
-    public $account_type = '';
+    public $account_type;
     public $password = '';
     public $passwordConfirmation = '';
     public $birthday;
@@ -43,10 +45,12 @@ class NewUser extends Component
     }
 
 
+   
     
     public function add()
     {
        
+        
         // Validate First the inputs before creating
         $this->validate([
             'first_name' => 'max:15',
@@ -62,24 +66,26 @@ class NewUser extends Component
            
         ]);
        
-         
+       
+      
         // Create a user
         $this->user = Account::create([
             'first_name' => $this->first_name,
             'last_name' => $this->last_name,
-            'birthday' => $this->birthday,
             'sex' => strtolower($this->sex),
-            'mobile_no' => $this->mobile_no,
             'email' => $this->email,
-            'account_type' => strtolower($this->account_type),
             'password' => Hash::make($this->password),
-            'remember_token' => Str::random(10),
+            'account_type' => 'responder',
+            'birthday' => $this->birthday,
+            'mobile_no' => $this->mobile_no,
             'unit_name' => $this->unit_name,
-
+            'remember_token' => Str::random(10),
+            
         ]);
-
+    
         // Pop up a alert message.
-        $this->showAddAlert = true;   
+        $this->showAddAlert = true;
+
         return redirect('/users');
     }
 

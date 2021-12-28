@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -11,17 +12,31 @@ use Laravel\Sanctum\HasApiTokens;
 class Account extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
+    
 
+   
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
- /*    protected $fillable = [
-        'name',
+    
+   protected $fillable = [
+        'first_name',
+        'last_name',
+        'sex',
         'email',
         'password',
-    ]; */
+        'account_type',
+        'birthday',
+        'address',
+        'mobile_no',
+        'unit_name',
+        'city_municipality',
+        'zip_code',
+        
+    ];
+
     protected $guarded=[];
 
     /**

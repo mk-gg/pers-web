@@ -3,7 +3,7 @@
 
     @if(in_array(request()->route()->getName(), ['dashboard', 'profile', 'profile-example', 'users', 'bootstrap-tables', 'transactions',
     'buttons',
-    'forms', 'modals', 'notifications', 'typography', 'upgrade-to-pro', 'new-user', 'edit-user','incidents', 'new-incident']))
+    'forms', 'modals', 'notifications', 'typography', 'upgrade-to-pro', 'new-user', 'edit-user','incidents', 'new-incident', 'locations', 'new-location']))
 
     {{-- Nav --}}
     @include('layouts.nav')

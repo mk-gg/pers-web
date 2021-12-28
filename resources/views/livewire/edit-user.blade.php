@@ -84,10 +84,11 @@
                                             d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
                                             clip-rule="evenodd"></path>
                                     </svg></span>
-                                <input data-datepicker=""
-                                    class="form-control datepicker-input" id="birthday" type="text"
+                                <input 
+                                    wire:model.lazy="user.birthday" class="form-control datepicker-input" id="birthday" type="text"
                                     placeholder="yyyy/mm/dd">
                             </div>
+                            @error('user.birthday')<div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="col-md-6 mb-3">
                             <label for="account_type">Role</label>
@@ -102,6 +103,7 @@
                             @error('user.account_type')<div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                     </div>
+                    <p id="demo"></p>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
@@ -114,7 +116,7 @@
                     <div class="col-md-6 mb-3">
                         <div class="form-group">
                             <label for="mobile_no">Phone</label>
-                                <input class="form-control" id="mobile_no" type="number"
+                                <input wire:model="user.mobile_no" class="form-control" id="mobile_no" type="number"
                                     placeholder="+639 32 456 7853">
                             </div>
                         </div>
@@ -172,7 +174,7 @@
                         </div>
                     </div> --}}
                     <div class="mt-3">
-                        <button type="submit" class="btn btn-gray-800 mt-2 animate-up-2">Save All</button>
+                        <button type="submit"  class="btn btn-gray-800 mt-2 animate-up-2">Save All</button>
                     </div>
                 </form>
             </div>
@@ -267,3 +269,13 @@
         </div>
     </div>
 </div>
+
+
+<script src="moment.js"></script>
+<script src="pikaday.js"></script>
+<script>
+    
+    var picker = new Pikaday({ field: document.getElementById('birthday'), 
+    format: 'YYYY-MM-DD' });
+    
+</script>

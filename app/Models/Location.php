@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Incident extends Authenticatable
+class Location extends Authenticatable
 {
     use HasFactory, Notifiable;
 
@@ -19,12 +19,13 @@ class Incident extends Authenticatable
      *
      * @var array
      */
-    /*
+    
+    
    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'birthday'
+        'location_type',
+        'address',
+        'latitude',
+        'longitude'
     ]; 
     protected $guarded=[];
 

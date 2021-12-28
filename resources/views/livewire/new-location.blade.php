@@ -1,8 +1,8 @@
 <div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div>
-            <h2 class="h4">Add User</h2>
-            <p class="mb-0">Your add user template</p>
+            <h2 class="h4">Add Incident</h2>
+            <p class="mb-0">Your add incident template</p>
             <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
@@ -45,13 +45,18 @@
             </div>
         </div>
     </div>
+    {{-- Form --}}
     <div class="row">
+       
         <div class="col-12 col-xl-8">
+             <!-- Alert-->
             @if($showAddAlert)
             <div class="alert alert-success" role="alert">
                 Added!
             </div>
             @endif
+            <!-- End Alert-->
+
             <div class="card card-body border-0 shadow mb-4">
                 <h2 class="h5 mb-4">General information</h2>
                 <!-- Form -->
@@ -59,67 +64,62 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div>
-                                <label for="first_name">First Name</label>
-                                <input wire:model="first_name" class="form-control" id="first_name" type="text"
-                                    placeholder="Enter your first name" required>
+                                <label for="location_type">Location Type</label>
+                                <input wire:model="location_type" class="form-control" id="location_type" type="text"
+                                    placeholder="Enter the incident type">
                             </div>
+                            @error('location_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                         <div class="col-md-6 mb-3">
                             <div>
-                                <label for="last_name">Last Name</label>
-                                <input wire:model="last_name" class="form-control" id="last_name" type="text"
-                                    placeholder="Also your last name" required>
+                                <label for="address">Address</label>
+                                <input wire:model="address" class="form-control" id="address" type="text"
+                                    placeholder="Enter address">
                             </div>
                         </div>
+                        @error('address') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                     </div>
-                    <div class="row align-items-center">
-                        <div class="col-md-6 mb-3">
-                            <label for="birthday">Birthday</label>
-                            <div class="input-group">
-                                <span class="input-group-text"><svg class="icon icon-xs" fill="currentColor"
-                                        viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
-                                            clip-rule="evenodd"></path>
-                                    </svg></span>
-                            
-                            <input wire:model.lazy="birthday" class="form-control" id="birthday" type="text" 
-                                   placeholder="MM/DD/YYYY" required>
-                                   
-                            @error('birthday') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="account_type">Account Type</label>
-                            <select wire:model.lazy="account_type" class="form-select mb-0"  id="account_type" 
-                                aria-label="Role select example">
-                                <option >Choose...</option>
-                                <option value="responder">Responder</option>
-                                <option value="dispatcher">Dispatcher</option>
-                                <option value="administrator">Administrator</option>
-                            </select>
-                            @error('account_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                        </div>
-                    </div>
-
+               
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                                <label for="email">Email</label>
-                                <input wire:model="email" id="email" class="form-control" id="email" type="email"
-                                    placeholder="name@company.com">
+                            <div>
+                                <label for="longitude">Longitude</label>
+                                <input wire:model="longitude" class="form-control" id="longitude" type="text"
+                                    placeholder="Enter the longitude">
                             </div>
-                            @error('email') <div class="invalid-feedback"> {{ $message }} </div> @enderror 
+                            @error('longitude') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div>
+                                <label for="latitude">Latitude</label>
+                                <input wire:model="latitude" class="form-control" id="latitude" type="text"
+                                    placeholder="Enter the latitude">
+                            </div>
+                            @error('latitude') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                        </div>
+                    </div>
+                    {{-- 
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="sex">Gender</label>
+                            <select wire:model="sex" class="form-select mb-0" id="sex"
+                                aria-label="Gender select example">
+                                <option value="">Gender</option>
+                                <option value="female">Female</option>
+                                <option value="male">Male</option>
+                            </select>
+                            @error('sex') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
-                                <label for="mobile_no">Phone</label>
-                                    <input wire:model="mobile_no" class="form-control" id="mobile_no" type="number"
-                                        placeholder="+639 32 456 7853">
+                                <label for="age">Age</label>
+                                    <input wire:model="age" class="form-control" id="age" type="number"
+                                        placeholder="Enter the age">
                             </div>
-                            @error('mobile_no') <div class="invalid-feedback"> {{ $message }}</div> @enderror
+                            @error('age') <div class="invalid-feedback"> {{ $message }}</div> @enderror
                         </div>
                     </div>
+                    
                     <div class="row">
                         <div class="col-sm-6 mb-3">
                             <div class="form-group">
@@ -141,24 +141,25 @@
                             </div>
                         </div>
                     </div>
-
+                    
                     <div class="row align-items-center">
                         <div class="col-md-6 mb-3">
-                            <label for="unit_name">Unit Name</label>
-                                <input wire:model="unit_name" class="form-control" id="unit_name" type="text"
-                                    placeholder="Unit Name">
+                            <label for="location">Location</label>
+                                <input wire:model="location" class="form-control" id="location" type="text"
+                                    placeholder="Location">
+                                    
                         </div> 
+                        
                         <div class="col-md-6 mb-3">
-                            <label for="sex">Gender</label>
-                            <select wire:model="sex" class="form-select mb-0" id="sex"
-                                aria-label="Gender select example">
-                                <option >Gender</option>
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
-                            </select>
-                            @error('sex') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                            <div>
+                                <label for="account_id">Account Id</label>
+                                <input wire:model="account_id" class="form-control" id="account_id" type="text"
+                                    placeholder="Enter the account_id">
+                            </div>
                         </div>
+                         
                     </div>
+                     --}}
                     <h2 class="h5 my-4">Location</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">
@@ -197,7 +198,10 @@
                 </form>
             </div>
         </div>
-    
+        {{-- End Form --}}
+
+        {{-- Right Panel Map --}}
+        {{--  
         <div class="col-12 col-xl-4">
             <div class="row">
                 <div class="col-12 mb-4">
@@ -220,10 +224,12 @@
                                 Connect
                             </a>
                             <a class="btn btn-sm btn-secondary" href="#">Send Message</a>
-                            --}}
+                            
                         </div>
                     </div>
                 </div>
+               
+                 
                 <div class="col-12">
                     <div class="card card-body border-0 shadow mb-4">
                         <h2 class="h5 mb-4">Select profile photo</h2>
@@ -283,20 +289,18 @@
                 </div>
             </div>
         </div>
+        --}}
+        {{-- End Right Panel Map --}}
     </div>
     
 </div>
 
-
-@section('scripts')
 
 <script src="moment.js"></script>
 <script src="pikaday.js"></script>
 <script>
     
     var picker = new Pikaday({ field: document.getElementById('birthday'), 
-    format: 'YYYY-MM-DD' });
+    format: 'MM/DD/YYYY' });
     
 </script>
-
-@endsection

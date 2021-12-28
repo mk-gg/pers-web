@@ -14,7 +14,7 @@ class LocationFactory extends Factory
      *
      * @var string
      */
-    protected $model = Incident::class;
+    protected $model = Location::class;
 
     /**
      * Define the model's default state.
@@ -24,20 +24,11 @@ class LocationFactory extends Factory
     public function definition()
     {
         return [
-            'incident_type' => $this->faker->incident_type,
-            'first_name' => $this->faker->firstName(),
-            'last_name' => $this->faker->lastName(),
-            'sex' => Arr::random(['male', 'female']),
-            'age' => $this->faker->age,
-            'description' => $this->faker->description,
-            'location' => $this->faker->location,
-            'date_time_reported' => now(),
-            'location_id' => $this->faker->location_id,
-            'account_id' => $this->faker->account_id,
-           
-            'remember_token' => Str::random(10),
-            
-       
+            'location_type' => $this->faker->location_type,
+            'address' => $this->faker->address,
+            'longitude' => $this->faker->longitude,
+            'latitude' => $this->faker-> latitude,
+        
             
         ];
     }

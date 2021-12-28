@@ -29,6 +29,8 @@ use App\Http\Livewire\UpgradeToPro;
 use App\Http\Livewire\Users;
 use App\Http\Livewire\Incidents;
 use App\Http\Livewire\NewIncident;
+use App\Http\Livewire\Locations;
+use App\Http\Livewire\NewLocation;
 
 
 
@@ -65,7 +67,8 @@ Route::get('/upgrade-to-pro', UpgradeToPro::class)->name('upgrade-to-pro');
 Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/profile-example', ProfileExample::class)->name('profile-example');
-    
+    Route::get('/locations', Locations::class)->name('locations');
+    Route::get('/new-location', NewLocation::class)->name('new-location');
     Route::get('/incidents', Incidents::class)->name('incidents');
     Route::get('/new-incident', NewIncident::class)->name('new-incident');
     Route::get('/new-user', NewUser::class)->name('new-user');
