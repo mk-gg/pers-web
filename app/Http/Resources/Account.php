@@ -22,8 +22,8 @@ class Account extends JsonResource
             'unit_name' => $this->unit_name,
             'city' => $this->city_municipality,
             'zip_code' => $this->zip_code,
-            'province' => $this->province
-            
+            'province' => $this->province,
+            'status' => $this->status,
            
             
             

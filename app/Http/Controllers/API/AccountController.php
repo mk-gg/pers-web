@@ -63,43 +63,16 @@ class AccountController extends BaseController
     }
     
 
-    public function update(Request $request, Account $account)
+    public function update(Request $request, $id)
     {
-        $input = $request->all();
-
-        $validator = Validator::make($input, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'birthday' => 'required',
-            'sex' => 'required',
-            'mobile_no' => 'required',
-            'email' => 'required',
-            'password' => 'required',
-            'account_type' => 'required',
-            'unit_name' => 'nullable',
-            'city_municipality' => 'nullable',
-            'zip_code' => 'nullable',
-            'province' => 'nullable',
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError($validator->errors());       
+        $account = Account::find($id);
+        if (is_null($account)) {
+            return $this->sendError('Post does not exist.');
         }
-
-        $account->first_name = $input['first_name'];
-        $account->last_name = $input['last_name'];
-        $account->email = $input['email'];
-        $account->password = $input['password'];
-        $account->birthday = $input['birthday'];
-        $account->mobile_no = $input['mobile_no'];
-        $account->account_type = $input['account_type'];
-        $account->unit_name = $input['unit_name'];
-        $account->city_municipality = $input['city_municipality'];
-        $account->zip_code = $input['zip_code'];
-        $account->province = $input['province'];
-        $account->save();
+        $account->update($request->all());
+        return $account;
         
-        return $this->sendResponse(new AccountResource($account), 'Post updated.');
+        
     }
    
     public function destroy(Account $account)

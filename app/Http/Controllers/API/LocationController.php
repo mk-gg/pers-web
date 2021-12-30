@@ -46,7 +46,7 @@ class LocationController extends BaseController
     */
     public function show($id)
     {
-        $incident = Location::find($id);
+        $incident = Location::where('location_id', $id)->first();
         if (is_null($incident)) {
             return $this->sendError('Post does not exist.');
         }
@@ -54,8 +54,14 @@ class LocationController extends BaseController
     }
     
 
-    public function update(Request $request, Location $incident)
+    public function update(Request $request, $id)
     {
+
+        $incident = Location::where('location_id', $id)->first();
+        if (is_null($incident)) {
+            return $this->sendError('Post does not exist.');
+        }
+
         $input = $request->all();
 
         $validator = Validator::make($input, [

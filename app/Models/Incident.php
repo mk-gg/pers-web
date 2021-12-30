@@ -19,12 +19,15 @@ class Incident extends Authenticatable
      *
      * @var array
      */
-    /*
+    
    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'birthday'
+        'incident_type',
+        'first_name',
+        'last_name',
+        'sex',
+        'description',
+        'location_id',
+        'account_id',
     ]; 
     protected $guarded=[];
 

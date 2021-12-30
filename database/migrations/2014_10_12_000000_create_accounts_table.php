@@ -27,6 +27,7 @@ class CreateAccountsTable extends Migration
             $table->string('mobile_no')->nullable();
             $table->string('city_municipality')->nullable();
             $table->string('zip_code')->nullable();
+            $table->string('status')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken()->unique();
             $table->timestamps();

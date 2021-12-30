@@ -50,7 +50,7 @@ class IncidentController extends BaseController
     */
     public function show($id)
     {
-        $incident = Incident::find($id);
+        $incident = Incident::where('incident_id', $id)->first();
         if (is_null($incident)) {
             return $this->sendError('Post does not exist.');
         }
@@ -58,8 +58,12 @@ class IncidentController extends BaseController
     }
     
 
-    public function update(Request $request, Incident $incident)
+    public function update(Request $request, $id)
     {
+        $incident = Incident::where('incident_id', $id)->first();
+        if (is_null($incident)) {
+            return $this->sendError('Post does not exist.');
+        }
         $input = $request->all();
 
         $validator = Validator::make($input, [
@@ -88,7 +92,7 @@ class IncidentController extends BaseController
         $incident->account_id = $input['account_id'];
         $incident->save();
         
-        return $this->sendResponse(new IncidentResource($incident), 'Post updated.');
+        return $this->sendResponse(new IncidentResource($incident), 'Post updated.');   
     }
    
     public function destroy(Incident $incident)

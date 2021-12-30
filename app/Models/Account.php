@@ -34,6 +34,7 @@ class Account extends Authenticatable
         'unit_name',
         'city_municipality',
         'zip_code',
+        'status',
         
     ];
 

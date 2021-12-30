@@ -1,3 +1,4 @@
+
 <div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div>
@@ -185,10 +186,18 @@
                                     placeholder="City">
                             </div>
                         </div>
+                       
+                        <div id="map"></div>
+
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label for="zip_code">ZIP</label>
-                                <input class="form-control" id="zip_code" type="tel" placeholder="ZIP">
+                                
+                               
+                               
+
+
+                                
+                                
                             </div>
                         </div>
                     </div>
@@ -296,11 +305,19 @@
 </div>
 
 
-<script src="moment.js"></script>
-<script src="pikaday.js"></script>
+<script async
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfNAv-xW-yQ408dQkucajjANnkHYaRuQw&callback=initMap">
+</script>
+
+
+
 <script>
-    
-    var picker = new Pikaday({ field: document.getElementById('birthday'), 
-    format: 'MM/DD/YYYY' });
-    
+    let map;
+
+    function initMap() {
+        map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: -34.397, lng: 150.644 },
+            zoom: 8,
+        });
+    }
 </script>
