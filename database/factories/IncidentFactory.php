@@ -34,7 +34,7 @@ class IncidentFactory extends Factory
             'date_time_reported' => now(),
             'location_id' => $this->faker->location_id,
             'account_id' => $this->faker->account_id,
-           
+            'status' => $this->faker->status,
             'remember_token' => Str::random(10),
             
        

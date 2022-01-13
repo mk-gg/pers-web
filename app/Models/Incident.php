@@ -13,7 +13,7 @@ class Incident extends Authenticatable
     use HasFactory, Notifiable;
 
 
-   
+    protected $primaryKey = 'incident_id';
     /**
      * The attributes that are mass assignable.
      *
@@ -25,9 +25,11 @@ class Incident extends Authenticatable
         'first_name',
         'last_name',
         'sex',
+        'age',
         'description',
         'location_id',
         'account_id',
+        'location',
     ]; 
     protected $guarded=[];
 

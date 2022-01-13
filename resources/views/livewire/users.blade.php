@@ -147,8 +147,6 @@
                     
                 @foreach ($users as $user)
                 
-               
-              
                 
                 <tr>
                     <td>
@@ -215,9 +213,7 @@
                 </tr>
                 
                 @endforeach
-
                 
-
             </tbody>
             
         </table>

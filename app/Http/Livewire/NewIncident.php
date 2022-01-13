@@ -2,15 +2,17 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Input;
 use App\Models\Incident;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
-
+use App\Models\Account;
 class NewIncident extends Component
 {
+    public Account $account;
     public Incident $incident;
     public $first_name;
     public $last_name;
@@ -21,7 +23,7 @@ class NewIncident extends Component
     public $location_id = 1;
     public $description;
     public $account_id;
-
+    public $selectedUser;
     public $showAddAlert = false;
 
 
@@ -49,6 +51,7 @@ class NewIncident extends Component
     
     public function add()
     {
+    
         
         // Validate First the inputs before creating
         $this->validate([
@@ -76,7 +79,11 @@ class NewIncident extends Component
             'date_time_reported' => now(),
         
         ]);
-        
+        dd($this->incident->incident_id);
+        /*
+        If a unit is selected, add an operation
+        If not, only add it to the incident
+        */
         // Pop up a alert message.
         $this->showAddAlert = true;   
         return redirect('/incidents');
@@ -86,8 +93,11 @@ class NewIncident extends Component
     public function render()
     {
         //view('livewire.new-user', ['account_types' => ['Responder', 'Reporter', 'Dispatcher']]
-        return view('livewire.new-incident');
-        ;
+        return view('livewire.new-incident',[
+            'users' => Account::all(),
+            //'users' => Account::latest()->paginate(10) 
+        ]);
+      
     }
     
 }

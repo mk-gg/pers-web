@@ -40,6 +40,7 @@ class AccountController extends BaseController
             'city_municipality' => 'nullable',
             'zip_code' => 'nullable',
             'province' => 'nullable',
+            'status' => 'nullable',
         
         ]);
         if($validator->fails()){

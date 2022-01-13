@@ -13,7 +13,7 @@ class Location extends Authenticatable
     use HasFactory, Notifiable;
 
 
-   
+    protected $primaryKey = 'location_id';
     /**
      * The attributes that are mass assignable.
      *
