@@ -35,12 +35,15 @@ class IncidentController extends BaseController
             'description' => 'nullable',
             'location_id' => 'nullable',
             'account_id' => 'required',
+            'location' => 'required',
+            'status' => 'required',
             
         ]);
         if($validator->fails()){
             return $this->sendError($validator->errors());       
         }
         $incident = Incident::create($input);
+        
         return $this->sendResponse(new IncidentResource($incident), 'Post created.');
     }
 
