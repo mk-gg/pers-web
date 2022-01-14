@@ -26,6 +26,7 @@ class LocationFactory extends Factory
         return [
             'location_type' => $this->faker->location_type,
             'address' => $this->faker->address,
+            'landmark' => $this->faker->landmark,
             'longitude' => $this->faker->longitude,
             'latitude' => $this->faker-> latitude,
         

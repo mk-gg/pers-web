@@ -24,6 +24,7 @@ class Location extends Authenticatable
    protected $fillable = [
         'location_type',
         'address',
+        'landmark',
         'latitude',
         'longitude'
     ]; 

@@ -31,6 +31,7 @@ class LocationController extends BaseController
             'longitude' => 'required',
             'latitude' => 'required',
             'address' => 'nullable',
+            'landmark' => 'nullable',
             
         ]);
         if($validator->fails()){
@@ -69,6 +70,7 @@ class LocationController extends BaseController
             'longitude' => 'required',
             'latitude' => 'required',
             'address' => 'nullable',
+            'landmark' => 'nullable',
         ]);
 
         if($validator->fails()){
@@ -79,7 +81,7 @@ class LocationController extends BaseController
         $incident->longitude = $input['longitude'];
         $incident->latitude = $input['latitude'];
         $incident->address = $input['address'];
-        
+        $incident->landmark = $input['landmark'];
         $incident->save();
         
         return $this->sendResponse(new LocationResource($incident), 'Post updated.');

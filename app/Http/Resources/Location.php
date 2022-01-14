@@ -13,8 +13,10 @@ class Location extends JsonResource
             'location_id' => $this->location_id,
             'location_type' => $this->location_type,
             'address' => $this->address,
+            'landmark' => $this->landmark,
             'longitude' => $this->longitude,
             'latitude' => $this->latitude,
+           
         ];
     }
     
