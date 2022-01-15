@@ -45,8 +45,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
     
     Route::resource('accounts', AccountController::class);
-   
     Route::resource('locations', LocationController::class);
+  
         
     
     Route::resource('incidents', IncidentController::class);

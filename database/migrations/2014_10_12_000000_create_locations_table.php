@@ -17,7 +17,7 @@ class CreateLocationsTable extends Migration
             $table->increments('location_id')->unique();
             $table->string('location_type')->nullable();
             $table->string('address')->nullable();
-            $talbe->string('landmark')->nullable();
+            $table->string('landmark')->nullable();
             $table->string('longitude')->nullable();
             $table->string('latitude')->unique();
             $table->rememberToken()->unique();
