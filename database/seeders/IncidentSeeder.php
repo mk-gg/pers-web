@@ -16,8 +16,6 @@ class IncidentSeeder extends Seeder
     public function run()
     {
         DB::table("incidents")->insert([
-
-        
             'first_name' => 'Juanito',
             'last_name' => 'Panito',
             'sex' => 'male',
