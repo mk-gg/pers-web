@@ -25,6 +25,14 @@ class Operation extends Authenticatable
         'reporter_id',
         'dispatcher_id',
         'external_agency_id',
+        'etd_base' ,
+        'eta_scene' ,
+        'etd_scene',
+        'eta_hospital',
+        'etd_hospital' ,
+        'eta_base',
+        'receiving_facitility'
+        
     ]; 
     protected $guarded=[];
 

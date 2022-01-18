@@ -28,10 +28,16 @@ class OperationController extends BaseController
         $input = $request->all();
         $validator = Validator::make($input, [
             'incident_id' => 'required',
-            'account_id' => 'required',
             'responder_id' => 'required',
             'dispatcher_id' => 'required',
             'external_agency_id' => 'nullable',
+            'etd_base' => 'nullable',
+            'eta_scene' => 'nullable',
+            'etd_scene' => 'nullable',
+            'eta_hospital' => 'nullable',
+            'etd_hospital' => 'nullable',
+            'eta_base' => 'nullable',
+            'receiving_facitility' => 'nullable'
         ]);
         if($validator->fails()){
             return $this->sendError($validator->errors());       
@@ -64,8 +70,16 @@ class OperationController extends BaseController
 
         $validator = Validator::make($input, [
             'incident_id' => 'required',
-            'account_id' => 'required',
+            'responder_id' => 'required',
+            'dispatcher_id' => 'required',
             'external_agency_id' => 'nullable',
+            'etd_base' => 'nullable',
+            'eta_scene' => 'nullable',
+            'etd_scene' => 'nullable',
+            'eta_hospital' => 'nullable',
+            'etd_hospital' => 'nullable',
+            'eta_base' => 'nullable',
+            'receiving_facitility' => 'nullable'
         ]);
 
         if($validator->fails()){
@@ -73,15 +87,21 @@ class OperationController extends BaseController
         }
 
         $incident->incident_id = $input['incident_id'];
-        $incident->account_id = $input['account_id'];
-        $incident->external_agency_id = $input['external_agency_id'];
-      
+        $incident->responder_id = $input['responder_id'];
+        $incident->dispatcher_id = $input['dispatcher_id'];
+        $incident->etd_base = $input['etd_base'];
+        $incident->eta_scene = $input['eta_scene'];
+        $incident->etd_scene = $input['etd_scene'];
+        $incident->eta_hospital = $input['eta_hospital'];
+        $incident->etd_hospital = $input['etd_hospital'];
+        $incident->eta_base = $input['eta_base'];
+        $incident->receiving_facitility = $input['receiving_facitility'];
         $incident->save();
         
         return $this->sendResponse(new OperationResource($incident), 'Post updated.');   
     }
    
-    public function destroy(Incident $incident)
+    public function destroy(Operation $incident)
     {
         $incident->delete();
         return $this->sendResponse([], 'Post deleted.');

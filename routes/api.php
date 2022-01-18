@@ -11,6 +11,7 @@ use App\Http\Controllers\API\UserController;
 use App\Http\Controllers\API\AccountController;
 use App\Http\Controllers\API\IncidentController;
 use App\Http\Controllers\API\LocationController;
+use App\Http\Controllers\API\OperationController;
 use App\Http\Controllers\AuthController;
 
 /*
@@ -42,8 +43,8 @@ Route::post('/login', [AuthController::class, 'login']);
 //Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
-
     
+    Route::post('operations', OperationController::class);
     Route::resource('accounts', AccountController::class);
     Route::resource('locations', LocationController::class);
   
