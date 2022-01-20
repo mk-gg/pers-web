@@ -52,7 +52,7 @@ class NewIncident extends Component
     public function add()
     {
     
-        
+        dd($this->selectedUser);
         // Validate First the inputs before creating
         $this->validate([
             'first_name' => 'max:15',
@@ -79,14 +79,25 @@ class NewIncident extends Component
             'date_time_reported' => now(),
         
         ]);
-        dd($this->incident->incident_id);
+        dd($this->selectedUser);
         /*
         If a unit is selected, add an operation
         If not, only add it to the incident
         */
+        if ( is_null($this->selectedUser)){
+            $this->showAddAlert = true;   
+            return redirect('/incidents');
+            
+        }else{
+            $this-> = Operation::create([
+                'incident_id' => $this->incident->incident_id,
+                'responder_id' => $this->incident,
+                'dispatcher_id' =>,
+                ''
+              ]);
+        }
         // Pop up a alert message.
-        $this->showAddAlert = true;   
-        return redirect('/incidents');
+       
     }
 
 
