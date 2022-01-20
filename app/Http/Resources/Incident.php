@@ -22,6 +22,7 @@ class Incident extends JsonResource
             'location_id' => $this->location_id,
             'account_id' => $this->account_id,
             'location' => $this->location,
+            'status' => $this->status
         ];
     }
     

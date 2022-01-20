@@ -39,18 +39,18 @@ Route::resource('users', UserController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
-
+Route::resource('incidents', IncidentController::class);
 //Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     
-    Route::post('operations', OperationController::class);
+    Route::resource('operations', OperationController::class);
     Route::resource('accounts', AccountController::class);
     Route::resource('locations', LocationController::class);
   
         
     
-    Route::resource('incidents', IncidentController::class);
+    
 });
 
 
