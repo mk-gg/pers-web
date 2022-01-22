@@ -37,7 +37,8 @@ class IncidentController extends BaseController
             'location_id' => 'nullable',
             'account_id' => 'required',
             'location' => 'required',
-            'status' => 'required',
+            'incident_status' => 'required',
+            'victim_status' => 'required',
             
         ]);
         if($validator->fails()){
@@ -79,7 +80,8 @@ class IncidentController extends BaseController
             'description' => 'nullable',
             'location_id' => 'nullable',
             'account_id' => 'required',
-            'status' => 'nullable'
+            'incident_status' => 'nullable',
+            'victim_status' => 'nullable'
         ]);
 
         if($validator->fails()){
@@ -95,6 +97,8 @@ class IncidentController extends BaseController
      
         $incident->location_id = $input['location_id'];
         $incident->account_id = $input['account_id'];
+        $incident->incident_status = $input['incident_status'];
+        $incident->victim_status = $input['victim_status'];
         $incident->save();
         
         return $this->sendResponse(new IncidentResource($incident), 'Post updated.');   

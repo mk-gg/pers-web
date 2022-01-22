@@ -24,7 +24,8 @@ class CreateIncidentsTable extends Migration
             $table->timestamp('date_time_reported');
             $table->string('location_id')->nullable();
             $table->string('account_id')->nullable();
-            $table->string('status');
+            $table->string('incident_status');
+            $table->string('victim_status');
             $table->rememberToken()->unique();
             $table->timestamps();
         });

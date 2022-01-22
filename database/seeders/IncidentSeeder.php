@@ -22,7 +22,8 @@ class IncidentSeeder extends Seeder
             'incident_type' => 'Heat Stroke',
             'description' => 'Man got heatstroke',
             'location' => 'Pascao',
-            'status' => 'Pending'
+            'incident_status' => 'Pending',
+            'victim_status' => 'Critical'
         ]);
     }
 }

@@ -59,9 +59,9 @@
             <thead>
                 <tr>
                     <th class="border-gray-200">Operation No.</th>
-                    <th class="border-gray-200">Incident Type</th>						
-                    <th class="border-gray-200">Issue Date</th>
-                    <th class="border-gray-200">Victim</th>
+                    <th class="border-gray-200">Incident ID</th>						
+                    <th class="border-gray-200">Unit Name</th>
+                    <th class="border-gray-200">External Agency</th>
                     <th class="border-gray-200">Location</th>
                     <th class="border-gray-200">Status</th>
                     <th class="border-gray-200">Action</th>
