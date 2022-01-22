@@ -25,8 +25,7 @@ class IncidentFactory extends Factory
     {
         return [
             'incident_type' => $this->faker->incident_type,
-            'first_name' => $this->faker->firstName(),
-            'last_name' => $this->faker->lastName(),
+            'name' => $this->faker->name(),
             'sex' => Arr::random(['male', 'female']),
             'age' => $this->faker->age,
             'description' => $this->faker->description,

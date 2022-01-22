@@ -25,6 +25,7 @@ class Operation extends Authenticatable
         'reporter_id',
         'dispatcher_id',
         'external_agency_id',
+        'unit_name',
         'etd_base' ,
         'eta_scene' ,
         'etd_scene',

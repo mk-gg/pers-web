@@ -28,7 +28,7 @@ class OperationController extends BaseController
         $input = $request->all();
         $validator = Validator::make($input, [
             'incident_id' => 'required',
-            'responder_id' => 'required',
+            'unit_name' => 'nullable',
             'dispatcher_id' => 'required',
             'external_agency_id' => 'nullable',
             'etd_base' => 'nullable',
@@ -70,7 +70,7 @@ class OperationController extends BaseController
 
         $validator = Validator::make($input, [
             'incident_id' => 'required',
-            'responder_id' => 'required',
+            'unit_name' => 'nullable',
             'dispatcher_id' => 'required',
             'external_agency_id' => 'nullable',
             'etd_base' => 'nullable',
@@ -79,7 +79,8 @@ class OperationController extends BaseController
             'eta_hospital' => 'nullable',
             'etd_hospital' => 'nullable',
             'eta_base' => 'nullable',
-            'receiving_facitility' => 'nullable'
+            'receiving_facitility' => 'nullable',
+            
         ]);
 
         if($validator->fails()){
@@ -87,7 +88,7 @@ class OperationController extends BaseController
         }
 
         $incident->incident_id = $input['incident_id'];
-        $incident->responder_id = $input['responder_id'];
+        $incident->unit_name = $input['unit_name'];
         $incident->dispatcher_id = $input['dispatcher_id'];
         $incident->etd_base = $input['etd_base'];
         $incident->eta_scene = $input['eta_scene'];

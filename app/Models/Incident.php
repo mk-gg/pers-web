@@ -22,7 +22,7 @@ class Incident extends Authenticatable
     
    protected $fillable = [
         'incident_type',
-        'first_name',
+        'name',
         'last_name',
         'sex',
         'age',

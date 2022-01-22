@@ -25,7 +25,7 @@ class OperationFactory extends Factory
     {
         return [
             'incident_id' => $this->faker->incident_id,
-            'responder_id' => $this->faker->responder_id,
+            'unit_name' => $this->faker->unit_name,
             'dispatcher_id' => $this->faker->dispatcher_id,
             'external_agency_id' => $this->faker->external_agency_id,
             'etd_base' => $this->faker->etd_base,

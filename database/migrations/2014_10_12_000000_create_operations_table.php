@@ -14,9 +14,9 @@ class CreateOperationsTable extends Migration
     public function up()
     {
         Schema::create('operations', function (Blueprint $table) {
-            $table->increments('operations_id')->unique();
+            $table->increments('operation_id')->unique();
             $table->string('incident_id');
-            $table->string('responder_id');
+            $table->string('unit_name')->nullable();
             $table->string('dispatcher_id');
             $table->string('external_agency_id')->nullable();
             $table->string('etd_base')->nullable();

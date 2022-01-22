@@ -14,7 +14,7 @@ class Operation extends JsonResource
 
             'operation_id' => $this->operation_id,
             'incident_id' => $this->incident_id,
-            'responder_id' => $this->responder_id,
+            'unit_name' => $this->unit_name,
             'dispatcher_id' => $this->dispatcher_id,
             'external_agency_id' => $this->external_agency_id,
             'etd_base' => $this->etd_base,

@@ -83,11 +83,10 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div>
-                                <label for="first_name">First Name</label>
-                                <input wire:model="first_name" class="form-control" id="first_name" type="text"
+                                <label for="name">Name</label>
+                                <input wire:model="name" class="form-control" id="first_name" type="text"
                                     placeholder="Enter the first name">
                             </div>
-                            
                         </div>
                         <div class="col-md-6 mb-3">
                             <div>

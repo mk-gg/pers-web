@@ -72,13 +72,14 @@ class IncidentController extends BaseController
 
         $validator = Validator::make($input, [
             'incident_type' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
+            'last_name' => 'nullable',
+            'first_name' => 'nullable',
             'sex' => 'required',
             'age' => 'required',
             'description' => 'nullable',
             'location_id' => 'nullable',
             'account_id' => 'required',
+            'status' => 'nullable'
         ]);
 
         if($validator->fails()){

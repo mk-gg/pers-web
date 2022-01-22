@@ -80,9 +80,9 @@
                         </a>
                     </td>
                     <td>
-                        <span class="fw-normal">{{ $operation->incident_type}}</span>
+                        <span class="fw-normal">{{ $operation->incident_id}}</span>
                     </td>
-                    <td><span class="fw-normal">{{ $operation->date_time_reported }}</span></td>
+                    <td><span class="fw-normal">{{ $operation->unit_name }}</span></td>
                     <td>
                         <a href="#" class="d-flex align-items-center">
                             <div class="d-block">
