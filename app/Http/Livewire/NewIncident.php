@@ -84,7 +84,7 @@ class NewIncident extends Component
                 'location' => $this->location,
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-                'date_time_reported' => now(),
+          
                 'status' => $this->status,
             ]);
             $this->showAddAlert = true;   
@@ -101,7 +101,7 @@ class NewIncident extends Component
                 'location' => $this->location,
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-                'date_time_reported' => now(),
+     
                 'status' => $this->status,
             ]);
           

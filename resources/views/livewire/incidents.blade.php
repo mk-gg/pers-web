@@ -82,7 +82,7 @@
                     <td>
                         <span class="fw-normal">{{ $incident->incident_type}}</span>
                     </td>
-                    <td><span class="fw-normal">{{ $incident->date_time_reported }}</span></td>
+                    <td><span class="fw-normal"></span></td>
                     <td>
                         <a href="#" class="d-flex align-items-center">
                             <div class="d-block">

@@ -30,7 +30,6 @@ class IncidentFactory extends Factory
             'age' => $this->faker->age,
             'description' => $this->faker->description,
             'location' => $this->faker->location,
-            'date_time_reported' => now(),
             'location_id' => $this->faker->location_id,
             'account_id' => $this->faker->account_id,
             'incident_status' => $this->faker->incident_status,

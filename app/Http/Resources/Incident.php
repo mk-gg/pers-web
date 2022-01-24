@@ -18,7 +18,7 @@ class Incident extends JsonResource
             'sex' => $this->sex,
             'age' => $this->age,
             'description' => $this->description,
-            'date_time_reported' => $this->date_time_reported,
+      
             'location_id' => $this->location_id,
             'account_id' => $this->account_id,
             'location' => $this->location,
