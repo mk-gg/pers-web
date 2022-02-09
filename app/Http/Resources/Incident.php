@@ -9,8 +9,8 @@ class Incident extends JsonResource
     public function toArray($request)
     {
         return [
-
-
+          
+            
             'incident_id' => $this->incident_id,
             'incident_type' => $this->incident_type,
             'first_name' => $this->first_name,

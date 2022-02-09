@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Http\Livewire;
+
+use App\Models\Incident;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
+use Livewire\Component;
+
+class EditIncident extends Component
+{
+
+
+    public Incident $incident;
+
+    public $name;
+    public $last_name;
+    public $sex;
+    public $age; 
+    public $incident_type;
+    public $location ;
+    public $location_id = 1;
+    public $description;
+    public $account_id;
+    public $selectedUser;
+    public $showAddAlert = false;
+    public $status;
+
+
+
+
+    public function rules()
+    {
+        return [
+            'name' => 'max:35',
+            'sex' => 'in::male,female',
+            'age' => 'numeric',
+            'description' => 'max:20',
+            'incident_type' => 'required',
+            'location' => 'required',
+        ];
+    }
+
+    public function updatedEmail()
+    {
+        $this->validate(['email'=>'required|email:rfc,dns|unique:accounts']);
+    }
+
+
+
+
+    public function add()
+    {
+       
+        //dd($this->selectedUser);
+        // Validate First the inputs before creating
+        $this->validate([
+            'name' => 'max:35',
+           // 'sex' => 'in::male,female',
+            'description' => 'max:20',
+            'incident_type' => 'required',
+            'location' => 'required',
+            'account_id' => 'required',
+        ]);
+        
+        
+       // dd($this->selectedUser);
+        /*
+        If a unit is selected, add an operation
+        If not, only add it to the incident
+        */
+        if ( is_null($this->selectedUser)){
+            // Create a user
+            $this->status = 'Pending';
+            $this->incident = Incident::create([
+                'name' => $this->name,
+                'sex' => strtolower($this->sex),
+                'age' => $this->age,
+                'description' => $this->description,
+                'incident_type' => $this->incident_type,
+                'location' => $this->location,
+                'location_id' => $this->location_id,
+                'account_id' => $this->account_id,
+          
+                'status' => $this->status,
+            ]);
+            $this->showAddAlert = true;   
+            return redirect('/incidents');
+            
+        }else{
+            $this->status = 'Ongoing';
+            $this->incident = Incident::create([
+                'name' => $this->name,
+                'sex' => strtolower($this->sex),
+                'age' => $this->age,
+                'description' => $this->description,
+                'incident_type' => $this->incident_type,
+                'location' => $this->location,
+                'location_id' => $this->location_id,
+                'account_id' => $this->account_id,
+     
+                'status' => $this->status,
+            ]);
+          
+           
+            
+            $this->showAddAlert = true;   
+            return redirect('/incidents');
+        }
+        // Pop up a alert message.
+       
+    }
+
+    
+    public function render()
+    {
+    
+        return view('livewire.edit-incident');
+    }
+}

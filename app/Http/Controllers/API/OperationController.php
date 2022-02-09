@@ -107,4 +107,7 @@ class OperationController extends BaseController
         $incident->delete();
         return $this->sendResponse([], 'Post deleted.');
     }
+
+
+    
 }
