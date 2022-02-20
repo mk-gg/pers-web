@@ -7,22 +7,22 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 
-use App\Models\Fcm;
+use App\Models\Token;
 use App\Models\Incident;
 
-class FcmController extends Controller
+class TokenController extends Controller
 {
     //
     public function registerToken(Request $request) {
         $fields = $request->validate([
-            'unit_name' => 'required',
+            'account_id' => 'required',
             'token' => 'required',
 
         ]);
     
-        $user = Fcm::where('token', $fields['token'])->first();
+        $user = Token::where('token', $fields['token'])->first();
         if (is_null($user)){
-            $user = Fcm::update([
+            $user = Token::update([
                 'account_id' => $fields['account_id'],
                 'token' => $fields['token'],
             ]);

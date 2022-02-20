@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFcmTable extends Migration
+class CreateTokenTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateFcmTable extends Migration
      */
     public function up()
     {
-        Schema::create('fcm', function (Blueprint $table) {
+        Schema::create('token', function (Blueprint $table) {
             $table->string('account_id');
             $table->string('token')->unique();
             $table->timestamps();
@@ -27,6 +27,6 @@ class CreateFcmTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fcm');
+        Schema::dropIfExists('token');
     }
 }

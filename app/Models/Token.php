@@ -9,12 +9,12 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class Fcm extends Authenticatable
+class Token extends Authenticatable
 {
     use HasFactory, Notifiable, HasApiTokens;
     
 
-    protected $primaryKey = 'unit_name';
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -22,7 +22,7 @@ class Fcm extends Authenticatable
      */
     
    protected $fillable = [
-
+        'unit_name',
         'token',
         
     ];

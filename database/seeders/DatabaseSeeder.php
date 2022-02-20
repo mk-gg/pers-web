@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             //UserSeeder::class,
             IncidentSeeder::class,
             AccountSeeder::class,
+            TokenSeeder::class
         ]);
     }
 }

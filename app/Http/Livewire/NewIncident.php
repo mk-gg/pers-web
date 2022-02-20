@@ -113,10 +113,12 @@ class NewIncident extends Component
                 'unit_name' => $this->selectedUser
                 ]);
             
-
+            $unit_name = $this->selectedUser;
             // Get tokens 
             $conn =     mysqli_connect("localhost", "root","","erbackend");
-            $sql = "Select token From fcm";
+  
+           
+            $sql = "SELECT token.token FROM token INNER JOIN account ON token.account_id = account.account_id WHERE account.unit_name = '".$unit_name."'";
             
             $result = mysqli_query($conn, $sql);
             $tokens = array();

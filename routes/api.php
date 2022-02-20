@@ -13,6 +13,7 @@ use App\Http\Controllers\API\IncidentController;
 use App\Http\Controllers\API\LocationController;
 use App\Http\Controllers\API\OperationController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\TokenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('users', UserController::class);
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
-
+Route::post('/register_token', [TokenController::class, 'registerToken']);
 //Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
