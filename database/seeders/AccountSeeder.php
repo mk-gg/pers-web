@@ -23,7 +23,8 @@ class AccountSeeder extends Seeder
             'password' => Hash::make('secret'),
             'address' => 'Pasacao',
             'mobile_no' => '0912345678',
-            'birthday' => '2021-01-01'
+            'birthday' => '2021-01-01',
+            'status' => 'Offline'
         ]);
     }
 }

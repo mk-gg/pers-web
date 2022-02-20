@@ -40,7 +40,7 @@ class AccountController extends BaseController
             'city_municipality' => 'nullable',
             'zip_code' => 'nullable',
             'province' => 'nullable',
-            'status' => 'nullable',
+            'status' => ['required', Rule::in(['off duty', 'available', 'unavailable'])],
         
         ]);
         if($validator->fails()){

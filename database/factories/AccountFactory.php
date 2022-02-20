@@ -38,7 +38,7 @@ class AccountFactory extends Factory
             'city_municipality' => $this->faker->city_municipality,
             'province' => $this->faker->province,
             'zip_code' => $this->faker->randomNumber(6),
-            'status' => $this->faker->status,
+            'status' => Arr::random(['Off Duty', 'Available', 'Unavailable']),
             'remember_token' => Str::random(10),
             
        

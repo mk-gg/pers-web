@@ -6,11 +6,14 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Validator;
 use App\Models\Incident;
+use App\Models\Operation;
 use App\Http\Resources\Incident as IncidentResource;
-   
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Collection;
 class IncidentController extends BaseController
 {
-
+    public $selected_unit;
+    public $i_id;
     /**
      * Get all users
      */
@@ -37,7 +40,7 @@ class IncidentController extends BaseController
             'location_id' => 'nullable',
             'account_id' => 'required',
             'location' => 'required',
-            'incident_status' => 'required',
+            'incident_status' => ['required', Rule::in(['off duty', 'available', 'unavailable'])],
             'victim_status' => 'required',
             
         ]);
@@ -54,7 +57,7 @@ class IncidentController extends BaseController
     * And view its details
     */
     public function show($id)
-    {
+    {   
         $incident = Incident::where('incident_id', $id)->first();
         if (is_null($incident)) {
             return $this->sendError('Post does not exist.');
@@ -65,6 +68,8 @@ class IncidentController extends BaseController
 
     public function update(Request $request, $id)
     {
+
+      
         $incident = Incident::where('incident_id', $id)->first();
         if (is_null($incident)) {
             return $this->sendError('Post does not exist.');
@@ -80,7 +85,7 @@ class IncidentController extends BaseController
             'description' => 'nullable',
             'location_id' => 'nullable',
             'account_id' => 'required',
-            'incident_status' => 'nullable',
+            'incident_status' => ['required', Rule::in(['off duty', 'available', 'unavailable'])],
             'victim_status' => 'nullable'
         ]);
 
@@ -94,7 +99,6 @@ class IncidentController extends BaseController
         $incident->age = $input['age'];
         $incident->incident_type = $input['incident_type'];
         $incident->description = $input['description'];
-     
         $incident->location_id = $input['location_id'];
         $incident->account_id = $input['account_id'];
         $incident->incident_status = $input['incident_status'];
@@ -108,5 +112,54 @@ class IncidentController extends BaseController
     {
         $incident->delete();
         return $this->sendResponse([], 'Post deleted.');
+    }
+
+    public function assigned_incidents($id)
+    {
+        
+
+        $operation = Operation::where('unit_name', $id)->first();
+        if (is_null($operation)) {
+            return $this->sendError('Unit name does not exist.');
+        }
+
+        $incident = Incident::where('incident_id', $operation->incident_id)->first();
+        if (is_null($incident)) {
+            return $this->sendError('Post does not exist.');
+        }    
+        //Validate first the input
+        // $validator = $request->validate([
+        //     'unit_name' => 'required',
+        // ]);
+        
+        //return $this->sendError($validator['incident_id']);
+        
+        // Check incident id exists
+   
+
+        // Check unit_name exists
+        // $operation = Operation::where('unit_name', $validator['unit_name'])->first();
+        // if (is_null($operation)) {
+        //     return $this->sendError('Post does not exist.');
+        // }
+        
+        // $this->selected_unit = $validator['unit_name'];
+
+        
+        
+        $this->selected_unit = $id;
+
+        // Get the incidents pertaining to this
+        $result = Incident::join('operations', 'incidents.incident_id', '=', 'operations.incident_id')
+                    ->where('operations.unit_name', $this->selected_unit)
+                    ->where('incidents.incident_status', 'Ongoing')
+                    ->get(['incidents.*', 'operations.*']);
+        
+
+        return response()->json(['success' => true, 'incidents' => $result]);
+                    
+        return $this->sendResponse($result->toJson(JSON_PRETTY_PRINT), 'Post updated.');  
+        
+
     }
 }

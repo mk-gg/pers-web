@@ -32,7 +32,7 @@ class IncidentFactory extends Factory
             'location' => $this->faker->location,
             'location_id' => $this->faker->location_id,
             'account_id' => $this->faker->account_id,
-            'incident_status' => $this->faker->incident_status,
+            'incident_status' => Arr::random(['Pending', 'Proceeding', 'Completed', 'Pseudo']),
             'victim_status' => $this->faker->victim_status,
             'remember_token' => Str::random(10),
             

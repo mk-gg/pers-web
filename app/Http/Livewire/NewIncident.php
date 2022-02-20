@@ -84,8 +84,8 @@ class NewIncident extends Component
                 'location' => $this->location,
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-          
-                'status' => $this->status,
+                'victim_status' => 'Critical',
+                'incident_status' => $this->status,
             ]);
             $this->showAddAlert = true;   
             return redirect('/incidents');
@@ -101,8 +101,9 @@ class NewIncident extends Component
                 'location' => $this->location,
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-     
-                'status' => $this->status,
+                
+                'incident_status' => $this->status,
+                'victim_status' => 'Critical',
             ]);
           
            $this->operation = Operation::create([
@@ -111,6 +112,27 @@ class NewIncident extends Component
                 'dispatcher_id' => $this->user->id,
                 'unit_name' => $this->selectedUser
                 ]);
+            
+
+            // Get tokens 
+            $conn =     mysqli_connect("localhost", "root","","erbackend");
+            $sql = "Select token From fcm";
+            
+            $result = mysqli_query($conn, $sql);
+            $tokens = array();
+
+            if (mysqli_num_rows($result) > 0) {
+                while($row = mysqli_fetch_assoc($result)){
+                    $tokens[] = $row["token"];
+                }
+            }
+
+            mysqli_close($conn);
+
+            // Notify the responders
+            $message = array("message" => " FCM PUSH TEST");
+            $message_status = $this->send_notification($tokens, $message);
+            echo $message_status;
             
             $this->showAddAlert = true;   
             return redirect('/incidents');
@@ -130,4 +152,36 @@ class NewIncident extends Component
       
     }
     
+
+    public function send_notification($tokens, $message, ) {
+        $url = 'https://fcm.googleapis.com/fcm/send';
+
+        $fields = array(
+            'registration_ids' => $tokens,
+            'data' => $message
+        );
+
+        $headers = array (
+            'Authorization:key = AAAA-1zFtK4:APA91bGndaTfaEXZwoVOcwRlgdJMqx9SxijhmKbIDYDgSsIT72ykpoOvN2E9PQHkifWEAecAf6lRJNHLB-xBMLgUGY6gkT2NAVifBiyjagRYPHORp7PMujSPuspf-ZKRCPn3blNOFHjP',
+            'Content-Type: application/json'
+
+        );
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_POST,true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($fields));
+
+        $result = curl_exec($ch);
+
+        if ($result == FALSE) {
+            die('Curl failed: '. curl_error($ch));
+        }
+        curl_close($ch);
+        return $result;
+    }
 }
