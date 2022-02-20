@@ -2,17 +2,20 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Livewire\Input;
 use App\Models\Incident;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Livewire\Component;
-
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
+use App\Models\Account;
+use App\Models\Operation;
 class EditIncident extends Component
 {
-
-
+    public Account $user;
     public Incident $incident;
-
+    public Operation $operation;
     public $name;
     public $last_name;
     public $sex;
@@ -47,7 +50,35 @@ class EditIncident extends Component
     }
 
 
+    public function mount($id) 
+    { 
+        
+        $existingUser = Incident::find($id)->first();
+        if(!is_null($existingUser)){
+            $this->user = auth()->user(); 
+            $this->incident = $existingUser;
 
+
+            $this->incident_type = $this->incident->incident_type;
+            $this->description = $this->incident->description;
+            $this->name = $this->incident->name;
+            $this->sex = $this->incident->sex;
+            $this->age = $this->incident->age;
+            $this->gender = $this->incident->gender;
+            $this->location = $this->incident->location;
+            $this->location_id = $this->incident->location_id;
+
+
+            $this->account_id = $this->incident->account_id;
+
+            
+
+            
+        }else{
+            return redirect('/incidents');
+        }
+        
+    }
 
     public function add()
     {
@@ -81,8 +112,8 @@ class EditIncident extends Component
                 'location' => $this->location,
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-          
-                'status' => $this->status,
+                'victim_status' => 'Critical',
+                'incident_status' => $this->status,
             ]);
             $this->showAddAlert = true;   
             return redirect('/incidents');
@@ -98,11 +129,17 @@ class EditIncident extends Component
                 'location' => $this->location,
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-     
-                'status' => $this->status,
+                
+                'incident_status' => $this->status,
+                'victim_status' => 'Critical',
             ]);
           
-           
+           $this->operation = Operation::create([
+                'incident_id' => $this->incident->incident_id,
+                //'responder_id' => $this->account_id,
+                'dispatcher_id' => $this->user->id,
+                'unit_name' => $this->selectedUser
+                ]);
             
             $this->showAddAlert = true;   
             return redirect('/incidents');
@@ -111,10 +148,15 @@ class EditIncident extends Component
        
     }
 
-    
+
     public function render()
     {
-    
-        return view('livewire.edit-incident');
+        //view('livewire.new-user', ['account_types' => ['Responder', 'Reporter', 'Dispatcher']]
+        return view('livewire.edit-incident',[
+            'users' => Account::all(),
+            //'users' => Account::latest()->paginate(10) 
+        ]);
+      
     }
+    
 }

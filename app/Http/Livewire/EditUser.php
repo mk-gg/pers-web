@@ -47,10 +47,7 @@ class EditUser extends Component{
    //     $user = User::find($id);
    // }
 
-    public function tests()
-    {
-        dd('boo');
-    }
+
     public function mount(Account $id) 
     {
       
