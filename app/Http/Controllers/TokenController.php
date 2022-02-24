@@ -14,19 +14,26 @@ class TokenController extends Controller
 {
     //
     public function registerToken(Request $request) {
-        $fields = $request->validate([
-            'account_id' => 'required',
-            'token' => 'required',
+       $input = $request->all();
 
-        ]);
-    
-        $user = Token::where('token', $fields['token'])->first();
-        if (is_null($user)){
-            $user = Token::update([
-                'account_id' => $fields['account_id'],
-                'token' => $fields['token'],
-            ]);
-        }else{
+       $validator = Validator::make($input, [
+        'account_id' => 'required',
+        'token' => 'required',
+       ]);
+       
+       if ($validator->fails())
+       {
+           return $this->sendError($validator->errors());
+       }
+
+
+        $user = Token::where('token', $input['token'])->first();
+        
+        if (is_null($user))
+        {
+            $user = Token::create($input);
+        }else
+        {
             $user->update($request->all());
         }
         

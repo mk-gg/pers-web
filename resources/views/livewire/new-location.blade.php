@@ -1,5 +1,6 @@
 
 <div>
+
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div>
             <h2 class="h4">Add Incident</h2>
@@ -207,6 +208,9 @@
                 </form>
             </div>
         </div>
+        
+        <div id="googleMap" style="width:100%;height:400px">Pisot</div>
+
         {{-- End Form --}}
 
         {{-- Right Panel Map --}}
@@ -309,7 +313,16 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfNAv-xW-yQ408dQkucajjANnkHYaRuQw&callback=initMap">
 </script>
 
-
+<script src="https://maps.googleapis.com/maps/api/js?key=s&callback=myMap"></script>
+<script>
+    function myMap() {
+    var mapProp = {
+        center:new google.maps.LatLng(51.508742,-0.120850),
+        zoom:5,
+    };
+    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+    } 
+</script>
 
 <script>
     let map;
