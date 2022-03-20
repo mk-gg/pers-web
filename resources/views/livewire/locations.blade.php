@@ -54,62 +54,26 @@
             </div>
         </div>
     </div>
-    <div class="card card-body border-0 shadow table-wrapper table-responsive">
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th class="border-gray-200">Location Id.</th>
-                    <th class="border-gray-200">Location Type</th>						
-                    <th class="border-gray-200">Address</th>
-                    <th class="border-gray-200">Longitude</th>
-                    <th class="border-gray-200">Latitude</th>
-                    <th class="border-gray-200">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Do for loop for incidents
-                    s@foreach ($incidents as $location) -->
-                <!-- Item -->
-                @foreach ($locations as $location )
-                    
-                <tr>
-                    <td>
-                        <a href="#" class="fw-bold">
-                            {{ $location->location_id}}
-                        </a>
-                    </td>
-                    <td>
-                        <span class="fw-normal">{{ $location->location_type}}</span>
-                    </td>
-                    <td><span class="fw-normal">{{ $location->address }}</span></td>
-                    <td><span class="fw-normal">{{ $location->longitude }}</span></td>
-                    <td><span class="fw-normal">{{ $location->latitude }}</span></td>
-                    
-                    {{--<td><span class="fw-bold text-danger">Critical</span></td>
-                    <td><span class="fw-bold text-warning">Due</span></td>  --}}
-                    <td>
-                        <div class="btn-group">
-                            <button class="btn btn-link text-dark dropdown-toggle dropdown-toggle-split m-0 p-0" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="icon icon-sm">
-                                    <span class="fas fa-ellipsis-h icon-dark"></span>
-                                </span>
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                            </button>
-                            <div class="dropdown-menu py-0">
-                                <a class="dropdown-item rounded-top" href="#"><span class="fas fa-eye me-2"></span>View Details</a>
-                                <a class="dropdown-item" href="#"><span class="fas fa-edit me-2"></span>Edit</a>
-                                <a class="dropdown-item text-danger rounded-bottom" href="#"><span class="fas fa-trash-alt me-2"></span>Remove</a>
-                            </div>
-                        </div>
-                    </td>
-                </tr>
-            
-                @endforeach                              
-            </tbody>
-        
-        </table>
-        {{ $locations->links('pagination-links') }}
+    <div wire:ignore style="width:100%;height:620px;" class="card">
+       <div style="height: 100%; width:100%" id="map">
+           
+       </div>
     </div>
 
 </div>
+
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfNAv-xW-yQ408dQkucajjANnkHYaRuQw&callback=initMap"></script>
+
+<script>
+    let map;
+
+    function initMap() {
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: 13.5330634, lng: 122.9695949 },
+        zoom: 12,
+    });
+    }
+
+</script>
+
     

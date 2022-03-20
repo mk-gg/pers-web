@@ -22,6 +22,10 @@
   display: none;
 }
 
+.gmap {
+  height: 100%;
+}
+
 .datepicker.active {
   display: block;
 }

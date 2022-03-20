@@ -4,7 +4,6 @@ namespace App\Http\Controllers\API;
    
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
-use Validator;
 use App\Models\Incident;
 use App\Models\Operation;
 use Illuminate\Validation\Rule;

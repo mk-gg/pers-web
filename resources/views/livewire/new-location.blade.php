@@ -1,5 +1,21 @@
+<style>
+    #map {
+        height: 100%;
+    }
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    
+</style>    
 
+<div wire:ignore style="width:100%;height:320px; ">
+    <div style="heigh: 100%; width:100%" class="gmap" id="map"></div>
+</div>
+<div wire:ignore class="gmap" id="map" style="height: 100%"></div>
 <div>
+
 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div>
@@ -188,7 +204,7 @@
                             </div>
                         </div>
                        
-                        <div id="map"></div>
+                        
 
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -209,7 +225,7 @@
             </div>
         </div>
         
-        <div id="googleMap" style="width:100%;height:400px">Pisot</div>
+ 
 
         {{-- End Form --}}
 
@@ -305,63 +321,23 @@
         --}}
         {{-- End Right Panel Map --}}
     </div>
+
     
 </div>
 
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfNAv-xW-yQ408dQkucajjANnkHYaRuQw&callback=initMap"></script>
 
-<script async
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfNAv-xW-yQ408dQkucajjANnkHYaRuQw&callback=initMap">
-</script>
-
-<script src="https://maps.googleapis.com/maps/api/js?key=s&callback=myMap"></script>
-<script>
-    function myMap() {
-    var mapProp = {
-        center:new google.maps.LatLng(51.508742,-0.120850),
-        zoom:5,
-    };
-    var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
-    } 
-</script>
 
 <script>
     let map;
 
     function initMap() {
-        map = new google.maps.Map(document.getElementById("map"), {
-            center: { lat: -34.397, lng: 150.644 },
-            zoom: 8,
-        });
+    map = new google.maps.Map(document.getElementById("map"), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 8,
+    });
     }
+
 </script>
 
-<script
-	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfNAv-xW-yQ408dQkucajjANnkHYaRuQw&callback=initMap"
-	async defer></script>
-<script type="text/javascript">
-var map;
-function initMap() {
-	var mapLayer = document.getElementById("map");
-	var centerCoordinates = new google.maps.LatLng(37.6, -95.665);
-	var defaultOptions = { center: centerCoordinates, zoom: 4 }
 
-	map = new google.maps.Map(mapLayer, defaultOptions);
-}
-
-function locate(){
-	document.getElementById("btnAction").disabled = true;
-	document.getElementById("btnAction").innerHTML = "Processing...";
-	if ("geolocation" in navigator){
-		navigator.geolocation.getCurrentPosition(function(position){ 
-			var currentLatitude = position.coords.latitude;
-			var currentLongitude = position.coords.longitude;
-
-			var infoWindowHTML = "Latitude: " + currentLatitude + "<br>Longitude: " + currentLongitude;
-			var infoWindow = new google.maps.InfoWindow({map: map, content: infoWindowHTML});
-			var currentLocation = { lat: currentLatitude, lng: currentLongitude };
-			infoWindow.setPosition(currentLocation);
-			document.getElementById("btnAction").style.display = 'none';
-		});
-	}
-}
-</script>

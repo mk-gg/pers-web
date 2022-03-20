@@ -19,7 +19,7 @@ class CreateLocationsTable extends Migration
             $table->string('address')->nullable();
             $table->string('landmark')->nullable();
             $table->string('longitude')->nullable();
-            $table->string('latitude')->unique();
+            $table->string('latitude')->nullable();
             $table->rememberToken()->unique();
             $table->timestamps();
         });

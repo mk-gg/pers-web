@@ -86,9 +86,14 @@
     <!-- Simplebar -->
     <script src="/assets/js/simplebar.min.js"></script>
 
+    <!-- Leaflet CSS -->
+    <link type="text/css" href="@@path/vendor/leaflet/dist/leaflet.css" rel="stylesheet">
+    
     <!-- Github buttons -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    
+
+    <!-- Google Maps -->
+    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfNAv-xW-yQ408dQkucajjANnkHYaRuQw&callback=initMap"></script>
     <!-- Volt JS -->
     <script src="/assets/js/volt.js"></script>
 
@@ -115,7 +120,6 @@
 
 
 </head>
-
 <body>
     @if(env('IS_DEMO')) 
         <!-- Google Tag Manager (noscript) -->
