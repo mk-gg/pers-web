@@ -1,7 +1,8 @@
 <?php
    
 namespace App\Http\Controllers\API;
-   
+
+use Illuminate\Validation\Rule;
 use Illuminate\Http\Request;
 use App\Http\Controllers\API\BaseController as BaseController;
 use Validator;

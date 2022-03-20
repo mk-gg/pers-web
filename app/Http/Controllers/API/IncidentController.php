@@ -7,9 +7,11 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use Validator;
 use App\Models\Incident;
 use App\Models\Operation;
+use Illuminate\Validation\Rule;
 use App\Http\Resources\Incident as IncidentResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Validator;
 class IncidentController extends BaseController
 {
     public $selected_unit;
