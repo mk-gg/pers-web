@@ -41,7 +41,7 @@ class IncidentController extends BaseController
             'location_id' => 'nullable',
             'account_id' => 'required',
             'location' => 'required',
-            'incident_status' => ['required', Rule::in(['off duty', 'available', 'unavailable'])],
+            'incident_status' => ['required', Rule::in(['pending', 'completed', 'proceeding'])],
             'victim_status' => 'required',
             
         ]);
