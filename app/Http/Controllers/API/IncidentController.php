@@ -32,7 +32,7 @@ class IncidentController extends BaseController
         $input = $request->all();
         $validator = Validator::make($input, [
             'incident_type' => 'required',
-            'name' => 'nullabe',
+            'name' => 'nullable',
             'first_name' => 'required',
             'last_name' => 'required',
             'sex' => 'required',
