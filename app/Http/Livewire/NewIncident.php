@@ -118,7 +118,7 @@ class NewIncident extends Component
             $conn =     mysqli_connect("localhost", "root","","erbackend");
   
            
-            $sql = "SELECT token.token FROM token INNER JOIN account ON token.account_id = account.account_id WHERE account.unit_name = '".$unit_name."'";
+            $sql = "SELECT token.token FROM token INNER JOIN accounts ON token.account_id = accounts.id WHERE accounts.unit_name = '".$unit_name."'";
             
             $result = mysqli_query($conn, $sql);
             $tokens = array();
@@ -134,7 +134,7 @@ class NewIncident extends Component
             // Notify the responders
             $message = array("message" => " FCM PUSH TEST");
             $message_status = $this->send_notification($tokens, $message);
-            echo $message_status;
+            
             
             $this->showAddAlert = true;   
             return redirect('/incidents');

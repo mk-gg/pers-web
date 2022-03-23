@@ -21,6 +21,7 @@ class CreateOperationsTable extends Migration
             $table->string('external_agency_id')->nullable();
             $table->string('etd_base')->nullable();
             $table->string('eta_scene')->nullable();
+            $table->string('etd_scene')->nullable();
             $table->string('eta_hospital')->nullable();
             $table->string('etd_hospital')->nullable();
             $table->string('eta_base')->nullable();
