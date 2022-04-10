@@ -82,11 +82,11 @@
                     <td>
                         <span class="fw-normal">{{ $incident->incident_type}}</span>
                     </td>
-                    <td><span class="fw-normal"></span></td>
+                    <td><span class="fw-normal"></span>{{  $incident->created_at }}</td>
                     <td>
                         <a href="#" class="d-flex align-items-center">
                             <div class="d-block">
-                                <span class="fw-bold">{{ $incident->last_name }}, {{ $incident->first_name }} </span>
+                                <span class="fw-bold">{{ $incident->name}} </span>
                                 <div class="small text-gray">{{ $incident->age }}  {{ $incident->sex }}</div>
                             </div>
                         </a>
@@ -104,7 +104,7 @@
                             </button>
                             <div class="dropdown-menu py-0">
                                 <a class="dropdown-item rounded-top" href="#"><span class="fas fa-eye me-2"></span>View Details</a>
-                                <a class="dropdown-item" href="#"><span class="fas fa-edit me-2"></span>Edit</a>
+                                <a class="dropdown-item" href={{route('edit-incidents', ['id'=>$incident->incident_id]) }}><span class="fas fa-edit me-2"></span>Edit</a>
                                 <a class="dropdown-item text-danger rounded-bottom" href="#"><span class="fas fa-trash-alt me-2"></span>Remove</a>
                             </div>
                         </div>

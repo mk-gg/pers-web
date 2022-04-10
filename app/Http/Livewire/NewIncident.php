@@ -28,19 +28,22 @@ class NewIncident extends Component
     public $selectedUser;
     public $showAddAlert = false;
     public $status;
-
+    public $victim_status;
+    public $permanent_address;
 
 
 
     public function rules()
     {
         return [
-            'name' => 'max:35',
+            'name' => 'max:45',
             'sex' => 'in::male,female',
             'age' => 'numeric',
             'description' => 'max:20',
             'incident_type' => 'required',
             'location' => 'required',
+            
+            'permanent_address' => 'max:5',
         ];
     }
 
@@ -54,27 +57,33 @@ class NewIncident extends Component
 
     public function add()
     {
-       
+        
         //dd($this->selectedUser);
         // Validate First the inputs before creating
         $this->validate([
-            'name' => 'max:35',
-           // 'sex' => 'in::male,female',
+            'name' => 'max:45',
+            'sex' => Rule::in(['male', 'female']),
             'description' => 'max:20',
             'incident_type' => 'required',
             'location' => 'required',
             'account_id' => 'required',
+            'permanent_address' => 'max:5',
+            
         ]);
         
         
+    
        // dd($this->selectedUser);
         /*
         If a unit is selected, add an operation
         If not, only add it to the incident
         */
+        
         if ( is_null($this->selectedUser)){
             // Create a user
+            
             $this->status = 'Pending';
+         
             $this->incident = Incident::create([
                 'name' => $this->name,
                 'sex' => strtolower($this->sex),
@@ -84,13 +93,14 @@ class NewIncident extends Component
                 'location' => $this->location,
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-                'victim_status' => 'Critical',
-                'incident_status' => $this->status,
+                'victim_status' => $this->victim_status,
+                'incident_status' => 'Critical',
             ]);
             $this->showAddAlert = true;   
             return redirect('/incidents');
             
         }else{
+            
             $this->status = 'Ongoing';
             $this->incident = Incident::create([
                 'name' => $this->name,
@@ -115,10 +125,12 @@ class NewIncident extends Component
             
             $unit_name = $this->selectedUser;
             // Get tokens 
-            $conn =     mysqli_connect("localhost", "root","","erbackend");
+            $conn =  mysqli_connect("localhost", "root", "","erbackend");
+
+            // $conn =  mysqli_connect("localhost", "chard", "pasacaoers12345","pasacaoers_db");
   
            
-            $sql = "SELECT token.token FROM token INNER JOIN accounts ON token.account_id = accounts.id WHERE accounts.unit_name = '".$unit_name."'";
+            $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON token.account_id = accounts.id WHERE accounts.unit_name = '".$unit_name."'";
             
             $result = mysqli_query($conn, $sql);
             $tokens = array();

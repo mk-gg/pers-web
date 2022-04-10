@@ -22,7 +22,7 @@ class Token extends Authenticatable
      */
     
    protected $fillable = [
-        'unit_name',
+        'account_id',
         'token',
         
     ];

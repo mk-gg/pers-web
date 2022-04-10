@@ -13,7 +13,7 @@ class CreateTokenTable extends Migration
      */
     public function up()
     {
-        Schema::create('token', function (Blueprint $table) {
+        Schema::create('tokens', function (Blueprint $table) {
             $table->string('account_id');
             $table->string('token')->unique();
             $table->timestamps();
