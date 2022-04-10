@@ -19,7 +19,7 @@ class AuthController extends Controller
             'last_name' => 'required|string|max:20',
             'email' => 'required|string|unique:users,email',
             'sex' => 'required',
-            'account_type' => ['required', Rule::in(['reporter', 'responder'])],
+            'account_type' => ['required', Rule::in(['reporter', 'responder', 'external agency'])],
             'birthday' => 'required|date|before:-13 years',
             'address' => 'required|string|max:30',
             'mobile_no' => 'required',
