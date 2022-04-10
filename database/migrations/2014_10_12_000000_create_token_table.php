@@ -27,6 +27,6 @@ class CreateTokenTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('token');
+        Schema::dropIfExists('tokens');
     }
 }
