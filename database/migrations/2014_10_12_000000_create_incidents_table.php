@@ -25,6 +25,13 @@ class CreateIncidentsTable extends Migration
             $table->string('account_id')->nullable();
             $table->string('incident_status');
             $table->string('victim_status');
+            $table->string('permanent_address')->nullable();
+
+            $table->string('temperature')->nullable();
+            $table->string('pulse_rate')->nullable();
+            $table->string('respiration_rate')->nullable();
+            $table->string('blood_pressure')->nullable();
+
             $table->rememberToken()->unique();
             $table->timestamps();
         });
