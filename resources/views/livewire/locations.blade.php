@@ -62,18 +62,13 @@
 
 </div>
 
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfNAv-xW-yQ408dQkucajjANnkHYaRuQw&callback=initMap"></script>
+@section('scripts')
+    @parent
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY') }}&callback=initMap" async defer></script>
+    <script src="/js/mapInput.js"></script>
+@stop
 
-<script>
-    let map;
 
-    function initMap() {
-    map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 13.5330634, lng: 122.9695949 },
-        zoom: 12,
-    });
-    }
 
-</script>
 
     

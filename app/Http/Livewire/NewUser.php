@@ -34,7 +34,7 @@ class NewUser extends Component
             'last_name' => 'max:20',
             'email' => 'email',
             'birthday' => 'required',
-            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'administrator'])],
+            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', ,'external agency', 'administrator'])],
             'password' => 'required|same:passwordConfirmation|min:6'
         ];
     }
@@ -59,7 +59,7 @@ class NewUser extends Component
             'sex'  => ['required', Rule::in(['male', 'female'])],
             'email' => 'email',
             'mobile_no' => 'required',
-            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'administrator'])],
+            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'external agency', 'administrator'])],
             'email' => 'required|email:rfc,dns|unique:accounts',
             'password' => 'required|same:passwordConfirmation|min:6',
             'unit_name' => 'max:20',
@@ -75,7 +75,7 @@ class NewUser extends Component
             'sex' => strtolower($this->sex),
             'email' => $this->email,
             'password' => Hash::make($this->password),
-            'account_type' => 'responder',
+            'account_type' => $this->account_type,
             'birthday' => $this->birthday,
             'mobile_no' => $this->mobile_no,
             'unit_name' => $this->unit_name,

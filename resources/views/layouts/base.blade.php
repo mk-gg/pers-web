@@ -93,7 +93,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
 
     <!-- Google Maps -->
-    <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfNAv-xW-yQ408dQkucajjANnkHYaRuQw&callback=initMap"></script>
+  
     <!-- Volt JS -->
     <script src="/assets/js/volt.js"></script>
 

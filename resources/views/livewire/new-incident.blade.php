@@ -84,17 +84,22 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="name">Name</label>
-                                <input wire:model="name" class="form-control" id="first_name" type="text"
-                                    placeholder="Enter the first name">
+                                <input wire:model="name" class="form-control" id="name" type="text"
+                                    placeholder="Enter the patient's name">
                             </div>
+                            @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div>
-                                <label for="last_name">Last Name</label>
-                                <input wire:model="last_name" class="form-control" id="last_name" type="text"
-                                    placeholder="Enter the last name">
-                            </div>
-                        </div>
+                        {{-- <div class="col-md-6 mb-3">
+                            <label for="victim_status">Victim Status</label>
+                            <select wire:model="incident.victim_status" class="form-select mb-0" id="victim_status"
+                                aria-label="Victim status example">
+                                <option value="">SDDS</option>
+                                <option value="unconscious">Unconscious</option>
+                                <option value="conscious">Conscious</option>
+                            </select>
+                            @error('victim_status') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                        </div> --}}
+
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -116,46 +121,29 @@
                             @error('age') <div class="invalid-feedback"> {{ $message }}</div> @enderror
                         </div>
                     </div>
-                    {{-- 
-                    <div class="row">
-                        <div class="col-sm-6 mb-3">
-                            <div class="form-group">
-                                <label for="password">Your Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon4"><svg class="icon icon-xs text-gray-600" fill="#6b7280" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg></span>
-                                    <input wire:model.lazy="password" type="password" placeholder="Password" class="form-control" id="password" required>
-                                </div>
-                            @error('password') <div class="invalid-feedback"> {{ $message }}</div> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                                <label for="confirm_password">Confirm Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon5"><svg class="icon icon-xs text-gray-600" fill="#6b7280" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg></span>
-                                    <input wire:model.lazy="passwordConfirmation" type="password" placeholder="Confirm Password" class="form-control" id="confirm_password" required>
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                     --}}
+                    
                     <div class="row align-items-center">
                         <div class="col-md-6 mb-3">
                             <label for="location">Location</label>
                                 <input wire:model="location" class="form-control" id="location" type="text"
                                     placeholder="Location">
-                                    
+                            @error('location') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div> 
-                        
+                      
                         <div class="col-md-6 mb-3">
                             <div>
-                                <label for="account_id">Account Id</label>
-                                <input wire:model="account_id" class="form-control" id="account_id" type="text"
-                                    placeholder="Enter the account_id">
+                                <label for="permanent_address">Permanent Address</label>
+                                <input wire:model="permanent_address" class="form-control" id="permanent_address" type="text"
+                                    placeholder="Enter the permanent address">
                             </div>
+                            @error('permanent_address') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
-                         
+                        
                     </div>
+
+                    
+
+
                     <h2 class="h5 my-4">Location</h2>
                     <div class="row">
                         <div class="col-sm-9 mb-3">

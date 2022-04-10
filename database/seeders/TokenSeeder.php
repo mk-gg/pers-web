@@ -15,7 +15,7 @@ class TokenSeeder extends Seeder
      */
     public function run()
     {
-        DB::table("token")->insert([
+        DB::table("tokens")->insert([
             'account_id' => '2',
             'token' => 'xsxs',
             

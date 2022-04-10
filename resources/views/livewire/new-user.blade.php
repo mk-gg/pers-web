@@ -96,6 +96,7 @@
                                 <option >Choose...</option>
                                 <option value="responder">Responder</option>
                                 <option value="dispatcher">Dispatcher</option>
+                                <option value="external agency">External Agency</option>
                                 <option value="administrator">Administrator</option>
                             </select>
                             @error('account_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
