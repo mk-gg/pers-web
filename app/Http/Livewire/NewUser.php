@@ -34,7 +34,7 @@ class NewUser extends Component
             'last_name' => 'max:20',
             'email' => 'email',
             'birthday' => 'required',
-            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', ,'external agency', 'administrator'])],
+            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'external agency', 'administrator'])],
             'password' => 'required|same:passwordConfirmation|min:6'
         ];
     }
