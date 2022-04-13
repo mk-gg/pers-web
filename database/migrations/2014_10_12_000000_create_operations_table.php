@@ -26,6 +26,7 @@ class CreateOperationsTable extends Migration
             $table->string('etd_hospital')->nullable();
             $table->string('eta_base')->nullable();
             $table->string('receiving_facility')->nullable();
+            
             $table->timestamps();
         });
     }

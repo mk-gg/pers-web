@@ -72,7 +72,7 @@ class AccountController extends BaseController
             return $this->sendError('Post does not exist.');
         }
         $account->update($request->all());
-        return $this->sendResponse(new AccountResource($account), 'Post updated.');   ;
+        return $this->sendResponse(new AccountResource($account), 'Post updated.');  
         
         
     }
