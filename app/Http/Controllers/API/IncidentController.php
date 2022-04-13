@@ -33,17 +33,18 @@ class IncidentController extends BaseController
         $validator = Validator::make($input, [
             'incident_type' => 'required',
             'name' => 'nullable',
-            'first_name' => 'required',
-            'last_name' => 'required',
             'sex' => 'required',
             'age' => 'required',
             'description' => 'nullable',
-            'location_id' => 'nullable',
             'account_id' => 'required',
-            'location' => 'required',
-            'incident_status' => ['required', Rule::in(['pending', 'completed', 'proceeding'])],
-            'victim_status' => 'required',
-            
+            'location_id' => 'required',
+            'incident_status' => ['required', Rule::in(['pending', 'completed', 'ongoing'])],
+            'victim_status' => ['required', Rule::in(['conscious','unconscious']),
+            'temperature' => 'nullable',
+            'pulse_rate' => 'nullable',
+            'respiration_rate' => 'nullable',
+            'blood_pressure' => 'nullable',
+            'permanent_address' => 'nullable'
         ]);
         if($validator->fails()){
             return $this->sendError($validator->errors());       
@@ -70,42 +71,11 @@ class IncidentController extends BaseController
     public function update(Request $request, $id)
     {
 
-      
-        $incident = Incident::where('incident_id', $id)->first();
+        $incident = Incident::find($id);
         if (is_null($incident)) {
             return $this->sendError('Post does not exist.');
         }
-        $input = $request->all();
-
-        $validator = Validator::make($input, [
-            'incident_type' => 'required',
-            'last_name' => 'nullable',
-            'first_name' => 'nullable',
-            'sex' => 'required',
-            'age' => 'required',
-            'description' => 'nullable',
-            'location_id' => 'nullable',
-            'account_id' => 'required',
-            'incident_status' => ['required', Rule::in(['off duty', 'available', 'unavailable'])],
-            'victim_status' => 'nullable'
-        ]);
-
-        if($validator->fails()){
-            return $this->sendError($validator->errors());       
-        }
-
-        $incident->first_name = $input['first_name'];
-        $incident->last_name = $input['last_name'];
-        $incident->sex = $input['sex'];
-        $incident->age = $input['age'];
-        $incident->incident_type = $input['incident_type'];
-        $incident->description = $input['description'];
-        $incident->location_id = $input['location_id'];
-        $incident->account_id = $input['account_id'];
-        $incident->incident_status = $input['incident_status'];
-        $incident->victim_status = $input['victim_status'];
-        $incident->save();
-        
+        $incident->update($request->all());
         return $this->sendResponse(new IncidentResource($incident), 'Post updated.');   
     }
    

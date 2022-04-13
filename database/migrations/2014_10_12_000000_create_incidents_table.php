@@ -11,6 +11,7 @@ class CreateIncidentsTable extends Migration
      *
      * @return void
      */
+
     public function up()
     {
         Schema::create('incidents', function (Blueprint $table) {
@@ -20,7 +21,6 @@ class CreateIncidentsTable extends Migration
             $table->string('sex')->nullable();
             $table->string('age')->nullable();
             $table->string('description')->nullable();
-            $table->string('location');
             $table->string('location_id')->nullable();
             $table->string('account_id')->nullable();
             $table->string('incident_status');

@@ -27,46 +27,64 @@ class NewUser extends Component
     public $sex;
     public $unit_name = '';
 
+
+
     public function rules()
     {
+
         return [
             'first_name' => 'max:15',
             'last_name' => 'max:20',
-            'email' => 'email',
             'birthday' => 'required',
+            'sex'  => ['required', Rule::in(['male', 'female'])],
+            'email' => 'required|email:rfc,dns|unique:accounts',
+            'mobile_no' => 'required',
             'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'external agency', 'administrator'])],
-            'password' => 'required|same:passwordConfirmation|min:6'
+            'email' => 'required|email:rfc,dns|unique:accounts',
+            'password' => 'required|same:passwordConfirmation|min:6',
+            'unit_name' => 'max:20'
         ];
-    }
-
-    public function updatedEmail()
-    {
-        $this->validate(['email'=>'required|email:rfc,dns|unique:accounts']);
-    }
-
-
+        
    
+    }
+    // public function rules()
+    // {
+    //     return [
+    //         'first_name' => 'max:15',
+    //         'last_name' => 'max:20',
+    //         'email' => 'email',
+    //         'birthday' => 'required',
+    //         'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'external agency', 'administrator'])],
+    //         'password' => 'required|same:passwordConfirmation|min:6'
+    //     ];
+    // }
+
+
+   public function updated($propertyName)
+   {
+       $this->validateOnly($propertyName);
+   }
     
     public function add()
     {
        
         
-        // Validate First the inputs before creating
-        $this->validate([
-            'first_name' => 'max:15',
-            'last_name' => 'max:20',
-            'birthday' => 'required',
-            'sex'  => ['required', Rule::in(['male', 'female'])],
-            'email' => 'email',
-            'mobile_no' => 'required',
-            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'external agency', 'administrator'])],
-            'email' => 'required|email:rfc,dns|unique:accounts',
-            'password' => 'required|same:passwordConfirmation|min:6',
-            'unit_name' => 'max:20',
+        // // Validate First the inputs before creating
+        // $this->validate([
+        //     'first_name' => 'max:15',
+        //     'last_name' => 'max:20',
+        //     'birthday' => 'required',
+        //     'sex'  => ['required', Rule::in(['male', 'female'])],
+        //     'email' => 'email',
+        //     'mobile_no' => 'required',
+        //     'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'external agency', 'administrator'])],
+        //     'email' => 'required|email:rfc,dns|unique:accounts',
+        //     'password' => 'required|same:passwordConfirmation|min:6',
+        //     'unit_name' => 'max:20',
            
-        ]);
+        // ]);
        
-       
+       $validatedData = $this->validate();
       
         // Create a user
         $this->user = Account::create([

@@ -47,6 +47,11 @@ class NewIncident extends Component
         ];
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
+
     public function updatedEmail()
     {
         $this->validate(['email'=>'required|email:rfc,dns|unique:accounts']);
@@ -60,19 +65,10 @@ class NewIncident extends Component
         
         //dd($this->selectedUser);
         // Validate First the inputs before creating
-        $this->validate([
-            'name' => 'max:45',
-            'sex' => Rule::in(['male', 'female']),
-            'description' => 'max:20',
-            'incident_type' => 'required',
-            'location' => 'required',
-            'account_id' => 'required',
-            'permanent_address' => 'max:5',
-            
-        ]);
+   
         
         
-    
+        $validatedData = $this->validate();
        // dd($this->selectedUser);
         /*
         If a unit is selected, add an operation
