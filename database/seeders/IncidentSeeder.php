@@ -21,7 +21,6 @@ class IncidentSeeder extends Seeder
             'age' => '53',
             'incident_type' => 'Heat Stroke',
             'description' => 'Man got heatstroke',
-            'location' => 'Pascao',
             'incident_status' => 'Pending',
             'victim_status' => 'Critical'
         ]);
