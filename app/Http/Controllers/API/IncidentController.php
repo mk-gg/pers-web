@@ -39,7 +39,7 @@ class IncidentController extends BaseController
             'account_id' => 'required',
             'location_id' => 'required',
             'incident_status' => ['required', Rule::in(['pending', 'completed', 'ongoing'])],
-            'victim_status' => ['required', Rule::in(['conscious','unconscious']),
+            'victim_status' => ['required', Rule::in(['conscious','unconscious'])],
             'temperature' => 'nullable',
             'pulse_rate' => 'nullable',
             'respiration_rate' => 'nullable',
