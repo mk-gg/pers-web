@@ -28,16 +28,17 @@ class TokenController extends Controller
 
 
 
-        $user = Token::find($input['token']);
 
-        // $user = Token::where('token', $input['token'])->first();
+
+        $user = Token::where('token', $input['token'])->first();
         
         if (is_null($user))
         {
             $user = Token::create($input);
         }else
         {
-            $user->update($request->all());
+            $user->account_id = $input['account_id'];
+            $user->token = $input['token'];
         }
         
         $response = [
