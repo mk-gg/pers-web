@@ -31,7 +31,12 @@ class Incident extends Authenticatable
         'account_id',
         'location',
         'incident_status',
-        'victim_status'
+        'victim_status',
+        'temperature',
+        'pulse_rate',
+        'respiration_rate',
+        'blood_pressure',
+        'permanent_address'
     ]; 
     protected $guarded=[];
 

@@ -37,7 +37,7 @@ class NewIncident extends Component
     {
         return [
             'name' => 'max:45',
-            'sex' => 'in::male,female',
+            'sex' =>  Rule::in(['male', 'female']),
             'age' => 'numeric',
             'description' => 'max:20',
             'incident_type' => 'required',

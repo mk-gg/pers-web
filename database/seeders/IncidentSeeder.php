@@ -22,7 +22,8 @@ class IncidentSeeder extends Seeder
             'incident_type' => 'Heat Stroke',
             'description' => 'Man got heatstroke',
             'incident_status' => 'Pending',
-            'victim_status' => 'Critical'
+            'victim_status' => 'Critical',
+            'temperature' => '1'
         ]);
     }
 }
