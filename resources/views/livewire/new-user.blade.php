@@ -98,6 +98,8 @@
                                 <option value="dispatcher">Dispatcher</option>
                                 <option value="external agency">External Agency</option>
                                 <option value="administrator">Administrator</option>
+                                <option value="bfp">BFP</option>
+                                <option value="pnp">PNP</option>
                             </select>
                             @error('account_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>

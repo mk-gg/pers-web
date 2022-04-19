@@ -11,58 +11,37 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Account;
 use App\Models\Operation;
-use App\Models\Location;
 class NewIncident extends Component
 {
     public Account $user;
     public Incident $incident;
     public Operation $operation;
-    public Location $location;
-    // General Information tab
-    public $name = '';
-    public $sex = '';
-    public $age= ''; 
+    public $name;
+    public $last_name;
+    public $sex;
+    public $age; 
     public $incident_type;
+    public $location ;
     public $location_id = 1;
     public $description;
     public $account_id;
     public $selectedUser;
     public $showAddAlert = false;
     public $status;
-    public $victim_status = '';
-    public $permanent_address;
 
 
-    public $landmark;
-    public $location_name;
-    public $address;
-    public $longitude;
-    public $latitude;
 
 
     public function rules()
     {
         return [
-            'incident_type' => ['required', Rule::in(['Medical Emegency', 'Vehicle Accident', 'Theft or Robbery', 'Assault', 'Fire Incident', 'Drowning', 'Other'])] ,
-            'description' => 'max:45',
-            'name' => 'max:45',
-            'victim_status' => ['required', Rule::in(['Unconscious', 'Conscious'])],
-            'sex' =>  Rule::in(['male', 'female']),
+            'name' => 'max:35',
+            'sex' => 'in::male,female',
             'age' => 'numeric',
-            'permanent_address' => 'max:85',
-            
-            'landmark' => 'max:35',
-            'location_name' => 'max:35',
-            'address' => 'required|max:85',
-            'longitude' => 'numeric',
-            'latitude' => 'numeric'
-            
+            'description' => 'max:20',
+            'incident_type' => 'required',
+            'location' => 'required',
         ];
-    }
-
-    public function updated($propertyName)
-    {
-        $this->validateOnly($propertyName);
     }
 
     public function updatedEmail()
@@ -75,48 +54,43 @@ class NewIncident extends Component
 
     public function add()
     {
-        
+       
         //dd($this->selectedUser);
         // Validate First the inputs before creating
-     
-        $validatedData = $this->validate();
+        $this->validate([
+            'name' => 'max:35',
+           // 'sex' => 'in::male,female',
+            'description' => 'max:20',
+            'incident_type' => 'required',
+            'location' => 'required',
+            'account_id' => 'required',
+        ]);
+        
+        
        // dd($this->selectedUser);
         /*
         If a unit is selected, add an operation
         If not, only add it to the incident
         */
-        
         if ( is_null($this->selectedUser)){
             // Create a user
-            
             $this->status = 'Pending';
-         
             $this->incident = Incident::create([
                 'name' => $this->name,
                 'sex' => strtolower($this->sex),
                 'age' => $this->age,
                 'description' => $this->description,
                 'incident_type' => $this->incident_type,
+                'location' => $this->location,
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-                'victim_status' => $this->victim_status,
-                'incident_status' => 'Critical',
+                'victim_status' => 'Critical',
+                'incident_status' => $this->status,
             ]);
-
-            $this->location = Location::create([
-                'incident_type' => 'incident',
-                'landmark' => $this->landmark,
-                'location_name' => $this->location_name,
-                'address' => $this->address,
-                'longitude' => $this->longitude,
-                'latitude' => $this->latitude
-            ]);
-
             $this->showAddAlert = true;   
             return redirect('/incidents');
             
         }else{
-            
             $this->status = 'Ongoing';
             $this->incident = Incident::create([
                 'name' => $this->name,
@@ -124,6 +98,7 @@ class NewIncident extends Component
                 'age' => $this->age,
                 'description' => $this->description,
                 'incident_type' => $this->incident_type,
+                'location' => $this->location,
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
                 
@@ -138,22 +113,13 @@ class NewIncident extends Component
                 'unit_name' => $this->selectedUser
                 ]);
             
-            $this->location = Location::create([
-                'incident_type' => 'incident',
-                'landmark' => $this->landmark,
-                'location_name' => $this->location_name,
-                'address' => $this->address,
-                'longitude' => $this->longitude,
-                'latitude' => $this->latitude
-            ]);
             $unit_name = $this->selectedUser;
             // Get tokens 
-            $conn =  mysqli_connect("localhost", "root", "","erbackend");
-
-            // $conn =  mysqli_connect("localhost", "chard", "pasacaoers12345","pasacaoers_db");
+	        $conn =  mysqli_connect("localhost", "root", "","erbackend");
+            //$conn =     mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
   
-           
-            $sql = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$unit_name."' ORDER BY operation_id DESC";
+            $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON tokens.account_id = accounts.id WHERE accounts.unit_name = '".$unit_name."'";
+	     
             
             $result = mysqli_query($conn, $sql);
             $tokens = array();
@@ -163,16 +129,30 @@ class NewIncident extends Component
                     $tokens[] = $row["token"];
                 }
             }
-
+            
+            $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$unit_name."' ORDER BY operation_id DESC";
+            
+            $r = mysqli_query($conn, $query);
+            $operation = $r->fetch_assoc();
+                      
+  
             mysqli_close($conn);
-
+            
             // Notify the responders
-            $message = array("message" => " FCM PUSH TEST");
-            $message_status = $this->send_notification($tokens, $message);
+            $data = array(
+              'title' => $operation['incident_type'],
+              'body' => $operation['description'],
+              '"operation"' => $operation,
+            );
+            
+            
+            $message_status = $this->send_notification($tokens, $data);
+            
+            
             
             
             $this->showAddAlert = true;   
-            return redirect('/incidents');
+            //return redirect('/incidents');
         }
         // Pop up a alert message.
        
@@ -190,12 +170,12 @@ class NewIncident extends Component
     }
     
 
-    public function send_notification($tokens, $message, ) {
+    public function send_notification($tokens, $data, ) {
         $url = 'https://fcm.googleapis.com/fcm/send';
 
         $fields = array(
             'registration_ids' => $tokens,
-            'data' => $message
+            'data' => $data,
         );
 
         $headers = array (

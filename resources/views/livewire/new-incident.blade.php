@@ -77,7 +77,7 @@
                             <div>
                                 <label for="incident_type">Incident Type</label>
                                 <select wire:model="incident_type" class="form-select mb-0" id="incident_type" aria-label="Incident Type select example">
-                                    <option ></option>
+                                    <option value=""></option>
                                     <option value="Medical Emergency">Medical Emergency</option>
                                     <option value="Vehicle Accident">Vehicle Accident</option>
                                     <option value="Theft or Robbery">Theft or Robbery</option>

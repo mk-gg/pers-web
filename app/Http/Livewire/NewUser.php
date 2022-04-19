@@ -39,7 +39,7 @@ class NewUser extends Component
             'sex'  => ['required', Rule::in(['male', 'female'])],
             'email' => 'required|email:rfc,dns|unique:accounts',
             'mobile_no' => 'required',
-            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'external agency', 'administrator'])],
+            'account_type' => ['required', Rule::in(['responder', 'reporter', 'dispatcher', 'bfp', 'pnp', 'administrator'])],
             'email' => 'required|email:rfc,dns|unique:accounts',
             'password' => 'required|same:passwordConfirmation|min:6',
             'unit_name' => 'max:20'
