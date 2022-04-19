@@ -72,7 +72,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/profile-example', ProfileExample::class)->name('profile-example');
     Route::get('/locations', Locations::class)->name('locations');
-    Route::get('/new-location', NewLocation::class)->name('new-location');
     Route::get('/operations', Operations::class)->name('operations');
     Route::get('/incidents', Incidents::class)->name('incidents');
     Route::get('/new-incident', NewIncident::class)->name('new-incident');
