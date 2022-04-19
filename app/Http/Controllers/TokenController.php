@@ -29,7 +29,7 @@ class TokenController extends Controller
 
 
 
-
+       
         $user = Token::where('token', $input['token'])->first();
         
         if (is_null($user))

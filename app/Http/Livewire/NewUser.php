@@ -112,7 +112,7 @@ class NewUser extends Component
     {
         //view('livewire.new-user', ['account_types' => ['Responder', 'Reporter', 'Dispatcher']]
         return view('livewire.new-user');
-        ;
+        
     }
     
 }

@@ -9,11 +9,11 @@
             padding: 0;
         }
         
-    </style> 
+    </style>  
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div>
-            <h2 class="h4">Add Incident</h2>
-            <p class="mb-0">Your add incident template</p>
+            <h2 class="h4">Add Location</h2>
+            <p class="mb-0">Your add location template</p>
             <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"
@@ -56,18 +56,13 @@
             </div>
         </div>
     </div>
-    {{-- Form --}}
     <div class="row">
-       
         <div class="col-12 col-xl-8">
-             <!-- Alert-->
             @if($showAddAlert)
             <div class="alert alert-success" role="alert">
                 Added!
             </div>
             @endif
-            <!-- End Alert-->
-
             <div class="card card-body border-0 shadow mb-4">
                 <h2 class="h5 mb-4">General information</h2>
                 <!-- Form -->
@@ -75,93 +70,16 @@
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div>
-                                <label for="incident_type">Incident Type</label>
-                                <select wire:model="incident_type" class="form-select mb-0" id="incident_type" aria-label="Incident Type select example">
-                                    <option ></option>
-                                    <option value="Medical Emergency">Medical Emergency</option>
-                                    <option value="Vehicle Accident">Vehicle Accident</option>
-                                    <option value="Theft or Robbery">Theft or Robbery</option>
-                                    <option value="Assault">Assault</option>
-                                    <option value="Fire Incident">Fire Incident</option>
-                                    <option value="Drowning">Drowning</option>
-                                    <option value="Other">Other</option>
-                               
+                                <label for="location_type">location Type</label>
+                                <select wire:model.lazy="location_type" class="form-select mb-0"  id="location_type" 
+                                    aria-label="Role select example">
+                                    <option >Choose...</option>
+                                    <option value="incident">Incident</option>
+                                    <option value="important_location">Important Location</option>
                                 </select>
-                                @error('incident_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                             </div>
+                                @error('location_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div>
-                                <label for="description">Description</label>
-                                <input wire:model="description" class="form-control" id="description" type="text"
-                                    placeholder="Enter description">
-                            </div>
-                        </div>
-                        @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                    </div>
-               
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <div>
-                                <label for="name">Name</label>
-                                <input wire:model="name" class="form-control" id="name" type="text"
-                                    placeholder="Enter the patient's name">
-                            </div>
-                            @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <label for="victim_status">Victim Status</label>
-                            <select wire:model.lazy="victim_status" class="form-select mb-0" id="victim_status"
-                                aria-label="Victim status example">
-                                <option ></option>
-                                <option value="Unconscious">Unconscious</option>
-                                <option value="Conscious">Conscious</option>
-                            </select>
-                            @error('victim_status') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                        </div> 
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="sex">Gender</label>
-                            <select wire:model="sex" class="form-select mb-0" id="sex"
-                                aria-label="Gender select example">
-                                <option value="">Gender</option>
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
-                            </select>
-                            @error('sex') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                                <label for="age">Age</label>
-                                    <input wire:model="age" class="form-control" id="age" type="number"
-                                        placeholder="Enter the age">
-                            </div>
-                            @error('age') <div class="invalid-feedback"> {{ $message }}</div> @enderror
-                        </div>
-                    </div>
-                    
-                    <div class="row align-items-center">
-                
-                      
-                        <div class="mb-3">
-                            <div>
-                                <label for="permanent_address">Permanent Address</label>
-                                <input wire:model="permanent_address" class="form-control" id="permanent_address" type="text"
-                                    placeholder="Enter the permanent address">
-                            </div>
-                            @error('permanent_address') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                        </div>
-                        
-                    </div>
-
-                    
-
-
-                    <h2 class="h5 my-4">Location</h2>
-                    <div class="row">
-                        
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="landmark">Landmark</label>
@@ -169,6 +87,16 @@
                                     placeholder="Enter the landmark" required>
                             </div>
                             @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div>
+                                <label for="address">Address</label>
+                                <input wire:model="address" class="form-control" id="address" type="text"
+                                    placeholder="Enter address">
+                            </div>
+                            @error('address') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                         <div class="col-md-6 mb-3">
                             <div>
@@ -179,20 +107,7 @@
                             @error('location_name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                     </div>
-                    <div class="row">
-                                        
- 
-                         <div class="col-md mb-3">
-                            <div>
-                                <label for="address">Address</label>
-                                <input wire:model="address" class="form-control" id="address" type="text"
-                                    placeholder="Enter address">
-                            </div>
-                            @error('address') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                        </div> 
-                       
-                    </div>
-                    
+
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <div>
@@ -211,91 +126,16 @@
                             @error('latitude') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                     </div>
-                    
-                    
+
                     <div class="mt-3">
                         <button type="submit" class="btn btn-gray-800 mt-2 animate-up-2">Save All</button>
                     </div>
                 </form>
             </div>
         </div>
-        {{-- End Form --}}
-
-        {{-- Right Panel Map --}}
-          
+    
         <div class="col-12 col-xl-4">
             <div class="row">
-                
-               
-                 
-                
-                
-                <div class="col-12 mb-4">
-                    <div class="card card-body border-0 shadow">
-                        <h2 class="h5 mb-4">Select available responders</h2>
-                        <tbody>
-                            
-                            @foreach ($users->unique('unit_name') as $user)
-                                
-                            @if (!is_null($user->unit_name))
-                                
-                            
-                            <!-- Start -->
-                            <div class="d-flex align-items-center">
-                                
-        
-                                <!-- Radio Button -->
-                                <div class="me-3">
-                                    <div class="form-check">
-                                        <input class="form-check-input" wire:model.lazy="selectedUser" type="radio" name="selectedUser" id="selectedUser" value="{{ $user->unit_name }}" checked>
-                                        <label class="form-check-label" for="selectedUser">
-                                        </label>
-                                    </div>
-                                </div>
-                                <!-- Responders List -->
-                                <div class="file-field">
-                                    <div class="d-flex justify-content-xl-center ms-xl-3">
-                                        <div class="d-flex">      
-                                            <div class="d-md-block text-left">
-                                                <div class="fw-normal text-dark ">{{ $user->unit_name }}</div>
-                                                
-                                            </div>
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <hr style="width:100%;text-align:left;margin-left:0">
-                            @endif
-                            <!-- End for -->
-                            @endforeach
-                        </tbody>
-                    </div>
-                </div>
-
-                <div class="col-12 mb-4">
-                    <div class="card shadow border-0 p-0">
-                        <div class="card-body pb-3">
-                            <h2 class="h5 mb-4">External Agency</h2>
-                  
-                            <input style="margin-right: 5px" class="form-check-input" type="checkbox" value="" id="1">
-                            <label style="margin-right: 50px" class="form-check-label" for="1">
-                                BFP
-                            </label>
-                            <input style="margin-right: 5px" class="form-check-input" type="checkbox" value="" id="2">
-                            <label class="form-check-label" for="2">
-                                PNP
-                            </label>
-                
-                        
-                            </div>
-                            <div class="form-check">
-                               
-                            </div>
-                           
-                        </div>
-                    </div>
-                </div>
 
                 <div class="col-12 mb-4">
                     <div class="card shadow border-0 text-center p-0">
@@ -308,19 +148,12 @@
                         </div>
                     </div>
                 </div>
-
-
-
-            </div>
                 
-        </div>     
+            </div>
+        </div>
     </div>
-        
-        {{-- End Right Panel Map --}}
     
 </div>
-
-
 
 
 @section('scripts')
@@ -393,7 +226,10 @@
                         window.alert("No results found");
                     }
                 })
-              
+               let lat = parseFloat(latlngStr[0]);
+               let lng = parseFloat(latlngStr[1]);
+               @this.latitude = lat;
+               @this.longitude = lng;
         }
        
     </script>

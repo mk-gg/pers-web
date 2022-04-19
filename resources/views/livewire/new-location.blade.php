@@ -11,7 +11,7 @@
 </style>    
 
 
-
+<div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div>
             <h2 class="h4">Add Location</h2>
@@ -73,7 +73,9 @@
             <div class="card card-body border-0 shadow mb-4">
                 <h2 class="h5 mb-4">General information</h2>
                 <!-- Form -->
-                <form wire:submit.prevent="add" action="#" method="POST">
+                <form wire:submit.prevent="add" action="/new-location" method="POST">
+               
+                    @csrf
                     <div class="row">
                         <div class="col-md-6 mb-3">  
                             <label for="location_type">Location Type</label>
@@ -87,7 +89,7 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="landmark">Landmark</label>
-                                <input wire:model.lazy="landmark" class="form-control" name="landmark" id="landmark" type="text"
+                                <input wire:model="landmark" class="form-control" name="landmark" id="landmark" type="text"
                                     placeholder="Enter the landmark">
                             </div>
                             @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror
@@ -108,7 +110,7 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="location_name">Location Name</label>
-                                <input wire:model.lazy="location_name" class="form-control" name="location_name" id="location_name" type="text"
+                                <input wire:model="location_name" class="form-control" name="location_name" id="location_name" type="text"
                                     placeholder="Enter the location name">
                             </div>
                             @error('location_name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
@@ -120,7 +122,7 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="longitude">Longitude</label>
-                                <input wire:model.lazy="longitude" class="form-control" name="longitude" id="longitude" type="text"
+                                <input wire:model="longitude" class="form-control" name="longitude" id="longitude" type="text"
                                     placeholder="Enter the longitude">
                             </div>
                             @error('longitude') <div class="invalid-feedback">{{ $message }}</div> @enderror 
@@ -128,77 +130,14 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="latitude">Latitude</label>
-                                <input wire:model.lazy="latitude" class="form-control" name="latitude" id="latitude" type="text"
+                                <input wire:model="latitude" class="form-control" name="latitude" id="latitude" type="text"
                                     placeholder="Enter the latitude">
                             </div>
                             @error('latitude') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                     </div>
                     
-                    
-                    {{-- 
-                    <div class="row">
-                        <div class="col-md-6 mb-3">
-                            <label for="sex">Gender</label>
-                            <select wire:model="sex" class="form-select mb-0" id="sex"
-                                aria-label="Gender select example">
-                                <option value="">Gender</option>
-                                <option value="female">Female</option>
-                                <option value="male">Male</option>
-                            </select>
-                            @error('sex') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                                <label for="age">Age</label>
-                                    <input wire:model="age" class="form-control" id="age" type="number"
-                                        placeholder="Enter the age">
-                            </div>
-                            @error('age') <div class="invalid-feedback"> {{ $message }}</div> @enderror
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <div class="col-sm-6 mb-3">
-                            <div class="form-group">
-                                <label for="password">Your Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon4"><svg class="icon icon-xs text-gray-600" fill="#6b7280" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg></span>
-                                    <input wire:model.lazy="password" type="password" placeholder="Password" class="form-control" id="password" required>
-                                </div>
-                            @error('password') <div class="invalid-feedback"> {{ $message }}</div> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                                <label for="confirm_password">Confirm Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon5"><svg class="icon icon-xs text-gray-600" fill="#6b7280" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg></span>
-                                    <input wire:model.lazy="passwordConfirmation" type="password" placeholder="Confirm Password" class="form-control" id="confirm_password" required>
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="row align-items-center">
-                        <div class="col-md-6 mb-3">
-                            <label for="location">Location</label>
-                                <input wire:model="location" class="form-control" id="location" type="text"
-                                    placeholder="Location">
-                                    
-                        </div> 
-                        
-                        <div class="col-md-6 mb-3">
-                            <div>
-                                <label for="account_id">Account Id</label>
-                                <input wire:model="account_id" class="form-control" id="account_id" type="text"
-                                    placeholder="Enter the account_id">
-                            </div>
-                        </div>
-                         
-                    </div>
-                     --}}
-                    
+                  
                     <div class="mt-3">
                         <button type="submit" class="btn btn-gray-800 mt-2 animate-up-2">Save All</button>
                     </div>
@@ -222,7 +161,7 @@
                                 <div style="heigh: 100%; width:100%" class="gmap" id="map"></div>
                             </div>
                             <div wire:ignore class="gmap" id="map" style="height: 100%"></div>
-                            <div>
+                            
                         </div>
                     </div>
                 </div>

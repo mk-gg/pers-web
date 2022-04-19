@@ -33,6 +33,7 @@ use App\Http\Livewire\NewIncident;
 use App\Http\Livewire\Locations;
 use App\Http\Livewire\NewLocation;
 use App\Http\Livewire\EditIncident;
+use App\Http\Livewire\NewLocations;
 
 
 
@@ -69,12 +70,15 @@ Route::get('/upgrade-to-pro', UpgradeToPro::class)->name('upgrade-to-pro');
 //Route::get('/blog/{id}', function ($id) { return view('pages/show-post', compact('id') ); })
 
 Route::middleware('auth')->group(function () {
+    Route::get('/new-locations', NewLocations::class)->name('new-locations');
     Route::get('/profile', Profile::class)->name('profile');
     Route::get('/profile-example', ProfileExample::class)->name('profile-example');
     Route::get('/locations', Locations::class)->name('locations');
+   
     Route::get('/operations', Operations::class)->name('operations');
     Route::get('/incidents', Incidents::class)->name('incidents');
     Route::get('/new-incident', NewIncident::class)->name('new-incident');
+    Route::get('/new-location', NewLocation::class)->name('new-location');
     Route::get('/new-user', NewUser::class)->name('new-user');
     Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
     Route::get('/edit-incident/{id}', EditIncident::class)->name('edit-incident');
@@ -92,4 +96,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/forms', Forms::class)->name('forms');
     Route::get('/modals', Modals::class)->name('modals');
     Route::get('/typography', Typography::class)->name('typography');
+
+
+
+
 });

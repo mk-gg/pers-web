@@ -74,7 +74,6 @@ class AccountController extends BaseController
         $account->update($request->all());
         return $this->sendResponse(new AccountResource($account), 'Post updated.');  
         
-        
     }
    
     public function destroy(Account $account)
