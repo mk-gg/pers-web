@@ -166,7 +166,7 @@
                             <div>
                                 <label for="landmark">Landmark</label>
                                 <input wire:model="landmark" class="form-control" id="landmark" type="text"
-                                    placeholder="Enter the landmark" required>
+                                    placeholder="Enter the landmark">
                             </div>
                             @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
@@ -197,7 +197,7 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="longitude">Longitude</label>
-                                <input wire:model="longitude" class="form-control" name="longitude" id="longitude" type="text"
+                                <input wire:model.lazy="longitude" class="form-control" name="longitude" id="longitude" type="text"
                                     placeholder="Enter the longitude">
                             </div>
                             @error('longitude') <div class="invalid-feedback">{{ $message }}</div> @enderror 
@@ -278,12 +278,12 @@
                         <div class="card-body pb-3">
                             <h2 class="h5 mb-4">External Agency</h2>
                   
-                            <input style="margin-right: 5px" class="form-check-input" type="checkbox" value="" id="1">
-                            <label style="margin-right: 50px" class="form-check-label" for="1">
+                            <input wire:model.lazy="bfp" style="margin-right: 5px" class="form-check-input" type="checkbox" value="" id="bfp">
+                            <label style="margin-right: 50px" class="form-check-label" for="bfp">
                                 BFP
                             </label>
-                            <input style="margin-right: 5px" class="form-check-input" type="checkbox" value="" id="2">
-                            <label class="form-check-label" for="2">
+                            <input wire:model.lazy="pnp" style="margin-right: 5px" class="form-check-input" type="checkbox" value="" id="pnp">
+                            <label class="form-check-label" for="pnp">
                                 PNP
                             </label>
                 

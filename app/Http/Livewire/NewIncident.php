@@ -11,24 +11,34 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Account;
 use App\Models\Operation;
+use App\Models\Location;
 class NewIncident extends Component
 {
     public Account $user;
     public Incident $incident;
     public Operation $operation;
+    public Location $location;
     public $name;
     public $last_name;
     public $sex;
     public $age; 
     public $incident_type;
-    public $location ;
+    public $victim_status;
     public $location_id = 1;
     public $description;
     public $account_id;
     public $selectedUser;
     public $showAddAlert = false;
     public $status;
+    public $bfp;
+    public $pnp;
+    public $permanent_address;
 
+    public $landmark = '';
+    public $address = '';
+    public $location_name = '';
+    public $latitude = '';
+    public $longitude = ''; 
 
 
 
@@ -36,11 +46,12 @@ class NewIncident extends Component
     {
         return [
             'name' => 'max:35',
-            'sex' => 'in::male,female',
+            'sex' =>  Rule::in(['male', 'female']),
+            'victim_status' => Rule::in(['Unconscious', 'Conscious']),
             'age' => 'numeric',
             'description' => 'max:20',
             'incident_type' => 'required',
-            'location' => 'required',
+            
         ];
     }
 
@@ -49,24 +60,25 @@ class NewIncident extends Component
         $this->validate(['email'=>'required|email:rfc,dns|unique:accounts']);
     }
 
+    public function updated($propertyName)
+    {
+        $this->validateOnly($propertyName);
+    }
 
     public function mount() { $this->user = auth()->user(); }
 
+
     public function add()
     {
-       
+        
+  
+        //dd($this->landmark);   
         //dd($this->selectedUser);
         // Validate First the inputs before creating
-        $this->validate([
-            'name' => 'max:35',
-           // 'sex' => 'in::male,female',
-            'description' => 'max:20',
-            'incident_type' => 'required',
-            'location' => 'required',
-            'account_id' => 'required',
-        ]);
-        
-        
+       // Validate First the inputs before creating 
+       $validatedData = $this->validate();
+       
+
        // dd($this->selectedUser);
         /*
         If a unit is selected, add an operation
@@ -74,18 +86,29 @@ class NewIncident extends Component
         */
         if ( is_null($this->selectedUser)){
             // Create a user
-            $this->status = 'Pending';
+            
             $this->incident = Incident::create([
                 'name' => $this->name,
                 'sex' => strtolower($this->sex),
                 'age' => $this->age,
                 'description' => $this->description,
                 'incident_type' => $this->incident_type,
-                'location' => $this->location,
+              
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-                'victim_status' => 'Critical',
-                'incident_status' => $this->status,
+                'victim_status' =>  $this->victim_status,
+                'incident_status' => 'Pending',
+                'permanent_address' => $this->permanent_address,
+            ]);
+
+            $this->location = Location::create([
+                'location_type' => 'incident',
+                'landmark' => $this->landmark,
+                'address' => $this->address,
+                'location_name' => $this->location_name,
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude
+                
             ]);
             $this->showAddAlert = true;   
             return redirect('/incidents');
@@ -98,10 +121,10 @@ class NewIncident extends Component
                 'age' => $this->age,
                 'description' => $this->description,
                 'incident_type' => $this->incident_type,
-                'location' => $this->location,
+          
                 'location_id' => $this->location_id,
                 'account_id' => $this->account_id,
-                
+                'permanent_address' => $this->permanent_address,
                 'incident_status' => $this->status,
                 'victim_status' => 'Critical',
             ]);
@@ -112,6 +135,17 @@ class NewIncident extends Component
                 'dispatcher_id' => $this->user->id,
                 'unit_name' => $this->selectedUser
                 ]);
+            
+            $this->location = Location::create([
+                'location_type' => 'incident',
+                'landmark' => $this->landmark,
+                'address' => $this->address,
+                'location_name' => $this->location_name,
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude
+                
+            ]);
+
             
             $unit_name = $this->selectedUser;
             // Get tokens 
@@ -131,7 +165,14 @@ class NewIncident extends Component
             }
             
             $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$unit_name."' ORDER BY operation_id DESC";
+            if($this->bfp == true){
+                $sql .= " OR accounts.account_type = 'BFP'";
+            }
             
+            if($this->pnp == true) {
+                $sql .= " OR accounts.account_type = 'PNP'";
+            }
+               
             $r = mysqli_query($conn, $query);
             $operation = $r->fetch_assoc();
                       
@@ -152,7 +193,7 @@ class NewIncident extends Component
             
             
             $this->showAddAlert = true;   
-            //return redirect('/incidents');
+            return redirect('/incidents');
         }
         // Pop up a alert message.
        
