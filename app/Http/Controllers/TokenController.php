@@ -37,6 +37,9 @@ class TokenController extends Controller
             $user = Token::create($input);
         }else
         {
+            $user = Token::updateOrCreate(
+                ['']
+            )
             $user->account_id = $input['account_id'];
             $user->token = $input['token'];
 
