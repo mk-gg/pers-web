@@ -38,16 +38,22 @@ class TokenController extends Controller
         }else
         {
           
-            $user->account_id = $input['account_id'];
-            $user->token = $input['token'];
+            $user->Token::updateOrCreate([
+                ['token' => $input['token']],
+                ['account_id' => $input['account_id']]
+            ]);
+            
+            // $user->account_id = $input['account_id'];
+            // $user->token = $input['token'];
 
-            $user->save();
+          
         }
         
         $response = [
             'success' => true,
             'fcm' => $user,
-            'result' => is_null($user)
+            'result' => is_null($user),
+            'input' => $input
         ];
         return response($response, 201);
     }
