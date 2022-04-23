@@ -39,12 +39,14 @@ class TokenController extends Controller
         {
             $user->account_id = $input['account_id'];
             $user->token = $input['token'];
+
+            $user->save();
         }
         
         $response = [
             'success' => true,
-            'fcm' => $user
-
+            'fcm' => $user,
+            'result' => is_null($user)
         ];
         return response($response, 201);
     }
