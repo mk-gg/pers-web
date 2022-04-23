@@ -80,8 +80,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/new-incident', NewIncident::class)->name('new-incident');
     Route::get('/new-location', NewLocation::class)->name('new-location');
     Route::get('/new-user', NewUser::class)->name('new-user');
-    Route::get('/edit-user/{id}', EditUser::class)->name('edit-user');
-    Route::get('/edit-incident/{id}', \App\Http\Livewire\EditUser::class)->name('edit-incident');
+    Route::get('/edit-user/{id}', \App\Http\Livewire\EditUser::class)->name('edit-user');
+    Route::get('/edit-incident/{id}', EditIncident::class)->name('edit-incident');
     Route::get('/users', Users::class)->name('users');
     Route::get('/login-example', LoginExample::class)->name('login-example');
     Route::get('/register-example', RegisterExample::class)->name('register-example');
