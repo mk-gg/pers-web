@@ -14,7 +14,7 @@ class Token extends Authenticatable
     use HasFactory, Notifiable, HasApiTokens;
     
 
-    
+    public $primaryKey = 'token';
     /**
      * The attributes that are mass assignable.
      *
@@ -23,7 +23,8 @@ class Token extends Authenticatable
     
    protected $fillable = [
         'account_id',
-        'token',
+        'token'
+       
         
     ];
 

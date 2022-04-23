@@ -32,22 +32,31 @@ class TokenController extends Controller
        
         $user = Token::where('token', $input['token'])->first();
         
-        if (is_null($user))
-        {
+
+        if (Token::where('token', $input['token'] )->exists()) {
+            $user->account_id = $input['account_id'];
+            $user->save();
+        }else{
             $user = Token::create($input);
-        }else
-        {
-          
-            $user->Token::updateOrCreate([
-                ['token' => $input['token']],
-                ['account_id' => $input['account_id']]
-            ]);
-            
-            // $user->account_id = $input['account_id'];
-            // $user->token = $input['token'];
+        }
+
+        // if (is_null($user))
+        // {
+        //     $user = Token::create($input);
+        // }else
+        // {
+        //     if (Token::where('token', $input['token'] )->exists()) {
+        //         $user->account_id = $input['account_id'];
+        //         $user->save();
+        //     }
+
+        //     // $users = User::where('email', '=', $request->input('email'))->first();
+        //     // Token::find($input['token'])->update(['account_id' => $input['token']]);
+        //     // // $user->account_id = $input['account_id'];
+        //     // $user->token = $input['token'];
 
           
-        }
+        // }
         
         $response = [
             'success' => true,
