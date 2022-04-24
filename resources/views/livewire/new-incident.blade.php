@@ -393,7 +393,10 @@
                         window.alert("No results found");
                     }
                 })
-              
+               let lat = parseFloat(latlngStr[0]);
+               let lng = parseFloat(latlngStr[1]);
+               @this.latitude = lat;
+               @this.longitude = lng;
         }
        
     </script>

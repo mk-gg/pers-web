@@ -155,8 +155,8 @@ class NewIncident extends Component
             
             $unit_name = $this->selectedUser;
             // Get tokens 
-	        //$conn =  mysqli_connect("localhost", "root", "","erbackend");
-            $conn =     mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
+	        $conn =  mysqli_connect("localhost", "root", "","erbackend");
+            //$conn =     mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
   
             $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON tokens.account_id = accounts.id WHERE accounts.unit_name = '".$unit_name."'";
             if($this->bfp == true){
