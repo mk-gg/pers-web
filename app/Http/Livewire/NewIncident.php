@@ -24,7 +24,7 @@ class NewIncident extends Component
     public $age; 
     public $incident_type;
     public $victim_status;
-    public $location_id = 1;
+
     public $description;
     public $account_id;
     public $selectedUser;
@@ -49,7 +49,7 @@ class NewIncident extends Component
             'sex' =>  Rule::in(['male', 'female']),
             'victim_status' => Rule::in(['Unconscious', 'Conscious']),
             'age' => 'numeric',
-            'description' => 'max:20',
+            'description' => 'max:255',
             'incident_type' => 'required',
             
         ];
@@ -86,7 +86,15 @@ class NewIncident extends Component
         */
         if ( is_null($this->selectedUser)){
             // Create a user
-            
+            $this->location = Location::create([
+                'location_type' => 'incident',
+                'landmark' => $this->landmark,
+                'address' => $this->address,
+                'location_name' => $this->location_name,
+                'latitude' => $this->latitude,
+                'longitude' => $this->longitude
+                
+            ]);
             $this->incident = Incident::create([
                 'name' => $this->name,
                 'sex' => strtolower($this->sex),
@@ -94,12 +102,20 @@ class NewIncident extends Component
                 'description' => $this->description,
                 'incident_type' => $this->incident_type,
               
-                'location_id' => $this->location_id,
+                'location_id' => $this->location->location_id,
                 'account_id' => $this->account_id,
                 'victim_status' =>  $this->victim_status,
                 'incident_status' => 'Pending',
                 'permanent_address' => $this->permanent_address,
             ]);
+
+            
+            $this->showAddAlert = true;   
+            return redirect('/incidents');
+            
+        }else{
+            
+            $this->status = 'Ongoing';
 
             $this->location = Location::create([
                 'location_type' => 'incident',
@@ -110,19 +126,16 @@ class NewIncident extends Component
                 'longitude' => $this->longitude
                 
             ]);
-            $this->showAddAlert = true;   
-            return redirect('/incidents');
-            
-        }else{
-            $this->status = 'Ongoing';
+
+
             $this->incident = Incident::create([
                 'name' => $this->name,
                 'sex' => strtolower($this->sex),
                 'age' => $this->age,
                 'description' => $this->description,
                 'incident_type' => $this->incident_type,
-          
-                'location_id' => $this->location_id,
+                
+                'location_id' => $this->location->location_id,
                 'account_id' => $this->account_id,
                 'permanent_address' => $this->permanent_address,
                 'incident_status' => $this->status,
@@ -136,24 +149,22 @@ class NewIncident extends Component
                 'unit_name' => $this->selectedUser
                 ]);
             
-            $this->location = Location::create([
-                'location_type' => 'incident',
-                'landmark' => $this->landmark,
-                'address' => $this->address,
-                'location_name' => $this->location_name,
-                'latitude' => $this->latitude,
-                'longitude' => $this->longitude
-                
-            ]);
+       
 
             
             $unit_name = $this->selectedUser;
             // Get tokens 
-	        //$conn =  mysqli_connect("localhost", "root", "","erbackend");
-            $conn =     mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
+	        $conn =  mysqli_connect("localhost", "root", "","erbackend");
+            //$conn =     mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
   
             $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON tokens.account_id = accounts.id WHERE accounts.unit_name = '".$unit_name."'";
-	     
+            if($this->bfp == true){
+                $sql .= " OR accounts.account_type = 'BFP'";
+            }
+            
+            if($this->pnp == true) {
+                $sql .= " OR accounts.account_type = 'PNP'";
+            }
             
             $result = mysqli_query($conn, $sql);
             $tokens = array();
@@ -165,13 +176,7 @@ class NewIncident extends Component
             }
             
             $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$unit_name."' ORDER BY operation_id DESC";
-            if($this->bfp == true){
-                $sql .= " OR accounts.account_type = 'BFP'";
-            }
-            
-            if($this->pnp == true) {
-                $sql .= " OR accounts.account_type = 'PNP'";
-            }
+        
                
             $r = mysqli_query($conn, $query);
             $operation = $r->fetch_assoc();
