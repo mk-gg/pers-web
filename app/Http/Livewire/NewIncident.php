@@ -37,8 +37,8 @@ class NewIncident extends Component
     public $landmark = '';
     public $address = '';
     public $location_name = '';
-    public $latitude = '';
-    public $longitude = ''; 
+    public $latitude;
+    public $longitude; 
 
 
 
@@ -79,6 +79,7 @@ class NewIncident extends Component
        $validatedData = $this->validate();
        
 
+      
        // dd($this->selectedUser);
         /*
         If a unit is selected, add an operation
