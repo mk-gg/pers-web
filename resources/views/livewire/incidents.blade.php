@@ -91,7 +91,7 @@
                             </div>
                         </a>
                     </td>                        
-                    <td><span class="fw-normal">{{ $incident->location }}</span></td>
+                    <td><span class="fw-normal">{{ $incident->incident_status }}</span></td>
                     <td><span class="fw-bold text-danger">{{ $incident->victim_status }}</span></td>
                     {{--}<td><span class="fw-bold text-warning">Due</span></td>  --}}
                     <td>

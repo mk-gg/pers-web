@@ -10,6 +10,7 @@ use Livewire\Component;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Account;
+use App\Models\Location;    
 use App\Models\Operation;
 class EditIncident extends Component
 {
@@ -23,7 +24,6 @@ class EditIncident extends Component
     public $age; 
     public $incident_type;
     public $victim_status;
-    public $location_id = 1;
     public $description;
     public $account_id;
     public $selectedUser;
@@ -33,23 +33,31 @@ class EditIncident extends Component
     public $pnp;
     public $permanent_address;
 
-    public $landmark = '';
-    public $address = '';
-    public $location_name = '';
-    public $latitude = '';
-    public $longitude = ''; 
+    public $landmark;
+    public $address;
+    public $location_name;
+    public $latitude;
+    public $longitude; 
 
 
 
     public function rules()
     {
         return [
-            'name' => 'max:35',
-            'sex' =>  Rule::in(['male', 'female']),
-            'victim_status' => Rule::in(['Unconscious', 'Conscious']),
-            'age' => 'numeric',
-            'description' => 'max:255',
-            'incident_type' => 'required',
+            'incident.incident_type' => 'required',
+            'incident.name' => 'max:35',        
+            'incident.sex' =>  Rule::in(['male', 'female']),
+            'incident.victim_status' => Rule::in(['Unconscious', 'Conscious']),
+            'incident.age' => 'numeric',
+            'incident.description' => 'max:255',
+            'incident.permanent_address' => 'max:255',
+
+            'location.location_type' => ['required', Rule::in(['incident', 'important_location'])],
+            'location.landmark'      => 'max:35',
+            'location.address'       => 'required|max:35',
+          //  'location.location_name' => 'max:35',
+            'location.longitude'     => 'required',
+            'location.latitude'      => 'required'
             
         ];
     }
@@ -64,7 +72,7 @@ class EditIncident extends Component
         $this->validateOnly($propertyName);
     }
 
-    public function mount() { $this->user = auth()->user(); }
+ 
 
 
     public function add()
@@ -83,73 +91,25 @@ class EditIncident extends Component
         If a unit is selected, add an operation
         If not, only add it to the incident
         */
-        if ( is_null($this->selectedUser)){
+       
+       
+        if ( !is_null($this->selectedUser) && $this->incident->incident_status == 'Pending'){
             // Create a user
             
-            $this->incident = Incident::create([
-                'name' => $this->name,
-                'sex' => strtolower($this->sex),
-                'age' => $this->age,
-                'description' => $this->description,
-                'incident_type' => $this->incident_type,
-              
-                'location_id' => $this->location_id,
-                'account_id' => $this->account_id,
-                'victim_status' =>  $this->victim_status,
-                'incident_status' => 'Pending',
-                'permanent_address' => $this->permanent_address,
-            ]);
-
-            $this->location = Location::create([
-                'location_type' => 'incident',
-                'landmark' => $this->landmark,
-                'address' => $this->address,
-                'location_name' => $this->location_name,
-                'latitude' => $this->latitude,
-                'longitude' => $this->longitude
-                
-            ]);
-            $this->showAddAlert = true;   
-            return redirect('/incidents');
-            
-        }else{
-            $this->status = 'Ongoing';
-            $this->incident = Incident::create([
-                'name' => $this->name,
-                'sex' => strtolower($this->sex),
-                'age' => $this->age,
-                'description' => $this->description,
-                'incident_type' => $this->incident_type,
-          
-                'location_id' => $this->location_id,
-                'account_id' => $this->account_id,
-                'permanent_address' => $this->permanent_address,
-                'incident_status' => $this->status,
-                'victim_status' => 'Critical',
-            ]);
-          
-           $this->operation = Operation::create([
+            $this->incident->incident_status = 'Ongoing';
+            $this->incident->save();
+            $this->location->save();
+           
+             $this->operation = Operation::create([
                 'incident_id' => $this->incident->incident_id,
                 //'responder_id' => $this->account_id,
                 'dispatcher_id' => $this->user->id,
                 'unit_name' => $this->selectedUser
-                ]);
-            
-            $this->location = Location::create([
-                'location_type' => 'incident',
-                'landmark' => $this->landmark,
-                'address' => $this->address,
-                'location_name' => $this->location_name,
-                'latitude' => $this->latitude,
-                'longitude' => $this->longitude
-                
             ]);
-
-            
             $unit_name = $this->selectedUser;
             // Get tokens 
-	        //$conn =  mysqli_connect("localhost", "root", "","erbackend");
-            $conn =     mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
+	        $conn =  mysqli_connect("localhost", "root", "","erbackend");
+            //$conn =     mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
   
             $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON tokens.account_id = accounts.id WHERE accounts.unit_name = '".$unit_name."'";
             if($this->bfp == true){
@@ -185,7 +145,7 @@ class EditIncident extends Component
               '"operation"' => $operation,
             );
             
-            
+         
             $message_status = $this->send_notification($tokens, $data);
             
             
@@ -193,12 +153,29 @@ class EditIncident extends Component
             
             $this->showAddAlert = true;   
             return redirect('/incidents');
+            
+        }else{
+           
+            dd("Incident is not pending or There's no responder");
+            
         }
         // Pop up a alert message.
        
     }
 
 
+    public function mount( $id)
+    {
+        
+        $this->user = auth()->user();
+        $existingUser = Incident::where('incident_id', $id)->first();
+       
+        $this->location = Location::where('location_id', $existingUser->location_id)->first();
+        $this->urlId = intval($existingUser->id);
+        $this->incident = $existingUser; 
+        
+        
+    }
     public function render()
     {
         //view('livewire.new-user', ['account_types' => ['Responder', 'Reporter', 'Dispatcher']]

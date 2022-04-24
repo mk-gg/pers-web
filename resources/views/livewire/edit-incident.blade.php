@@ -1,4 +1,15 @@
 <div>
+    <style>
+        #map {
+            height: 100%;
+        }
+        html, body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+        }
+        
+    </style> 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div>
             <h2 class="h4">Add Incident</h2>
@@ -65,15 +76,24 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="incident_type">Incident Type</label>
-                                <input wire:model.lazy ="incident_type" class="form-control" id="incident_type" type="text"
-                                    placeholder="Enter the incident type">
+                                <select wire:model="incident.incident_type" class="form-select mb-0" id="incident_type" aria-label="Incident Type select example">
+                                    <option value=""></option>
+                                    <option value="Medical Emergency">Medical Emergency</option>
+                                    <option value="Vehicle Accident">Vehicle Accident</option>
+                                    <option value="Theft or Robbery">Theft or Robbery</option>
+                                    <option value="Assault">Assault</option>
+                                    <option value="Fire Incident">Fire Incident</option>
+                                    <option value="Drowning">Drowning</option>
+                                    <option value="Other">Other</option>
+                               
+                                </select>
+                                @error('incident_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                             </div>
-                            @error('incident_type') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="description">Description</label>
-                                <input wire:model.lazy ="description" class="form-control" id="description" type="text"
+                                <input wire:model="description" class="form-control" id="description" type="text"
                                     placeholder="Enter description">
                             </div>
                         </div>
@@ -84,22 +104,27 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="name">Name</label>
-                                <input wire:model.lazy="name" class="form-control" id="first_name" type="text"
-                                    placeholder="Enter the first name">
+                                <input wire:model="incident.name" class="form-control" id="name" type="text"
+                                    placeholder="Enter the patient's name">
                             </div>
+                            @error('name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                         <div class="col-md-6 mb-3">
-                            <div>
-                                <label for="last_name">Last Name</label>
-                                <input wire:model.lazy="last_name" class="form-control" id="last_name" type="text"
-                                    placeholder="Enter the last name">
-                            </div>
-                        </div>
+                            <label for="victim_status">Victim Status</label>
+                            <select wire:model.lazy="incident.victim_status" class="form-select mb-0" id="victim_status"
+                                aria-label="Victim status example">
+                                <option ></option>
+                                <option value="Unconscious">Unconscious</option>
+                                <option value="Conscious">Conscious</option>
+                            </select>
+                            @error('victim_status') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                        </div> 
+
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
                             <label for="sex">Gender</label>
-                            <select wire:model.lazy="sex" class="form-select mb-0" id="sex"
+                            <select wire:model="incident.sex" class="form-select mb-0" id="sex"
                                 aria-label="Gender select example">
                                 <option value="">Gender</option>
                                 <option value="female">Female</option>
@@ -110,84 +135,84 @@
                         <div class="col-md-6 mb-3">
                             <div class="form-group">
                                 <label for="age">Age</label>
-                                    <input wire:model.lazy="age" class="form-control" id="age" type="number"
+                                    <input wire:model="incident.age" class="form-control" id="age" type="number"
                                         placeholder="Enter the age">
                             </div>
                             @error('age') <div class="invalid-feedback"> {{ $message }}</div> @enderror
                         </div>
                     </div>
-                    {{-- 
-                    <div class="row">
-                        <div class="col-sm-6 mb-3">
-                            <div class="form-group">
-                                <label for="password">Your Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon4"><svg class="icon icon-xs text-gray-600" fill="#6b7280" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg></span>
-                                    <input wire:model.lazy="password" type="password" placeholder="Password" class="form-control" id="password" required>
-                                </div>
-                            @error('password') <div class="invalid-feedback"> {{ $message }}</div> @enderror
-                            </div>
-                        </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-group">
-                                <label for="confirm_password">Confirm Password</label>
-                                <div class="input-group">
-                                    <span class="input-group-text" id="basic-addon5"><svg class="icon icon-xs text-gray-600" fill="#6b7280" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg></span>
-                                    <input wire:model.lazy="passwordConfirmation" type="password" placeholder="Confirm Password" class="form-control" id="confirm_password" required>
-                                </div>  
-                            </div>
-                        </div>
-                    </div>
-                     --}}
+                    
                     <div class="row align-items-center">
-                        <div class="col-md-6 mb-3">
-                            <label for="location">Location</label>
-                                <input wire:model.lazy="location" class="form-control" id="location" type="text"
-                                    placeholder="Location">
-                                    
-                        </div> 
+                
+                      
+                        <div class="mb-3">
+                            <div>
+                                <label for="permanent_address">Permanent Address</label>
+                                <input wire:model="incident.permanent_address" class="form-control" id="permanent_address" type="text"
+                                    placeholder="Enter the permanent address">
+                            </div>
+                            @error('permanent_address') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                        </div>
+                        
+                    </div>
+
+                    
+
+
+                    <h2 class="h5 my-4">Location</h2>
+                    <div class="row">
                         
                         <div class="col-md-6 mb-3">
                             <div>
-                                <label for="account_id">Account Id</label>
-                                <input wire:model.lazy="account_id" class="form-control" id="account_id" type="text"
-                                    placeholder="Enter the account_id">
+                                <label for="landmark">Landmark</label>
+                                <input wire:model="location.landmark" class="form-control" id="landmark" type="text"
+                                    placeholder="Enter the landmark">
                             </div>
+                            @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
-                         
+                        <div class="col-md-6 mb-3">
+                            <div>
+                                <label for="location_name">Location Name</label>
+                                <input wire:model="" class="form-control" name="location_name" id="location_name" type="text"
+                                    placeholder="Enter the location name">
+                            </div>
+                            @error('location_name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                        </div>
                     </div>
-                    <h2 class="h5 my-4">Location</h2>
                     <div class="row">
-                        <div class="col-sm-9 mb-3">
-                            <div class="form-group">
+                                        
+ 
+                         <div class="col-md mb-3">
+                            <div>
                                 <label for="address">Address</label>
-                                <input  class="form-control" id="address" type="text>
-                                    placeholder="Enter your home address">
+                                <input wire:model="location.address" class="form-control" id="address" type="text"
+                                    placeholder="Enter address">
                             </div>
-                        </div>
-                        <div class="col-sm-3 mb-3">
-                            <div class="form-group">
-                                <label for="number">Number</label>
-                                <input class="form-control" id="number" type="number"
-                                    placeholder="No.">
-                            </div>
-                        </div>
+                            @error('address') <div class="invalid-feedback">{{ $message }}</div> @enderror 
+                        </div> 
+                       
                     </div>
+                    
                     <div class="row">
-                        <div class="col-sm-4 mb-3">
-                            <div class="form-group">
-                                <label for="city_municipality">City</label>
-                                <input class="form-control" id="city_municipality" type="text"
-                                    placeholder="City">
+                        <div class="col-md-6 mb-3">
+                            <div>
+                                <label for="longitude">Longitude</label>
+                                <input wire:model.lazy="location.longitude" class="form-control" name="longitude" id="longitude" type="text"
+                                    placeholder="Enter the longitude">
                             </div>
+                            @error('longitude') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label for="zip_code">ZIP</label>
-                                <input class="form-control" id="zip_code" type="tel" placeholder="ZIP">
+                        <div class="col-md-6 mb-3">
+                            <div>
+                                <label for="latitude">Latitude</label>
+                                <input wire:model.lazy="location.latitude" class="form-control" name="latitude" id="latitude" type="text"
+                                    placeholder="Enter the latitude">
                             </div>
+                            @error('latitude') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
                     </div>
+                    
+                    
                     <div class="mt-3">
                         <button type="submit" class="btn btn-gray-800 mt-2 animate-up-2">Save All</button>
                     </div>
@@ -205,67 +230,175 @@
                  
                 
                 
-                <div class="col-12">
+                <div class="col-12 mb-4">
                     <div class="card card-body border-0 shadow">
                         <h2 class="h5 mb-4">Select available responders</h2>
                         <tbody>
                             
-                        @foreach ($users->unique('unit_name') as $user)
+                            @foreach ($users->unique('unit_name') as $user)
+                                
+                            @if (!is_null($user->unit_name))
+                                
                             
-                        @if (!is_null($user->unit_name))
-                            
-                        
-                        <!-- Start -->
-                        <div class="d-flex align-items-center">
-                            
-    
-                            <!-- Radio Button -->
-                            <div class="me-3">
-                                <div class="form-check">
-                                    <input class="form-check-input" wire:model.lazy="selectedUser" type="radio" name="selectedUser" id="selectedUser" value="{{ $user->unit_name }}" checked>
-                                    <label class="form-check-label" for="selectedUser">
-                                    </label>
+                            <!-- Start -->
+                            <div class="d-flex align-items-center">
+                                
+        
+                                <!-- Radio Button -->
+                                <div class="me-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" wire:model.lazy="selectedUser" type="radio" name="selectedUser" id="selectedUser" value="{{ $user->unit_name }}" checked>
+                                        <label class="form-check-label" for="selectedUser">
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
-                            <!-- Responders List -->
-                            <div class="file-field">
-                                <div class="d-flex justify-content-xl-center ms-xl-3">
-                                    <div class="d-flex">      
-                                        <div class="d-md-block text-left">
-                                            <div class="fw-normal text-dark ">{{ $user->unit_name }}</div>
+                                <!-- Responders List -->
+                                <div class="file-field">
+                                    <div class="d-flex justify-content-xl-center ms-xl-3">
+                                        <div class="d-flex">      
+                                            <div class="d-md-block text-left">
+                                                <div class="fw-normal text-dark ">{{ $user->unit_name }}</div>
+                                                
+                                            </div>
                                             
                                         </div>
-                                        
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <hr style="width:100%;text-align:left;margin-left:0">
-                        @endif
-                        <!-- End for -->
-                        @endforeach
-                       
-                        
-                       
-
-                    </tbody>
-                    </div>
+                            <hr style="width:100%;text-align:left;margin-left:0">
+                            @endif
+                            <!-- End for -->
+                            @endforeach
+                        </tbody>
                     </div>
                 </div>
+
+                <div class="col-12 mb-4">
+                    <div class="card shadow border-0 p-0">
+                        <div class="card-body pb-3">
+                            <h2 class="h5 mb-4">External Agency</h2>
+                  
+                            <input wire:model.lazy="bfp" style="margin-right: 5px" class="form-check-input" type="checkbox" value="" id="bfp">
+                            <label style="margin-right: 50px" class="form-check-label" for="bfp">
+                                BFP
+                            </label>
+                            <input wire:model.lazy="pnp" style="margin-right: 5px" class="form-check-input" type="checkbox" value="" id="pnp">
+                            <label class="form-check-label" for="pnp">
+                                PNP
+                            </label>
+                
+                        
+                            </div>
+                            <div class="form-check">
+                               
+                            </div>
+                           
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 mb-4">
+                    <div class="card shadow border-0 text-center p-0">
+                        <div class="card-body pb-3">
+                            <div wire:ignore style="width:100%;height:500px; ">
+                                <div style="heigh: 100%; width:100%" class="gmap" id="map"></div>
+                            </div>
+                            <div wire:ignore class="gmap" id="map" style="height: 100%"></div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+
+
             </div>
-        </div>
+                
+        </div>     
+    </div>
         
         {{-- End Right Panel Map --}}
-    </div>
     
 </div>
 
 
-<script src="moment.js"></script>
-<script src="pikaday.js"></script>
-<script>
-    
-    var picker = new Pikaday({ field: document.getElementById('birthday'), 
-    format: 'MM/DD/YYYY' });
-    
-</script>
+
+
+@section('scripts')
+
+<script src="https://maps.googleapis.com/maps/api/js?key={{ env('GOOGLE_MAPS_API_KEY ') }}&callback=initialize" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/geocode/js?key={{ env('GOOGLE_MAPS_API_KEY ') }}&callback=initialize" async defer></script>
+    <script>
+        let map;
+
+        function initialize() {
+            
+            map = new google.maps.Map(document.getElementById("map"), {
+                center: {lat: 13.519231558052947, lng: 123.04375797926176 },
+                zoom: 18,
+            });
+            
+            const loc =  { lat: 13.519231558052947, lng: 123.04375797926176 };
+
+            const geocoder = new google.maps.Geocoder();
+            const infowindow = new google.maps.InfoWindow();
+
+            const marker = new google.maps.Marker({
+                position: loc,
+                map: map,
+                draggable: true
+            });
+            
+            google.maps.event.addListener(marker,'position_changed',
+                function (){
+                    let lat = marker.position.lat();
+                    let lng = marker.position.lng();
+                    document.getElementById('latitude').value = this.getPosition().lat();
+                    document.getElementById('longitude').value = this.getPosition().lng();
+                  
+                    geocodeLatLng(geocoder, map, infowindow);
+                  
+                });
+            google.maps.event.addListener(map,'click',
+                function (event){
+                    pos = event.latLng;
+                    marker.setPosition(pos);
+                });
+            
+        }
+
+        function geocodeLatLng(geocoder, map, infoWindow) {
+            const input = document.getElementById('latitude').value + "," + document.getElementById('longitude').value;
+           
+            const latlngStr = input.split(",", 2);
+            const latlng = {
+                lat: parseFloat(latlngStr[0]),
+                lng: parseFloat(latlngStr[1]),
+            };
+            
+            geocoder
+                .geocode({ location: latlng })
+                .then((response) => {
+                    if (response.results[0]) {
+                        map.setZoom(11);
+
+                        const marker = new google.maps.Marker({
+                            position: latlng,
+                            map: map,
+                        });
+
+                        infowindow.setContent(response.results[0].formatted_address);
+                        infowindow.open(map, marker);
+                        
+                    }else {
+                        window.alert("No results found");
+                    }
+                })
+               let lat = parseFloat(latlngStr[0]);
+               let lng = parseFloat(latlngStr[1]);
+               @this.latitude = lat;
+               @this.longitude = lng;
+        }
+       
+    </script>
+
+@endsection
