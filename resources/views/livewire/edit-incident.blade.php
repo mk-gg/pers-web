@@ -162,7 +162,7 @@
                     <h2 class="h5 my-4">Location</h2>
                     <div class="row">
                         
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md mb-3">
                             <div>
                                 <label for="landmark">Landmark</label>
                                 <input wire:model="location.landmark" class="form-control" id="landmark" type="text"
@@ -170,14 +170,7 @@
                             </div>
                             @error('landmark') <div class="invalid-feedback">{{ $message }}</div> @enderror 
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div>
-                                <label for="location_name">Location Name</label>
-                                <input wire:model="" class="form-control" name="location_name" id="location_name" type="text"
-                                    placeholder="Enter the location name">
-                            </div>
-                            @error('location_name') <div class="invalid-feedback">{{ $message }}</div> @enderror 
-                        </div>
+                       
                     </div>
                     <div class="row">
                                         

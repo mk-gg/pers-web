@@ -52,10 +52,9 @@ class EditIncident extends Component
             'incident.description' => 'max:255',
             'incident.permanent_address' => 'max:255',
 
-            'location.location_type' => ['required', Rule::in(['incident', 'important_location'])],
+            //'location.location_type' => ['required', Rule::in(['incident', 'important_location'])],
             'location.landmark'      => 'max:35',
             'location.address'       => 'required|max:35',
-          //  'location.location_name' => 'max:35',
             'location.longitude'     => 'required',
             'location.latitude'      => 'required'
             
@@ -78,8 +77,8 @@ class EditIncident extends Component
     public function add()
     {
         
-  
-        //dd($this->landmark);   
+        
+       
         //dd($this->selectedUser);
         // Validate First the inputs before creating
        // Validate First the inputs before creating 
@@ -93,7 +92,7 @@ class EditIncident extends Component
         */
        
        
-        if ( !is_null($this->selectedUser) && $this->incident->incident_status == strtolower('Pending')){
+        if ( !is_null($this->selectedUser) && $this->incident->incident_status == 'Pending'){
             // Create a user
             
             $this->incident->incident_status = 'Ongoing';
