@@ -93,7 +93,7 @@
                         <div class="col-md-6 mb-3">
                             <div>
                                 <label for="description">Description</label>
-                                <input wire:model="description" class="form-control" id="description" type="text"
+                                <input wire:model="incident.description" class="form-control" id="description" type="text"
                                     placeholder="Enter description">
                             </div>
                         </div>
