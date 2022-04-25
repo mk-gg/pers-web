@@ -54,7 +54,7 @@ class EditIncident extends Component
 
             //'location.location_type' => ['required', Rule::in(['incident', 'important_location'])],
             'location.landmark'      => 'max:35',
-            'location.address'       => 'required|max:35',
+            'location.address'       => 'max:35',
             'location.longitude'     => 'required',
             'location.latitude'      => 'required'
             
@@ -128,7 +128,7 @@ class EditIncident extends Component
                 }
             }
             
-            $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$unit_name."' ORDER BY operation_id DESC";
+            $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$unit_name."' ORDER BY operation_id DESC LIMIT 1";
         
                
             $r = mysqli_query($conn, $query);
