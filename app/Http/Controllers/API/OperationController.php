@@ -87,17 +87,7 @@ class OperationController extends BaseController
             return $this->sendError($validator->errors());       
         }
 
-        $incident->incident_id = $input['incident_id'];
-        $incident->unit_name = $input['unit_name'];
-        $incident->dispatcher_id = $input['dispatcher_id'];
-        $incident->etd_base = $input['etd_base'];
-        $incident->eta_scene = $input['eta_scene'];
-        $incident->etd_scene = $input['etd_scene'];
-        $incident->eta_hospital = $input['eta_hospital'];
-        $incident->etd_hospital = $input['etd_hospital'];
-        $incident->eta_base = $input['eta_base'];
-        $incident->receiving_facitility = $input['receiving_facitility'];
-        $incident->save();
+        $incident->update($request->all());
         
         return $this->sendResponse(new OperationResource($incident), 'Post updated.');   
     }
