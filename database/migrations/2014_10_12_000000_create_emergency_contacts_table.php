@@ -31,6 +31,6 @@ class CreateEmergencyContactsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('emergency_contacts');
+        Schema::dropIfExists('emergency contacts');
     }
 }
