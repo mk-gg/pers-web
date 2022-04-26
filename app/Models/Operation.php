@@ -32,7 +32,7 @@ class Operation extends Authenticatable
         'eta_hospital',
         'etd_hospital' ,
         'eta_base',
-        'receiving_facitility'
+        'receiving_facility'
         
     ]; 
     protected $guarded=[];

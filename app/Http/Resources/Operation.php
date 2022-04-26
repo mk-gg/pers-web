@@ -22,7 +22,7 @@ class Operation extends JsonResource
             'etd_scene' => $this->etd_scene,
             'eta_hospital' => $this->eta_hospital,
             'etd_hospital' => $this->etd_hospital,
-            'receiving_facitility' => $this->receiving_facitility,
+            'receiving_facility' => $this->receiving_facility,
         ];
     }
     
