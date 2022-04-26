@@ -13,7 +13,7 @@ class CreateEmergencyContactsTable extends Migration
      */
     public function up()
     {
-        Schema::create('emergency contacts', function (Blueprint $table) {
+        Schema::create('emergency_contacts', function (Blueprint $table) {
             $table->increments('contact_id')->unique();
             $table->string('contact_name')->nullable();
             $table->string('contact_number')->nullable();
@@ -31,6 +31,6 @@ class CreateEmergencyContactsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('operations');
+        Schema::dropIfExists('emergency_contacts');
     }
 }
