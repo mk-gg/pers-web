@@ -37,7 +37,7 @@ class OperationController extends BaseController
             'eta_hospital' => 'nullable',
             'etd_hospital' => 'nullable',
             'eta_base' => 'nullable',
-            'receiving_facitility' => 'nullable'
+            'receiving_facility' => 'nullable'
         ]);
         if($validator->fails()){
             return $this->sendError($validator->errors());       
@@ -79,7 +79,7 @@ class OperationController extends BaseController
             'eta_hospital' => 'nullable',
             'etd_hospital' => 'nullable',
             'eta_base' => 'nullable',
-            'receiving_facitility' => 'nullable',
+            'receiving_facility' => 'nullable',
             
         ]);
 
