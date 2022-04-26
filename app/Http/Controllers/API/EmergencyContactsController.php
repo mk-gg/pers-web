@@ -46,7 +46,7 @@ class EmergencyContactsController extends BaseController
     */
     public function show($id)
     {
-        $incident = EmergencyContacts::where('contact_id', $id)->first();
+        $incident = EmergencyContacts::where('account_id', $id)->get();
         if (is_null($incident)) {
             return $this->sendError('Post does not exist.');
         }
