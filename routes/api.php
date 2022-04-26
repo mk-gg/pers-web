@@ -14,6 +14,7 @@ use App\Http\Controllers\API\LocationController;
 use App\Http\Controllers\API\OperationController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TokenController;
+use App\Http\Controllers\API\EmergencyContactsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('operations', OperationController::class);
     Route::resource('accounts', AccountController::class);
     Route::resource('locations', LocationController::class);
+    Route::resource('emergencycontacts', EmergencyContactsController::class);
     // Get assigned_incidents
 
     
