@@ -47,13 +47,18 @@ class EmergencyContactsController extends BaseController
     public function show($id)
     {
         $contacts = EmergencyContacts::all();
+        
 
+ 
+
+      
+        
         $incident = $contacts->where('account_id', $id);
         if (is_null($incident)) {
             return $this->sendError('Post does not exist.');
         }
+        return $this->sendResponse(EmergencyContactsResource::collection($incident), 'Post Fetched');
 
-        return $this->sendResponse(new EmergencyContactsResource($incident), 'Post fetched.');
     }
     
 
