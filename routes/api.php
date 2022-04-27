@@ -49,6 +49,8 @@ Route::post('/register_token', [TokenController::class, 'registerToken']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/operation/unit/{id}', [IncidentController::class, 'assigned_incidents']);
+    Route::get('/operation/get/{unit_name}', [OperationController::class, 'show_ops']);
+    
     Route::resource('incidents', IncidentController::class);
     Route::resource('operations', OperationController::class);
     Route::resource('accounts', AccountController::class);

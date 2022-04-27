@@ -7,7 +7,8 @@ use App\Http\Controllers\API\BaseController as BaseController;
 use Validator;
 use App\Models\Operation;
 use App\Http\Resources\Operation as OperationResource;
-   
+use Illuminate\Support\Facades\DB;
+
 class OperationController extends BaseController
 {
 
@@ -59,6 +60,19 @@ class OperationController extends BaseController
         return $this->sendResponse(new OperationResource($incident), 'Post fetched.');
     }
     
+    public function show_ops($unit_name)
+    {
+        $contacts = Operation::all();
+        
+        $operations = DB::select("SELECT operations.*, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'Completed' AND unit_name = '".$unit_name."'");
+
+
+ 
+        if (is_null($operations)) {
+            return $this->sendError('Post does not exist.');
+        }
+        return $this->sendResponse(collect($operations), 'Post Fetched');
+    }
 
     public function update(Request $request, $id)
     {
