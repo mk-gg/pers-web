@@ -38,7 +38,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::resource('incidents', IncidentController::class);
 // Route::get('/accounts', [AccountController::class, 'index']);
 Route::resource('users', UserController::class);
-
+Route::resource('emergencycontacts', EmergencyContactsController::class);
 
 //Route::resource('accounts', AccountController::class);
 Route::post('/register', [AuthController::class, 'register']);
@@ -55,7 +55,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('operations', OperationController::class);
     Route::resource('accounts', AccountController::class);
     Route::resource('locations', LocationController::class);
-    Route::resource('emergencycontacts', EmergencyContactsController::class);
+   
     // Get assigned_incidents
 
     

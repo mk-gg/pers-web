@@ -9,6 +9,7 @@ use App\Models\Operation;
 use App\Http\Resources\Operation as OperationResource;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Response;
 class OperationController extends BaseController
 {
 
@@ -71,7 +72,7 @@ class OperationController extends BaseController
         if (collect($operations)->isEmpty()) {
             return $this->sendError('Post does not exist.');
         }
-        return $this->sendResponse(collect($operations), 'Post Fetched');
+        return $this->sendResponse(response()->json($operations), 'Post Fetched');
     }
 
     public function update(Request $request, $id)
