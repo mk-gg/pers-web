@@ -60,18 +60,26 @@ class EmergencyContactsController extends BaseController
 
     public function update(Request $request, $id)
     {
-        $account = EmergencyContacts::find($id);
+        $account = EmergencyContacts::where('contact_id', $id)->first();
+        //return $this->sendResponse($account, 'Post updated.');  
         if (is_null($account)) {
             return $this->sendError('Post does not exist.');
         }
         $account->update($request->all());
-        return $this->sendResponse(new EmergencyContacts($account), 'Post updated.');  
+ 
+        return $this->sendResponse($account, 'Post updated.');  
         
     }
    
-    public function destroy(EmergencyContacts $incident)
+    public function destroy(Request $request, $id)
     {
-        $incident->delete();
+        
+        $account = EmergencyContacts::where('contact_id', $id)->first();
+        //return $this->sendResponse($account, 'Post updated.');  
+        if (is_null($account)) {
+            return $this->sendError('Post does not exist.');
+        }
+        $account->delete();
         return $this->sendResponse([], 'Post deleted.');
     }
 }
