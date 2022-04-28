@@ -38,7 +38,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route::resource('incidents', IncidentController::class);
 // Route::get('/accounts', [AccountController::class, 'index']);
 Route::resource('users', UserController::class);
-Route::resource('emergencycontacts', EmergencyContactsController::class);
 
 //Route::resource('accounts', AccountController::class);
 Route::post('/register', [AuthController::class, 'register']);
@@ -49,6 +48,7 @@ Route::post('/register_token', [TokenController::class, 'registerToken']);
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/operation/unit/{id}', [IncidentController::class, 'assigned_incidents']);
+    Route::resource('emergencycontacts', EmergencyContactsController::class);
     Route::get('/operation/get/{unit_name}', [OperationController::class, 'show_ops']);
     
     Route::resource('incidents', IncidentController::class);

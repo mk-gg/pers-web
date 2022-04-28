@@ -66,13 +66,13 @@ class OperationController extends BaseController
        
         
         $operations = DB::select("SELECT operations.*, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'Completed' AND unit_name = '".$unit_name."'");
-
+    
 
  
         if (collect($operations)->isEmpty()) {
             return $this->sendError('Post does not exist.');
         }
-        return $this->sendResponse(response()->json($operations), 'Post Fetched');
+        return $this->sendResponse(collect($operations), 'Post Fetched');
     }
 
     public function update(Request $request, $id)
