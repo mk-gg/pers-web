@@ -44,7 +44,7 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register_token', [TokenController::class, 'registerToken']);
 
-
+Route::resource('incidents', IncidentController::class);
 //Protected Routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -53,7 +53,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('accounts', AccountController::class);
     Route::get('/operation/get/{unit_name}', [OperationController::class, 'show_ops']);
     
-    Route::resource('incidents', IncidentController::class);
+    
     Route::resource('operations', OperationController::class);
     
     Route::resource('locations', LocationController::class);

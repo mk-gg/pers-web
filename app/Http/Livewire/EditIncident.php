@@ -91,75 +91,111 @@ class EditIncident extends Component
         If not, only add it to the incident
         */
        
-       
-        if ( !is_null($this->selectedUser) && $this->incident->incident_status == 'Pending'){
-            // Create a user
-            
-            $this->incident->incident_status = 'Ongoing';
-            $this->incident->save();
-            $this->location->save();
-           
-             $this->operation = Operation::create([
-                'incident_id' => $this->incident->incident_id,
-                //'responder_id' => $this->account_id,
-                'dispatcher_id' => $this->user->id,
-                'unit_name' => $this->selectedUser
-            ]);
-            $unit_name = $this->selectedUser;
-            // Get tokens 
-	        //$conn =  mysqli_connect("localhost", "root", "","erbackend");
-            $conn =     mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
+        $conn = mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
+
+        $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON tokens.account_id = accounts.id WHERE";
+
+
+        if (!is_null($this->selectedUser))
+        {
+            $sql .= " accounts.unit_name = '".$this->selectedUser."'";
+            if($this->bfp == true || $this->pnp == true){
+                $sql .= " OR";
+            }
+            $this->incident->incident_status = "Ongoing";
+        }
+
+
+
+        if($this->bfp == true){
+            $sql .= " accounts.account_type = 'BFP'";
+            if($this->pnp == true){
+                $sql .= " OR";
+            }
+          }
+          
+        if($this->pnp == true) {
+            $sql .= " accounts.account_type = 'PNP'";
+        }
+
+
+        if(($this->bfp == true || $this->pnp == true) && is_null($this->selectedUser))
+        {
+            $this->incident->incident_status = 'Completed';
+        }
+
+        
+        $this->operation = Operation::create([
+            'incident_id' => $this->incident->incident_id,
+            //'responder_id' => $this->account_id,
+            'dispatcher_id' => $this->user->id,
+            'unit_name' => $this->selectedUser
+        ]);
+          $this->incident->save();
+          $this->location->save();
+        
+        
+        
+
+     
   
-            $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON tokens.account_id = accounts.id WHERE accounts.unit_name = '".$unit_name."'";
-            if($this->bfp == true){
-                $sql .= " OR accounts.account_type = 'BFP'";
-            }
-            
-            if($this->pnp == true) {
-                $sql .= " OR accounts.account_type = 'PNP'";
-            }
-            
+
+          $result = mysqli_query($conn, $sql);
+          $tokens = array();
+
+          if (mysqli_num_rows($result) > 0) {
+              while($row = mysqli_fetch_assoc($result)){
+                  $tokens[] = $row["token"];
+              }
+          }
+          
+          $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$this->selectedUser."' ORDER BY operation_id DESC LIMIT 1";
+      
+             
+          $r = mysqli_query($conn, $query);
+          $operation = $r->fetch_assoc();
+                    
+
+          
+          
+          // Notify the responders
+          $data = array(
+            'title' => $operation['incident_type'],
+            'body' => $operation['description'],
+            '"operation"' => $operation,
+          );
+          
+        $message_status = $this->send_notification($tokens, $data);
+
+        if (!is_null($this->account_id))
+        {
+            $sql = "SELECT tokens.token FROM tokens WHERE account_id = '".$this->account_id."'";
+              
             $result = mysqli_query($conn, $sql);
             $tokens = array();
-
+            
             if (mysqli_num_rows($result) > 0) {
                 while($row = mysqli_fetch_assoc($result)){
                     $tokens[] = $row["token"];
                 }
             }
             
-            $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$unit_name."' ORDER BY operation_id DESC LIMIT 1";
-        
-               
-            $r = mysqli_query($conn, $query);
-            $operation = $r->fetch_assoc();
-                      
-  
-            mysqli_close($conn);
-            
-            // Notify the responders
             $data = array(
-              'title' => $operation['incident_type'],
-              'body' => $operation['description'],
-              '"operation"' => $operation,
+              'title' => "Incident Report",
+              'body' => "Stay calm. Responders are on their way.",
             );
-            
-         
+
             $message_status = $this->send_notification($tokens, $data);
-            
-            
-            
-            
-            $this->showAddAlert = true;   
-            return redirect('/incidents');
-            
-        }else{
-           
-            dd("Incident is not pending or There's no responder");
-            
         }
-        // Pop up a alert message.
+        
        
+        
+        mysqli_close($conn);
+
+        
+        $this->showAddAlert = true;   
+        return redirect('/incidents');
+          
     }
 
 

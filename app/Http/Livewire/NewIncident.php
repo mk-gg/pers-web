@@ -77,130 +77,126 @@ class NewIncident extends Component
         // Validate First the inputs before creating
        // Validate First the inputs before creating 
        $validatedData = $this->validate();
-       
-
+       //$conn =  mysqli_connect("localhost", "root", "","erbackend");
+       $conn = mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
       
        // dd($this->selectedUser);
         /*
         If a unit is selected, add an operation
         If not, only add it to the incident
         */
-        if ( is_null($this->selectedUser)){
-            // Create a user
-            $this->location = Location::create([
-                'location_type' => 'incident',
-                'landmark' => $this->landmark,
-                'address' => $this->address,
-                'location_name' => $this->location_name,
-                'latitude' => $this->latitude,
-                'longitude' => $this->longitude
-                
-            ]);
-            $this->incident = Incident::create([
-                'name' => $this->name,
-                'sex' => strtolower($this->sex),
-                'age' => $this->age,
-                'description' => $this->description,
-                'incident_type' => $this->incident_type,
-              
-                'location_id' => $this->location->location_id,
-                'account_id' => $this->account_id,
-                'victim_status' =>  $this->victim_status,
-                'incident_status' => 'Pending',
-                'permanent_address' => $this->permanent_address,
-            ]);
-
+        $this->location = Location::create([
+            'location_type' => 'incident',
+            'landmark' => $this->landmark,
+            'address' => $this->address,
+            'location_name' => $this->location_name,
+            'latitude' => $this->latitude,
+            'longitude' => $this->longitude
             
-            $this->showAddAlert = true;   
-            return redirect('/incidents');
-            
-        }else{
-            
-            $this->status = 'Ongoing';
+        ]);
 
-            $this->location = Location::create([
-                'location_type' => 'incident',
-                'landmark' => $this->landmark,
-                'address' => $this->address,
-                'location_name' => $this->location_name,
-                'latitude' => $this->latitude,
-                'longitude' => $this->longitude
-                
-            ]);
+        $this->incident = Incident::create([
+            'name' => $this->name,
+            'sex' => strtolower($this->sex),
+            'age' => $this->age,
+            'description' => $this->description,
+            'incident_type' => $this->incident_type,
+            'location_id' => $this->location->location_id,
+            'account_id' => $this->account_id,
+            'victim_status' =>  $this->victim_status,
+            'incident_status' => 'Pending',
+            'permanent_address' => $this->permanent_address,
+        ]);
 
 
-            $this->incident = Incident::create([
-                'name' => $this->name,
-                'sex' => strtolower($this->sex),
-                'age' => $this->age,
-                'description' => $this->description,
-                'incident_type' => $this->incident_type,
-                
-                'location_id' => $this->location->location_id,
-                'account_id' => $this->account_id,
-                'permanent_address' => $this->permanent_address,
-                'incident_status' => $this->status,
-                'victim_status' => 'Critical',
-            ]);
+
+      
+
+        $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON tokens.account_id = accounts.id WHERE";
+
+   
+        if (!is_null($this->selectedUser))
+        {
+            $sql .= " accounts.unit_name = '".$this->selectedUser."'";
+            if($this->bfp == true || $this->pnp == true){
+                $sql .= " OR";
+            }
+            $this->incident->incident_status = "Ongoing";
+         
+        }
+
+
+
+        if($this->bfp == true){
+            $sql .= " accounts.account_type = 'BFP'";
+            if($this->pnp == true){
+                $sql .= " OR";
+            }
+          }
           
-           $this->operation = Operation::create([
+        if($this->pnp == true) {
+            $sql .= " accounts.account_type = 'PNP'";
+        }
+
+
+        if(($this->bfp == true || $this->pnp == true) && is_null($this->selectedUser))
+        {
+            $this->incident->incident_status = 'Completed';
+        }
+
+        if ($this->bfp == true || $this->pnp == true || !is_null($this->selectedUser))
+        {
+            $this->operation = Operation::create([
                 'incident_id' => $this->incident->incident_id,
                 //'responder_id' => $this->account_id,
                 'dispatcher_id' => $this->user->id,
                 'unit_name' => $this->selectedUser
                 ]);
-            
-       
-
-            
-            $unit_name = $this->selectedUser;
-            // Get tokens 
-	        //$conn =  mysqli_connect("localhost", "root", "","erbackend");
-            $conn =     mysqli_connect("localhost", "chard","pasacaoers12345","pasacaoers_db");
-  
-            $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON tokens.account_id = accounts.id WHERE accounts.unit_name = '".$unit_name."'";
-            if($this->bfp == true){
-                $sql .= " OR accounts.account_type = 'BFP'";
-            }
-            
-            if($this->pnp == true) {
-                $sql .= " OR accounts.account_type = 'PNP'";
-            }
-            
-            $result = mysqli_query($conn, $sql);
-            $tokens = array();
-
-            if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)){
-                    $tokens[] = $row["token"];
-                }
-            }
-            
-            $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$unit_name."' ORDER BY operation_id DESC LIMIT 1";
-        
-               
-            $r = mysqli_query($conn, $query);
-            $operation = $r->fetch_assoc();
-                      
-  
-            mysqli_close($conn);
-            
-            // Notify the responders
-            $data = array(
-              'title' => $operation['incident_type'],
-              'body' => $operation['description'],
-              '"operation"' => $operation,
-            );
-            
-            
-            $message_status = $this->send_notification($tokens, $data);
-            
-            
-            
-            
-            $this->showAddAlert = true;   
-            return redirect('/incidents');
         }
+    
+  
+   
+          $result = mysqli_query($conn, $sql);
+          $tokens = array();
+ 
+          if (mysqli_num_rows($result) > 0) {
+              while($row = mysqli_fetch_assoc($result)){
+                  $tokens[] = $row["token"];
+              }
+          }
+         
+          $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$this->selectedUser."' ORDER BY operation_id DESC LIMIT 1";
+      
+             
+          $r = mysqli_query($conn, $query);
+          $operation = $r->fetch_assoc();
+                    
+
+          
+          
+          // Notify the responders
+          $data = array(
+            'title' => $operation['incident_type'],
+            'body' => $operation['description'],
+            '"operation"' => $operation,
+          );
+          
+        $message_status = $this->send_notification($tokens, $data);
+
+        
+        
+       
+        
+        mysqli_close($conn);
+
+
+
+    
+            
+            
+        $this->showAddAlert = true;   
+        return redirect('/incidents');
+        
         // Pop up a alert message.
        
     }
