@@ -95,23 +95,6 @@ class NewIncident extends Component
             
         ]);
 
-        $this->incident = Incident::create([
-            'name' => $this->name,
-            'sex' => strtolower($this->sex),
-            'age' => $this->age,
-            'description' => $this->description,
-            'incident_type' => $this->incident_type,
-            'location_id' => $this->location->location_id,
-            'account_id' => $this->account_id,
-            'victim_status' =>  $this->victim_status,
-            'incident_status' => 'Pending',
-            'permanent_address' => $this->permanent_address,
-        ]);
-
-
-
-      
-
         $sql = "SELECT tokens.token FROM tokens INNER JOIN accounts ON tokens.account_id = accounts.id WHERE";
 
    
@@ -121,11 +104,9 @@ class NewIncident extends Component
             if($this->bfp == true || $this->pnp == true){
                 $sql .= " OR";
             }
-            $this->incident->incident_status = "Ongoing";
-         
+            $this->status = "Ongoing";
+            
         }
-
-
 
         if($this->bfp == true){
             $sql .= " accounts.account_type = 'BFP'";
@@ -141,8 +122,22 @@ class NewIncident extends Component
 
         if(($this->bfp == true || $this->pnp == true) && is_null($this->selectedUser))
         {
-            $this->incident->incident_status = 'Completed';
+            $this->status = 'Completed';
         }
+        
+        $this->incident = Incident::create([
+            'name' => $this->name,
+            'sex' => strtolower($this->sex),
+            'age' => $this->age,
+            'description' => $this->description,
+            'incident_type' => $this->incident_type,
+            'location_id' => $this->location->location_id,
+            'account_id' => $this->account_id,
+            'victim_status' =>  $this->victim_status,
+            'incident_status' => $this->status,
+            'permanent_address' => $this->permanent_address,
+        ]);
+        
 
         if ($this->bfp == true || $this->pnp == true || !is_null($this->selectedUser))
         {
@@ -161,12 +156,13 @@ class NewIncident extends Component
                         $tokens[] = $row["token"];
                     }
                 }
+       
                
-                $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$this->selectedUser."' ORDER BY operation_id DESC LIMIT 1";
+                $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE operations.operation_id = ".$this->operation->operation_id;
             
                    
                 $r = mysqli_query($conn, $query);
-                $operation = $r->fetch_assoc();
+                $operation = $r->fetch_assoc() or die($conn->error);
                           
       
                 
@@ -191,15 +187,14 @@ class NewIncident extends Component
   
          
       
-   
-        
-
 
     
             
             
         $this->showAddAlert = true;   
         return redirect('/incidents');
+        
+
         
         // Pop up a alert message.
        
