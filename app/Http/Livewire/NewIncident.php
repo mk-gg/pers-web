@@ -152,43 +152,47 @@ class NewIncident extends Component
                 'dispatcher_id' => $this->user->id,
                 'unit_name' => $this->selectedUser
                 ]);
+
+                $result = mysqli_query($conn, $sql);
+                $tokens = array();
+       
+                if (mysqli_num_rows($result) > 0) {
+                    while($row = mysqli_fetch_assoc($result)){
+                        $tokens[] = $row["token"];
+                    }
+                }
+               
+                $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$this->selectedUser."' ORDER BY operation_id DESC LIMIT 1";
+            
+                   
+                $r = mysqli_query($conn, $query);
+                $operation = $r->fetch_assoc();
+                          
+      
+                
+                
+                // Notify the responders
+                $data = array(
+                  'title' => $operation['incident_type'],
+                  'body' => $operation['description'],
+                  '"operation"' => $operation,
+                );
+                
+              $message_status = $this->send_notification($tokens, $data);
+      
+              
+              
+             
+              
+              mysqli_close($conn);
+      
         }
     
   
-   
-          $result = mysqli_query($conn, $sql);
-          $tokens = array();
- 
-          if (mysqli_num_rows($result) > 0) {
-              while($row = mysqli_fetch_assoc($result)){
-                  $tokens[] = $row["token"];
-              }
-          }
          
-          $query = "SELECT operations.operation_id, operations.unit_name, operations.external_agency_id, incidents.*, locations.* FROM operations INNER JOIN incidents ON operations.incident_id = incidents.incident_id INNER JOIN locations ON incidents.location_id = locations.location_id WHERE incidents.incident_status = 'ongoing' AND unit_name = '".$this->selectedUser."' ORDER BY operation_id DESC LIMIT 1";
       
-             
-          $r = mysqli_query($conn, $query);
-          $operation = $r->fetch_assoc();
-                    
-
-          
-          
-          // Notify the responders
-          $data = array(
-            'title' => $operation['incident_type'],
-            'body' => $operation['description'],
-            '"operation"' => $operation,
-          );
-          
-        $message_status = $this->send_notification($tokens, $data);
-
+   
         
-        
-       
-        
-        mysqli_close($conn);
-
 
 
     

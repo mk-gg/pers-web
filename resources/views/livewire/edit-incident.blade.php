@@ -12,8 +12,8 @@
     </style> 
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div>
-            <h2 class="h4">Add Incident</h2>
-            <p class="mb-0">Your add incident template</p>
+            <h2 class="h4">Edit Incident</h2>
+            <p class="mb-0">Your edit incident template</p>
             <div class="dropdown-menu dashboard-dropdown dropdown-menu-start mt-2 py-1">
                 <a class="dropdown-item d-flex align-items-center" href="#">
                     <svg class="dropdown-icon text-gray-400 me-2" fill="currentColor" viewBox="0 0 20 20"

@@ -24,8 +24,6 @@ class Token extends Authenticatable
    protected $fillable = [
         'account_id',
         'token'
-       
-        
     ];
 
     protected $guarded=[];
