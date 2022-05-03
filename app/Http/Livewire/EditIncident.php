@@ -46,7 +46,7 @@ class EditIncident extends Component
         return [
             'incident.incident_type' => 'required',
             'incident.name' => 'max:35',        
-            'incident.sex' =>  Rule::in(['male', 'female']),
+            'incident.sex' =>  Rule::in(['Male', 'Female']),
             'incident.victim_status' => Rule::in(['Unconscious', 'Conscious']),
             'incident.age' => 'numeric',
             'incident.description' => 'max:255',
@@ -124,13 +124,7 @@ class EditIncident extends Component
             $this->status = 'Completed';
         }
 
-        
-        $this->operation = Operation::create([
-            'incident_id' => $this->incident->incident_id,
-            //'responder_id' => $this->account_id,
-            'dispatcher_id' => $this->user->id,
-            'unit_name' => $this->selectedUser
-        ]);
+
 
           $this->incident->incident_status = $this->status;
           $this->incident->save();

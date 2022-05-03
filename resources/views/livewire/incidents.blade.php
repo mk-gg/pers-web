@@ -1,7 +1,7 @@
 <div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+            {{-- <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                     <li class="breadcrumb-item">
                         <a href="#">
@@ -11,9 +11,9 @@
                     <li class="breadcrumb-item"><a href="#">Volt</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Transactions</li>
                 </ol>
-            </nav>
+            </nav> --}}
             <h2 class="h4">All Incidents</h2>
-            <p class="mb-0">Your web analytics dashboard template.</p>
+            <p class="mb-0"></p>
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
             <a href="/new-incident" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
@@ -35,7 +35,7 @@
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                         </svg>
                     </span>
-                    <input type="text" class="form-control" placeholder="Search orders">
+                    <input type="text" class="form-control" placeholder="">
                 </div>
             </div>
             <div class="col-4 col-md-2 col-xl-1 ps-md-0 text-end">
@@ -62,8 +62,8 @@
                     <th class="border-gray-200">Incident Type</th>						
                     <th class="border-gray-200">Issue Date</th>
                     <th class="border-gray-200">Victim</th>
-                    <th class="border-gray-200">Location</th>
-                    <th class="border-gray-200">Status</th>
+                    <th class="border-gray-200">Incident Status</th>
+                    <th class="border-gray-200">Victim Status</th>
                     <th class="border-gray-200">Action</th>
                 </tr>
             </thead>
@@ -92,7 +92,12 @@
                         </a>
                     </td>                        
                     <td><span class="fw-normal">{{ $incident->incident_status }}</span></td>
-                    <td><span class="fw-bold text-danger">{{ $incident->victim_status }}</span></td>
+                    @if ($incident->victim_status == "Unconscious")
+                     <td><span class="fw-bold text-danger">{{ $incident->victim_status }}</span></td>
+                    @else
+                     <td><span class="fw-bold text-success">{{ $incident->victim_status }}</span></td>
+                    @endif
+                    
                     {{--}<td><span class="fw-bold text-warning">Due</span></td>  --}}
                     <td>
                         <div class="btn-group">

@@ -1,7 +1,7 @@
 <div>
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center py-4">
         <div class="d-block mb-4 mb-md-0">
-            <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
+            {{-- <nav aria-label="breadcrumb" class="d-none d-md-inline-block">
                 <ol class="breadcrumb breadcrumb-dark breadcrumb-transparent">
                     <li class="breadcrumb-item">
                         <a href="#">
@@ -11,9 +11,9 @@
                     <li class="breadcrumb-item"><a href="#">Volt</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Transactions</li>
                 </ol>
-            </nav>
+            </nav> --}}
             <h2 class="h4">All Operations</h2>
-            <p class="mb-0">Your web analytics dashboard template.</p>
+            <p class="mb-0"></p>
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
             <a href="/new-incident" class="btn btn-sm btn-gray-800 d-inline-flex align-items-center">
@@ -35,7 +35,7 @@
                             <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
                         </svg>
                     </span>
-                    <input type="text" class="form-control" placeholder="Search orders">
+                    <input type="text" class="form-control" placeholder="">
                 </div>
             </div>
             <div class="col-4 col-md-2 col-xl-1 ps-md-0 text-end">
@@ -61,9 +61,14 @@
                     <th class="border-gray-200">Operation No.</th>
                     <th class="border-gray-200">Incident ID</th>						
                     <th class="border-gray-200">Unit Name</th>
-                    <th class="border-gray-200">External Agency</th>
-                    <th class="border-gray-200">Location</th>
-                    <th class="border-gray-200">Status</th>
+                    <th class="border-gray-200">Dispatcher ID</th>
+                    <th class="border-gray-200">External Agency ID</th>
+                    <th class="border-gray-200">ETD Base</th>
+                    <th class="border-gray-200">ETA Base</th>
+                    <th class="border-gray-200">ETD Scene</th>
+                    <th class="border-gray-200">ETA Scene</th>
+                    <th class="border-gray-200">ETD Hospital</th>
+                    <th class="border-gray-200">ETA Hospital</th>
                     <th class="border-gray-200">Action</th>
                 </tr>
             </thead>
@@ -83,16 +88,24 @@
                         <span class="fw-normal">{{ $operation->incident_id}}</span>
                     </td>
                     <td><span class="fw-normal">{{ $operation->unit_name }}</span></td>
-                    <td>
+                    <td><span class="fw-normal">{{ $operation->dispatcher_id }}</span></td>
+                    <td><span class="fw-normal">{{ $operation->external_agency_id }}</span></td>
+                    <td><span class="fw-normal">{{ $operation->etd_base }}</span></td>
+                    <td><span class="fw-normal">{{ $operation->eta_base }}</span></td>
+                    <td><span class="fw-normal">{{ $operation->etd_scene }}</span></td>
+                    <td><span class="fw-normal">{{ $operation->eta_scene }}</span></td>
+                    <td><span class="fw-normal">{{ $operation->etd_hospital }}</span></td>
+                    <td><span class="fw-normal">{{ $operation->eta_hospital }}</span></td>
+                    {{-- <td>
                         <a href="#" class="d-flex align-items-center">
                             <div class="d-block">
-                                <span class="fw-bold">{{ $operation->last_name }}, {{ $operation->first_name }} </span>
-                                <div class="small text-gray">{{ $operation->age }}  {{ $operation->sex }}</div>
+                                <span class="fw-bold">{{ $operation->dispatcher_id}} </span>
+                                <div class="small text-gray">{{ $operation->external_agency_id }}</div>
                             </div>
                         </a>
-                    </td>                        
-                    <td><span class="fw-normal">{{ $operation->location }}</span></td>
-                    <td><span class="fw-bold text-danger">Critical</span></td>
+                    </td>                         --}}
+                    {{-- <td><span class="fw-normal">{{ $operation->location }}</span></td>
+                    <td><span class="fw-bold text-danger">Critical</span></td> --}}
                     {{--}<td><span class="fw-bold text-warning">Due</span></td>  --}}
                     <td>
                         <div class="btn-group">
@@ -103,7 +116,7 @@
                                 <span class="visually-hidden">Toggle Dropdown</span>
                             </button>
                             <div class="dropdown-menu py-0">
-                                <a class="dropdown-item rounded-top" href="#"><span class="fas fa-eye me-2"></span>View Details</a>
+                                {{-- <a class="dropdown-item rounded-top" href="#"><span class="fas fa-eye me-2"></span>View Details</a> --}}
                                 <a class="dropdown-item" href="#"><span class="fas fa-edit me-2"></span>Edit</a>
                                 <a class="dropdown-item text-danger rounded-bottom" href="#"><span class="fas fa-trash-alt me-2"></span>Remove</a>
                             </div>

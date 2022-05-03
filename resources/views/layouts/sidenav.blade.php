@@ -80,6 +80,7 @@
         </div>
       </li>
       {{-- ---------------------- --}}
+{{--       
       <li class="nav-item">
         <span
           class="nav-link d-flex justify-content-between align-items-center"
@@ -110,7 +111,9 @@
             </li>
           </ul>
         </div>
-      </li>
+      </li> --}}
+      
+
       {{-- ----------------------- --}}
       <li class="nav-item {{ Request::segment(1) == 'incidents' ? 'active' : '' }}">
         <a href="/incidents" class="nav-link">
@@ -139,7 +142,7 @@
         </a>
       </li>
       {{-- ----------------------- --}}
-      <li class="nav-item {{ Request::segment(1) == 'transactions' ? 'active' : '' }}">
+      {{-- <li class="nav-item {{ Request::segment(1) == 'transactions' ? 'active' : '' }}">
         <a href="/transactions" class="nav-link">
           <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg">
@@ -150,8 +153,9 @@
             </svg></span>
           <span class="sidebar-text">Button2</span>
         </a>
-      </li>
-      <li class="nav-item">
+      </li> --}}
+
+      {{-- <li class="nav-item">
         <a href="#" target="_blank" class="nav-link d-flex justify-content-between">
           <span>
             <span class="sidebar-icon">
@@ -166,10 +170,11 @@
           {{--
           <span>
             <span class="badge badge-sm bg-secondary ms-1">Pro</span>
-          </span> --}}
+          </span> -
         </a>
-        </li>
-      <li class="nav-item">
+        </li> --}}
+
+      {{-- <li class="nav-item">
         <a href="#" target="_blank" class="nav-link d-flex justify-content-between">
           <span>
             <span class="sidebar-icon">
@@ -183,9 +188,10 @@
           </span>
           {{-- <span>
             <span class="badge badge-sm bg-secondary ms-1"></span>
-          </span> --}}
+          </span> 
         </a>
-      </li>
+      </li> --}}
+
       <li class="nav-item {{ Request::segment(1) == 'locations' ? 'active' : '' }}">
         <a href="/locations" class="nav-link">
           <span class="sidebar-icon"><svg class="icon icon-xs me-2" fill="currentColor" viewBox="0 0 20 20"
@@ -198,6 +204,8 @@
           <span class="sidebar-text">Locations</span>
         </a>
       </li>
+
+      {{-- 
       <li class="nav-item">
         <span
           class="nav-link {{ Request::segment(1) !== 'bootstrap-tables' ? 'collapsed' : '' }} d-flex justify-content-between align-items-center"
@@ -229,6 +237,10 @@
           </ul>
         </div>
       </li>
+
+       --}}
+
+       {{-- 
       <li class="nav-item">
         <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
           data-bs-target="#submenu-pages">
@@ -294,6 +306,9 @@
           </ul>
         </div>
       </li>
+       --}}
+
+{{--        
       <li class="nav-item">
         <span class="nav-link collapsed d-flex justify-content-between align-items-center" data-bs-toggle="collapse"
           data-bs-target="#submenu-components">
@@ -345,7 +360,7 @@
             </li>
           </ul>
         </div>
-      </li>
+      </li> --}}
       <li role="separator" class="dropdown-divider mt-4 mb-3 border-gray-700"></li>
       <li class="nav-item">
         <a href="/documentation/getting-started/overview/index.html" target="_blank"
