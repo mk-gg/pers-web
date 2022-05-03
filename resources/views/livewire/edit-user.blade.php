@@ -98,7 +98,10 @@
                                 <option value="responder">Responder</option>
                                 <option value="reporter">Reporter</option>
                                 <option value="dispatcher">Dispatcher</option>
-                                <option value="administrator">Administrator</option>
+                                <option value="bfp">BFP</option>
+                                <option value="pnp">PNP</option>
+                              
+                                
                             </select>
                             @error('user.account_type')<div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>

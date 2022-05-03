@@ -31,7 +31,7 @@ class EditUser extends Component{
             'user.email' => 'email',
             //'user.sex' => ['required', Rule::in(['Male', 'Female', 'Other'])],
             'user.birthday' => 'required|date|before:-13 years',
-            'user.account_type' => ['required', Rule::in(['reporter', 'responder', 'dispatcher', 'administrator'])],
+            'user.account_type' => ['required', Rule::in(['reporter', 'responder', 'dispatcher', 'bpf', 'pnp'])],
             'user.address' => 'max:40',
             'user.mobile_no' => 'numeric',
             'user.city_municipality' => 'max:20',
