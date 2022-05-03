@@ -161,7 +161,7 @@
                             <img src="../assets/img/team/profile-picture-1.jpg" class="avatar rounded-circle me-3"
                                 alt="Avatar">
                             <div class="d-block">
-                                <span class="fw-bold">{{ $user->first_name }}</span>
+                                <span class="fw-bold">{{ $user->first_name }} {{ $user->last_name }}</span>
                                 <div class="small text-gray">{{ $user->email }}</div>
                             </div>
                         </a>

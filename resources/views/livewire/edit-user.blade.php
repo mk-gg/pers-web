@@ -98,8 +98,8 @@
                                 <option value="responder">Responder</option>
                                 <option value="reporter">Reporter</option>
                                 <option value="dispatcher">Dispatcher</option>
-                                <option value="bfp">BFP</option>
-                                <option value="pnp">PNP</option>
+                                <option value="BFP">BFP</option>
+                                <option value="PNP">PNP</option>
                               
                                 
                             </select>
