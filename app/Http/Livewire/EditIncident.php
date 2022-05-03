@@ -46,7 +46,7 @@ class EditIncident extends Component
         return [
             'incident.incident_type' => 'required',
             'incident.name' => 'max:35',        
-            'incident.sex' =>  Rule::in(['Male', 'Female']),
+            'incident.sex' =>  Rule::in(['male', 'female']),
             'incident.victim_status' => Rule::in(['Unconscious', 'Conscious']),
             'incident.age' => 'numeric',
             'incident.description' => 'max:255',
