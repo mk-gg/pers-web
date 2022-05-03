@@ -16,7 +16,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\TokenController;
 use App\Http\Controllers\API\EmergencyContactsController;
 use App\Http\Controllers\API\TestApi;
-
+use App\Http\Controllers\API\OperationNotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::resource('emergencycontacts', EmergencyContactsController::class);
     Route::resource('accounts', AccountController::class);
     Route::get('/operation/get/{unit_name}', [OperationController::class, 'show_ops']);
-
+    Route::post('/operation/send', [OperationNotificationController::class, 'send']);
     Route::resource('operations', OperationController::class);
     Route::resource('incidents', IncidentController::class);
     
