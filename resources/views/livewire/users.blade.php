@@ -17,8 +17,8 @@
                     <li class="breadcrumb-item active" aria-current="page">Users List</li>
                 </ol>
             </nav>--}}
-            <h2 class="h4">Users List</h2>
-            <p class="mb-0">Insert desc</p>
+            <h2 class="h4">User List</h2>
+            <p class="mb-0"></p>
         </div>
         <div class="btn-toolbar mb-2 mb-md-0">
             @can('create_acc', \App\Models\Account::class)
