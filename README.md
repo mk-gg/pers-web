@@ -1,2 +1,2 @@
 # Pasacao ERS
-Back End
+This is the web application for our capstone. 
